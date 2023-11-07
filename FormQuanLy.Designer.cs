@@ -30,14 +30,21 @@
         {
             tabControl1 = new TabControl();
             tabPage1 = new TabPage();
-            tabPage2 = new TabPage();
+            tabSinhVien = new TabPage();
+            groupBoxSinhVienViewData = new GroupBox();
+            dataGridViewSinhVien = new DataGridView();
+            groupBoxSinhVien2 = new GroupBox();
+            groupBoxSinhVien1 = new GroupBox();
             tabControl1.SuspendLayout();
+            tabSinhVien.SuspendLayout();
+            groupBoxSinhVienViewData.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewSinhVien).BeginInit();
             SuspendLayout();
             // 
             // tabControl1
             // 
             tabControl1.Controls.Add(tabPage1);
-            tabControl1.Controls.Add(tabPage2);
+            tabControl1.Controls.Add(tabSinhVien);
             tabControl1.Dock = DockStyle.Fill;
             tabControl1.Location = new Point(0, 0);
             tabControl1.Name = "tabControl1";
@@ -55,15 +62,53 @@
             tabPage1.Text = "tabPage1";
             tabPage1.UseVisualStyleBackColor = true;
             // 
-            // tabPage2
+            // tabSinhVien
             // 
-            tabPage2.Location = new Point(4, 24);
-            tabPage2.Name = "tabPage2";
-            tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(792, 422);
-            tabPage2.TabIndex = 1;
-            tabPage2.Text = "tabPage2";
-            tabPage2.UseVisualStyleBackColor = true;
+            tabSinhVien.Controls.Add(groupBoxSinhVienViewData);
+            tabSinhVien.Controls.Add(groupBoxSinhVien2);
+            tabSinhVien.Controls.Add(groupBoxSinhVien1);
+            tabSinhVien.Location = new Point(4, 24);
+            tabSinhVien.Name = "tabSinhVien";
+            tabSinhVien.Padding = new Padding(3);
+            tabSinhVien.Size = new Size(792, 422);
+            tabSinhVien.TabIndex = 1;
+            tabSinhVien.Text = "Sinh Viên";
+            tabSinhVien.UseVisualStyleBackColor = true;
+            // 
+            // groupBoxSinhVienViewData
+            // 
+            groupBoxSinhVienViewData.Controls.Add(dataGridViewSinhVien);
+            groupBoxSinhVienViewData.Location = new Point(404, 6);
+            groupBoxSinhVienViewData.Name = "groupBoxSinhVienViewData";
+            groupBoxSinhVienViewData.Size = new Size(382, 408);
+            groupBoxSinhVienViewData.TabIndex = 2;
+            groupBoxSinhVienViewData.TabStop = false;
+            // 
+            // dataGridViewSinhVien
+            // 
+            dataGridViewSinhVien.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewSinhVien.Dock = DockStyle.Fill;
+            dataGridViewSinhVien.Location = new Point(3, 19);
+            dataGridViewSinhVien.Name = "dataGridViewSinhVien";
+            dataGridViewSinhVien.RowTemplate.Height = 25;
+            dataGridViewSinhVien.Size = new Size(376, 386);
+            dataGridViewSinhVien.TabIndex = 0;
+            // 
+            // groupBoxSinhVien2
+            // 
+            groupBoxSinhVien2.Location = new Point(8, 263);
+            groupBoxSinhVien2.Name = "groupBoxSinhVien2";
+            groupBoxSinhVien2.Size = new Size(390, 151);
+            groupBoxSinhVien2.TabIndex = 1;
+            groupBoxSinhVien2.TabStop = false;
+            // 
+            // groupBoxSinhVien1
+            // 
+            groupBoxSinhVien1.Location = new Point(8, 6);
+            groupBoxSinhVien1.Name = "groupBoxSinhVien1";
+            groupBoxSinhVien1.Size = new Size(390, 251);
+            groupBoxSinhVien1.TabIndex = 0;
+            groupBoxSinhVien1.TabStop = false;
             // 
             // FormQuanLy
             // 
@@ -75,6 +120,9 @@
             Text = "FormQuanLy";
             Load += FormQuanLy_Load;
             tabControl1.ResumeLayout(false);
+            tabSinhVien.ResumeLayout(false);
+            groupBoxSinhVienViewData.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dataGridViewSinhVien).EndInit();
             ResumeLayout(false);
         }
 
@@ -82,6 +130,10 @@
 
         private TabControl tabControl1;
         private TabPage tabPage1;
-        private TabPage tabPage2;
+        private TabPage tabSinhVien;
+        private GroupBox groupBoxSinhVien2;
+        private GroupBox groupBoxSinhVien1;
+        private GroupBox groupBoxSinhVienViewData;
+        private DataGridView dataGridViewSinhVien;
     }
 }
