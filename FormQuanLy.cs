@@ -21,7 +21,7 @@ namespace LTTQ_Proj
 
         private void FormQuanLy_Load(object sender, EventArgs e)
         {
-
+            dataGridViewSinhVien.DataSource = dc.dataTable("Select * from SinhVien");
         }
     }
 }
