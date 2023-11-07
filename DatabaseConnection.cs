@@ -31,11 +31,11 @@ namespace LTTQ_Proj
             con.Dispose();
         }
 
-        public DataTable dataTable(string tableName)
+        public DataTable dataTable(string selectQuery)
         {
             this.openConnection();
             DataTable dt = new DataTable();
-            SqlDataAdapter dataAdapter = new SqlDataAdapter(tableName, con);
+            SqlDataAdapter dataAdapter = new SqlDataAdapter(selectQuery, con);
             dataAdapter.Fill(dt);
             this.closeConnection();
             return dt;
