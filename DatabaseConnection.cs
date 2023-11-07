@@ -7,12 +7,21 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data;
 using System.Data.SqlClient;
+using System.Configuration;
 
 namespace LTTQ_Proj
 {
     internal class DatabaseConnection
     {
-        SqlConnection con = new SqlConnection("Data Source=DIAMONDN\\SQLEXPRESS;Initial Catalog=LTTQ_Proj;Persist Security Info=True;User ID=sa;Password=diamond12.ng");
+        string connectionString;
+        SqlConnection con;
+
+        public DatabaseConnection()
+        {
+            string key = "connectionString";
+            connectionString = ConfigurationManager.AppSettings[key];
+            con = new SqlConnection(connectionString);
+        }
 
         public void openConnection()
         {

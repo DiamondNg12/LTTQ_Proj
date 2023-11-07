@@ -17,6 +17,8 @@ namespace LTTQ_Proj
             InitializeComponent();
         }
 
+        DatabaseConnection dc = new DatabaseConnection();
+
         private void FormQuanLy_Load(object sender, EventArgs e)
         {
 
