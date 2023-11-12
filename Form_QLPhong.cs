@@ -17,6 +17,7 @@ namespace LTTQ_Proj
         SqlCommand cmd;
         SqlDataAdapter dap;
         DataSet ds;
+        DatabaseConnection DB = new DatabaseConnection();
 
         public Form_QLPhong()
         {
@@ -61,7 +62,63 @@ namespace LTTQ_Proj
                 MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.Yes)
                 this.Close();
         }
+        private void btnPTimKiem_Click(object sender, EventArgs e)
+        {
+            String sql = "Select * from Phong";
+            String dk = "";
+            if (txtPMaPhong.Text.Trim() != "")
+            {
+                dk += " MaPhong like '%" + txtPMaPhong.Text + "%'";
+            }
+            if (txtPTenPhong.Text.Trim() != "" && dk == "")
+            {
+                dk += " TenPhong like N'%" + txtPTenPhong.Text + "%'";
+            }
 
+            if (txtPTenPhong.Text.Trim() != "" && dk != "")
+            {
+                dk += " AND TenPhong like N'%" + txtPTenPhong.Text + "%'";
+            }
+            if (dk != "")
+            {
+                sql += " WHERE" + dk;
+            }
+            //Goi phương thức Load dữ liệu kết hợp điều kiện tìm kiếm
+            LoadDuLieu(sql);
+
+
+        }
+
+        private void dgvPDanhSachPhong_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            try
+            {
+
+                txtPMaPhong.Text = dgvPDanhSachPhong[0, e.RowIndex].Value.ToString();
+                txtPTenPhong.Text = dgvPDanhSachPhong[1, e.RowIndex].Value.ToString();
+                txtPMaNha.Text = dgvPDanhSachPhong[2, e.RowIndex].Value.ToString();
+                cmbPSoNguoiToiDa.SelectedIndex = cmbPSoNguoiToiDa.Items.IndexOf(dgvPDanhSachPhong[4, e.RowIndex].Value.ToString());
+                txtPSoNguoiDangO.Text = dgvPDanhSachPhong[4, e.RowIndex].Value.ToString();
+                txtPTienThue.Text = dgvPDanhSachPhong[5, e.RowIndex].Value.ToString();
+                txtPGhiChu.Text = dgvPDanhSachPhong[6, e.RowIndex].Value.ToString();
+            }
+            catch (Exception ex)
+            {
+            }
+        }
+
+        private void btnPSua_Click(object sender, EventArgs e)
+        {
+            string sql;
+            sql = "Update PHONG SET ";
+            sql += "TenPhong = N'" + txtPTenPhong.Text + "',";
+            sql += "SoNguoiToiDa= '" + cmbPSoNguoiToiDa + "',";
+            sql += "SoNguoiDangO = '" + cmbPSoNguoiToiDa + "',";
+            sql += "TienThue = N'" + txtPTienThue.Text + "',";
+            sql += "GhiChu = N'" + txtPGhiChu.Text + "' ";
+            sql += "Where MaPhong = N'" + txtPMaPhong.Text + "'";
+            sql += "Where MaNha = N'" + txtPMaNha.Text + "'";
+        }
         private void btnPThem_Click(object sender, EventArgs e)
         {
 
@@ -110,8 +167,8 @@ namespace LTTQ_Proj
                 errorP.Clear();
             }
 
-            //Kiểm tra xem mã sản phẩm đã tồn tại chưa đẻ tránh việc insert mới bị lỗi
-            sql = "Select Count(*) From tblMatHang Where MaSP ='" + txtPMaPhong.Text + "'";
+            //Kiểm tra xem mã phong đã tồn tại chưa đẻ tránh việc insert mới bị lỗi
+            sql = "Select Count(*) From PHONG Where MaPhong ='" + txtPMaPhong.Text + "'";
             cmd = new SqlCommand(sql, con); int val = (int)cmd.ExecuteScalar();
             if (val > 0)
             {
@@ -119,69 +176,35 @@ namespace LTTQ_Proj
                 return;
             }
             errorP.Clear();
-
-        }
-
-        private void btnPTimKiem_Click(object sender, EventArgs e)
-        {
-            String sql = "Select * from Phong";
-            String dk = "";
-            if (txtPMaPhong.Text.Trim() != "")
-            {
-                dk += " MaPhong like '%" + txtPMaPhong.Text + "%'";
-            }
-            if (txtPTenPhong.Text.Trim() != "" && dk == "")
-            {
-                dk += " TenPhong like N'%" + txtPTenPhong.Text + "%'";
-            }
-
-            if (txtPTenPhong.Text.Trim() != "" && dk != "")
-            {
-                dk += " AND TenPhong like N'%" + txtPTenPhong.Text + "%'";
-            }
-            if (dk != "")
-            {
-                sql += " WHERE" + dk;
-            }
-            //Goi phương thức Load dữ liệu kết hợp điều kiện tìm kiếm
-            LoadDuLieu(sql);
-
-            ////Insert vao CSDL
+            //////Insert vao CSDL
             //sql = "INSERT INTO tblMatHang(MaPhong,TenPhong,MaNha,LoaiPhong,SoNguoiOToiDa,SoNguoiDangO,TienThue,GhiChu)VALUES (";
             //sql += "N'" + txtPMaPhong.Text + "',N'" + txtPTenPhong.Text + "','" + txtPMaNha.Text + "','" + grbPLoaiPhong.Text
-            // + "',N'" + cmbPSoNguoiToiDa.Text + "'," + txtPSoNguoiDangO.Text + "," + txtPTienThueText + ",N'" + txtPGhiChu.Text + "')";
-            //    }
-        }
+            //+ "',N'" + cmbPSoNguoiToiDa.Text + "'," + txtPSoNguoiDangO.Text + "," + txtPTienThue.Text + ",N'" + txtPGhiChu.Text + "')";
 
-        private void dgvPDanhSachPhong_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            try
-            {
+            string loaiPhong = grbPLoaiPhong.Controls.OfType<RadioButton>().Where(r => r.Checked).FirstOrDefault().Text;
+            sql = "INSERT INTO PHONG(MaPhong,TenPhong,MaNha,LoaiPhong,SoNguoiToiDa,SoNguoiDangO,TienThue,GhiChu)VALUES (";
+            sql += "N'" + txtPMaPhong.Text + "',N'" + txtPTenPhong.Text + "','" + txtPMaNha.Text + "','" + loaiPhong + "',N'" + cmbPSoNguoiToiDa.Text + "'," + txtPSoNguoiDangO.Text + "," + txtPTienThue.Text + ",N'" + txtPGhiChu.Text + "')";
+            cmd = new SqlCommand(sql, con);
+            cmd.ExecuteNonQuery();
+            dgvPDanhSachPhong.DataSource = DB.dataTable("select * from PHONG");
+            //Thông báo đã thêm thành công
+            MessageBox.Show("Thêm phòng thành công!");
 
-                txtPMaPhong.Text = dgvPDanhSachPhong[0, e.RowIndex].Value.ToString();
-                txtPTenPhong.Text = dgvPDanhSachPhong[1, e.RowIndex].Value.ToString();
-                txtPMaNha.Text = dgvPDanhSachPhong[2, e.RowIndex].Value.ToString();
-                cmbPSoNguoiToiDa.SelectedIndex = cmbPSoNguoiToiDa.Items.IndexOf(dgvPDanhSachPhong[4, e.RowIndex].Value.ToString());
-                txtPSoNguoiDangO.Text = dgvPDanhSachPhong[4, e.RowIndex].Value.ToString();
-                txtPTienThue.Text = dgvPDanhSachPhong[5, e.RowIndex].Value.ToString();
-                txtPGhiChu.Text = dgvPDanhSachPhong[6, e.RowIndex].Value.ToString();
-            }
-            catch (Exception ex)
-            {
-            }
-        }
+            //Clear các control
+            txtPMaPhong.Text = "";
+            txtPTenPhong.Text = "";
+            txtPMaNha.Text = "";
+            txtPSoNguoiDangO.Text = "";
+            grbPLoaiPhong.Controls.OfType<RadioButton>().ToList().ForEach(r => r.Checked = false);
+            cmbPSoNguoiToiDa.SelectedIndex = -1;
+            txtPTienThue.Text = "";
+            txtPGhiChu.Text = "";
 
-        private void btnPSua_Click(object sender, EventArgs e)
-        {
-            string sql;
-            sql = "Update PHONG SET ";
-            sql += "TenPhong = N'" + txtPTenPhong.Text + "',";
-            sql += "SoNguoiToiDa= '" + cmbPSoNguoiToiDa + "',";
-            sql += "SoNguoiDangO = '" + cmbPSoNguoiToiDa + "',";
-            sql += "TienThue = N'" + txtPTienThue.Text + "',";
-            sql += "GhiChu = N'" + txtPGhiChu.Text + "' ";
-            sql += "Where MaPhong = N'" + txtPMaPhong.Text + "'";
-            sql += "Where MaNha = N'" + txtPMaNha.Text + "'";
+            //Đóng kết nối
+            con.Close();
         }
     }
+
+
 }
+
