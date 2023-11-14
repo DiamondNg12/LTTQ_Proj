@@ -18,26 +18,37 @@ namespace LTTQ_Proj
 
         public DatabaseConnection()
         {
-            string key = "connectionString";
-            connectionString = ConfigurationManager.AppSettings[key];
-            con = new SqlConnection(connectionString);
+            this.connectionString = ConfigurationManager.AppSettings["connectionString"];
+            this.con = new SqlConnection(this.connectionString);
         }
 
         public void openConnection()
         {
-            if (con.State != ConnectionState.Open)
+            try
             {
-                con.Open();
+                if (con.State != ConnectionState.Open)
+                {
+                    this.con.Open();
+                }
             }
+            catch (Exception e)
+            {
+                this.con = new SqlConnection(this.connectionString);
+                if (con.State != ConnectionState.Open)
+                {
+                    this.con.Open();
+                }
+            }
+            
         }
 
         public void closeConnection()
         {
             if (con.State != ConnectionState.Closed)
             {
-                con.Close();
+                this.con.Close();
             }
-            con.Dispose();
+            this.con.Dispose();
         }
 
         public DataTable dataTable(string selectQuery)

@@ -35,24 +35,26 @@
             dataGridViewSinhVien = new DataGridView();
             groupBoxSinhVien2 = new GroupBox();
             groupBoxSinhVien1 = new GroupBox();
+            comboBox3 = new ComboBox();
+            comboBox2 = new ComboBox();
+            inputSVMaQue = new ComboBox();
+            inputSVGioiTinh = new ComboBox();
+            labelSVMaLop = new Label();
+            labelSVMaKhoa = new Label();
+            labelSVMaQue = new Label();
+            labelSVGioiTinh = new Label();
             labelSVNgaySinh = new Label();
+            inputSVNgaySinh = new TextBox();
             inputSVTenSinhVien = new TextBox();
             labelSVTenSV = new Label();
             inputSVMaSinhVien = new TextBox();
             labelSVMaSV = new Label();
-            inputSVNgaySinh = new TextBox();
-            labelSVGioiTinh = new Label();
-            inputSVGioiTinh = new ComboBox();
-            label1 = new Label();
-            comboBox1 = new ComboBox();
-            label2 = new Label();
-            comboBox2 = new ComboBox();
-            label3 = new Label();
-            comboBox3 = new ComboBox();
+            btnSVThem = new Button();
             tabControl1.SuspendLayout();
             tabSinhVien.SuspendLayout();
             groupBoxSinhVienViewData.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewSinhVien).BeginInit();
+            groupBoxSinhVien2.SuspendLayout();
             groupBoxSinhVien1.SuspendLayout();
             SuspendLayout();
             // 
@@ -111,9 +113,10 @@
             // 
             // groupBoxSinhVien2
             // 
-            groupBoxSinhVien2.Location = new Point(8, 263);
+            groupBoxSinhVien2.Controls.Add(btnSVThem);
+            groupBoxSinhVien2.Location = new Point(8, 304);
             groupBoxSinhVien2.Name = "groupBoxSinhVien2";
-            groupBoxSinhVien2.Size = new Size(390, 151);
+            groupBoxSinhVien2.Size = new Size(390, 110);
             groupBoxSinhVien2.TabIndex = 1;
             groupBoxSinhVien2.TabStop = false;
             // 
@@ -121,11 +124,11 @@
             // 
             groupBoxSinhVien1.Controls.Add(comboBox3);
             groupBoxSinhVien1.Controls.Add(comboBox2);
-            groupBoxSinhVien1.Controls.Add(comboBox1);
+            groupBoxSinhVien1.Controls.Add(inputSVMaQue);
             groupBoxSinhVien1.Controls.Add(inputSVGioiTinh);
-            groupBoxSinhVien1.Controls.Add(label3);
-            groupBoxSinhVien1.Controls.Add(label2);
-            groupBoxSinhVien1.Controls.Add(label1);
+            groupBoxSinhVien1.Controls.Add(labelSVMaLop);
+            groupBoxSinhVien1.Controls.Add(labelSVMaKhoa);
+            groupBoxSinhVien1.Controls.Add(labelSVMaQue);
             groupBoxSinhVien1.Controls.Add(labelSVGioiTinh);
             groupBoxSinhVien1.Controls.Add(labelSVNgaySinh);
             groupBoxSinhVien1.Controls.Add(inputSVNgaySinh);
@@ -135,9 +138,80 @@
             groupBoxSinhVien1.Controls.Add(labelSVMaSV);
             groupBoxSinhVien1.Location = new Point(8, 6);
             groupBoxSinhVien1.Name = "groupBoxSinhVien1";
-            groupBoxSinhVien1.Size = new Size(390, 251);
+            groupBoxSinhVien1.Size = new Size(390, 292);
             groupBoxSinhVien1.TabIndex = 0;
             groupBoxSinhVien1.TabStop = false;
+            // 
+            // comboBox3
+            // 
+            comboBox3.FormattingEnabled = true;
+            comboBox3.Items.AddRange(new object[] { "Nam", "Nữ" });
+            comboBox3.Location = new Point(130, 219);
+            comboBox3.Name = "comboBox3";
+            comboBox3.Size = new Size(98, 23);
+            comboBox3.TabIndex = 3;
+            // 
+            // comboBox2
+            // 
+            comboBox2.FormattingEnabled = true;
+            comboBox2.Items.AddRange(new object[] { "Nam", "Nữ" });
+            comboBox2.Location = new Point(130, 187);
+            comboBox2.Name = "comboBox2";
+            comboBox2.Size = new Size(98, 23);
+            comboBox2.TabIndex = 3;
+            // 
+            // inputSVMaQue
+            // 
+            inputSVMaQue.FormattingEnabled = true;
+            inputSVMaQue.Location = new Point(130, 153);
+            inputSVMaQue.Name = "inputSVMaQue";
+            inputSVMaQue.Size = new Size(98, 23);
+            inputSVMaQue.TabIndex = 3;
+            // 
+            // inputSVGioiTinh
+            // 
+            inputSVGioiTinh.FormattingEnabled = true;
+            inputSVGioiTinh.Items.AddRange(new object[] { "Nam", "Nữ" });
+            inputSVGioiTinh.Location = new Point(130, 120);
+            inputSVGioiTinh.Name = "inputSVGioiTinh";
+            inputSVGioiTinh.Size = new Size(98, 23);
+            inputSVGioiTinh.TabIndex = 3;
+            // 
+            // labelSVMaLop
+            // 
+            labelSVMaLop.AutoSize = true;
+            labelSVMaLop.Location = new Point(27, 222);
+            labelSVMaLop.Name = "labelSVMaLop";
+            labelSVMaLop.Size = new Size(27, 15);
+            labelSVMaLop.TabIndex = 2;
+            labelSVMaLop.Text = "Lớp";
+            // 
+            // labelSVMaKhoa
+            // 
+            labelSVMaKhoa.AutoSize = true;
+            labelSVMaKhoa.Location = new Point(27, 190);
+            labelSVMaKhoa.Name = "labelSVMaKhoa";
+            labelSVMaKhoa.Size = new Size(34, 15);
+            labelSVMaKhoa.TabIndex = 2;
+            labelSVMaKhoa.Text = "Khoa";
+            // 
+            // labelSVMaQue
+            // 
+            labelSVMaQue.AutoSize = true;
+            labelSVMaQue.Location = new Point(27, 156);
+            labelSVMaQue.Name = "labelSVMaQue";
+            labelSVMaQue.Size = new Size(29, 15);
+            labelSVMaQue.TabIndex = 2;
+            labelSVMaQue.Text = "Quê";
+            // 
+            // labelSVGioiTinh
+            // 
+            labelSVGioiTinh.AutoSize = true;
+            labelSVGioiTinh.Location = new Point(27, 123);
+            labelSVGioiTinh.Name = "labelSVGioiTinh";
+            labelSVGioiTinh.Size = new Size(52, 15);
+            labelSVGioiTinh.TabIndex = 2;
+            labelSVGioiTinh.Text = "Giới tính";
             // 
             // labelSVNgaySinh
             // 
@@ -147,6 +221,13 @@
             labelSVNgaySinh.Size = new Size(60, 15);
             labelSVNgaySinh.TabIndex = 2;
             labelSVNgaySinh.Text = "Ngày sinh";
+            // 
+            // inputSVNgaySinh
+            // 
+            inputSVNgaySinh.Location = new Point(130, 86);
+            inputSVNgaySinh.Name = "inputSVNgaySinh";
+            inputSVNgaySinh.Size = new Size(214, 23);
+            inputSVNgaySinh.TabIndex = 1;
             // 
             // inputSVTenSinhVien
             // 
@@ -180,84 +261,14 @@
             labelSVMaSV.TabIndex = 0;
             labelSVMaSV.Text = "Mã sinh viên";
             // 
-            // inputSVNgaySinh
+            // btnSVThem
             // 
-            inputSVNgaySinh.Location = new Point(130, 86);
-            inputSVNgaySinh.Name = "inputSVNgaySinh";
-            inputSVNgaySinh.Size = new Size(214, 23);
-            inputSVNgaySinh.TabIndex = 1;
-            // 
-            // labelSVGioiTinh
-            // 
-            labelSVGioiTinh.AutoSize = true;
-            labelSVGioiTinh.Location = new Point(27, 123);
-            labelSVGioiTinh.Name = "labelSVGioiTinh";
-            labelSVGioiTinh.Size = new Size(52, 15);
-            labelSVGioiTinh.TabIndex = 2;
-            labelSVGioiTinh.Text = "Giới tính";
-            // 
-            // inputSVGioiTinh
-            // 
-            inputSVGioiTinh.FormattingEnabled = true;
-            inputSVGioiTinh.Items.AddRange(new object[] { "Nam", "Nữ" });
-            inputSVGioiTinh.Location = new Point(130, 120);
-            inputSVGioiTinh.Name = "inputSVGioiTinh";
-            inputSVGioiTinh.Size = new Size(98, 23);
-            inputSVGioiTinh.TabIndex = 3;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(27, 156);
-            label1.Name = "label1";
-            label1.Size = new Size(52, 15);
-            label1.TabIndex = 2;
-            label1.Text = "Giới tính";
-            // 
-            // comboBox1
-            // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Items.AddRange(new object[] { "Nam", "Nữ" });
-            comboBox1.Location = new Point(130, 153);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(98, 23);
-            comboBox1.TabIndex = 3;
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Location = new Point(27, 190);
-            label2.Name = "label2";
-            label2.Size = new Size(52, 15);
-            label2.TabIndex = 2;
-            label2.Text = "Giới tính";
-            // 
-            // comboBox2
-            // 
-            comboBox2.FormattingEnabled = true;
-            comboBox2.Items.AddRange(new object[] { "Nam", "Nữ" });
-            comboBox2.Location = new Point(130, 187);
-            comboBox2.Name = "comboBox2";
-            comboBox2.Size = new Size(98, 23);
-            comboBox2.TabIndex = 3;
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Location = new Point(27, 222);
-            label3.Name = "label3";
-            label3.Size = new Size(52, 15);
-            label3.TabIndex = 2;
-            label3.Text = "Giới tính";
-            // 
-            // comboBox3
-            // 
-            comboBox3.FormattingEnabled = true;
-            comboBox3.Items.AddRange(new object[] { "Nam", "Nữ" });
-            comboBox3.Location = new Point(130, 219);
-            comboBox3.Name = "comboBox3";
-            comboBox3.Size = new Size(98, 23);
-            comboBox3.TabIndex = 3;
+            btnSVThem.Location = new Point(66, 22);
+            btnSVThem.Name = "btnSVThem";
+            btnSVThem.Size = new Size(90, 30);
+            btnSVThem.TabIndex = 0;
+            btnSVThem.Text = "button1";
+            btnSVThem.UseVisualStyleBackColor = true;
             // 
             // FormQuanLy
             // 
@@ -272,6 +283,7 @@
             tabSinhVien.ResumeLayout(false);
             groupBoxSinhVienViewData.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dataGridViewSinhVien).EndInit();
+            groupBoxSinhVien2.ResumeLayout(false);
             groupBoxSinhVien1.ResumeLayout(false);
             groupBoxSinhVien1.PerformLayout();
             ResumeLayout(false);
@@ -296,9 +308,10 @@
         private ComboBox inputSVGioiTinh;
         private ComboBox comboBox3;
         private ComboBox comboBox2;
-        private ComboBox comboBox1;
-        private Label label3;
-        private Label label2;
-        private Label label1;
+        private ComboBox inputSVMaQue;
+        private Label labelSVMaLop;
+        private Label labelSVMaKhoa;
+        private Label labelSVMaQue;
+        private Button btnSVThem;
     }
 }
