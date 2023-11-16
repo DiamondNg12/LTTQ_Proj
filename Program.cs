@@ -2,7 +2,6 @@ namespace LTTQ_Proj
 {
     internal static class Program
     {
-        // pqdat
         /// <summary>
         ///  The main entry point for the application.
         /// </summary>
