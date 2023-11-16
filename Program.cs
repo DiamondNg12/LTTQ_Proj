@@ -2,6 +2,7 @@ namespace LTTQ_Proj
 {
     internal static class Program
     {
+        // dat test ne
         /// <summary>
         ///  The main entry point for the application.
         /// </summary>
