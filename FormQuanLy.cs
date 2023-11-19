@@ -41,7 +41,6 @@ namespace LTTQ_Proj
             {
                 inputSVMaKhoa.Items.Add(new {Text = $"{khoa["MaKhoa"]} - {khoa["TenKhoa"]}", Value = khoa["MaKhoa"]});
             }
-
         }
 
         private void inputSVMaKhoa_SelectedIndexChanged(object sender, EventArgs e)
