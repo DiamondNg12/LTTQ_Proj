@@ -39,7 +39,7 @@ namespace LTTQ_Proj
 
             foreach (DataRow khoa in khoas.Rows)
             {
-                inputSVMaKhoa.Items.Add(new {Text = $"{khoa["MaKhoa"]} - {khoa["TenKhoa"]}", Value = khoa["MaKhoa"]});
+                inputSVMaKhoa.Items.Add(new { Text = $"{khoa["MaKhoa"]} - {khoa["TenKhoa"]}", Value = khoa["MaKhoa"] });
             }
         }
 
@@ -58,6 +58,28 @@ namespace LTTQ_Proj
         private void groupBox1_Enter(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnSVThem_Click(object sender, EventArgs e)
+        {
+            string ma_sinh_vien = inputSVMaSinhVien.Text;
+            string ten_sinh_vien = inputSVTenSinhVien.Text;
+            string gioi_tinh = inputSVGioiTinh.Text;
+            string ngay_sinh = inputSVNgaySinh.Text;
+            string[] que = inputSVMaQue.Text.Split(" - ");
+            string ma_que = que[0];
+            string[] khoa = inputSVMaKhoa.Text.Split(" - ");
+            string ma_khoa = khoa[0];
+            string[] lop = inputSVMaLop.Text.Split(" - ");
+            string ma_lop = lop[0];
+            if (ma_sinh_vien.Trim() != "" && ten_sinh_vien.Trim() != "" && gioi_tinh.Trim() != "" && ngay_sinh.Trim() != "" && ma_que.Trim() != "" && ma_khoa.Trim() != "" && ma_lop.Trim() != "")
+            {
+                dc.addSinhVien(ma_sinh_vien, ten_sinh_vien, ngay_sinh, gioi_tinh, ma_que, ma_khoa, ma_lop);
+                MessageBox.Show("Thêm Sinh viên thành công");
+                dataGridViewSinhVien.DataSource = dc.dataTable("select * from SinhVien");
+            } else {
+                MessageBox.Show("Vui lòng nhập đủ thông tin");
+            }
         }
     }
 }
