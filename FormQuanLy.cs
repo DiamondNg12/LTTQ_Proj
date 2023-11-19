@@ -29,5 +29,10 @@ namespace LTTQ_Proj
                 inputSVMaQue.Items.Add($"{que["MaQue"]} - {que["TenQue"]}");
             }
         }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
     }
 }
