@@ -30,6 +30,7 @@
         {
             tabControl1 = new TabControl();
             tabPage1 = new TabPage();
+            tabPage2 = new TabPage();
             tabSinhVien = new TabPage();
             groupBoxSinhVienViewData = new GroupBox();
             dataGridViewSinhVien = new DataGridView();
@@ -50,7 +51,6 @@
             labelSVTenSV = new Label();
             inputSVMaSinhVien = new TextBox();
             labelSVMaSV = new Label();
-            tabPage2 = new TabPage();
             tabPage3 = new TabPage();
             tabControl1.SuspendLayout();
             tabSinhVien.SuspendLayout();
@@ -82,6 +82,16 @@
             tabPage1.TabIndex = 0;
             tabPage1.Text = "tabPage1";
             tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tabPage2
+            // 
+            tabPage2.Location = new Point(4, 24);
+            tabPage2.Name = "tabPage2";
+            tabPage2.Padding = new Padding(3);
+            tabPage2.Size = new Size(792, 422);
+            tabPage2.TabIndex = 2;
+            tabPage2.Text = "tabPage2";
+            tabPage2.UseVisualStyleBackColor = true;
             // 
             // tabSinhVien
             // 
@@ -158,7 +168,6 @@
             // inputSVMaLop
             // 
             inputSVMaLop.FormattingEnabled = true;
-            inputSVMaLop.Items.AddRange(new object[] { "Nam", "Nữ" });
             inputSVMaLop.Location = new Point(130, 219);
             inputSVMaLop.Name = "inputSVMaLop";
             inputSVMaLop.Size = new Size(98, 23);
@@ -167,11 +176,11 @@
             // inputSVMaKhoa
             // 
             inputSVMaKhoa.FormattingEnabled = true;
-            inputSVMaKhoa.Items.AddRange(new object[] { "Nam", "Nữ" });
             inputSVMaKhoa.Location = new Point(130, 187);
             inputSVMaKhoa.Name = "inputSVMaKhoa";
             inputSVMaKhoa.Size = new Size(98, 23);
             inputSVMaKhoa.TabIndex = 3;
+            inputSVMaKhoa.SelectedIndexChanged += inputSVMaKhoa_SelectedIndexChanged;
             // 
             // inputSVMaQue
             // 
@@ -273,16 +282,6 @@
             labelSVMaSV.Size = new Size(74, 15);
             labelSVMaSV.TabIndex = 0;
             labelSVMaSV.Text = "Mã sinh viên";
-            // 
-            // tabPage2
-            // 
-            tabPage2.Location = new Point(4, 24);
-            tabPage2.Name = "tabPage2";
-            tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(792, 422);
-            tabPage2.TabIndex = 2;
-            tabPage2.Text = "tabPage2";
-            tabPage2.UseVisualStyleBackColor = true;
             // 
             // tabPage3
             // 
