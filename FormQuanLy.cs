@@ -25,7 +25,7 @@ namespace LTTQ_Proj
             DataTable ques = dc.dataTable("Select * from Que");
             foreach (DataRow que in ques.Rows)
             {
-                inputSVMaQue.Items.Add($"{que["MaQue"]} - {que["TenQue"]}") ;
+                inputSVMaQue.Items.Add($"{que["MaQue"]} - {que["TenQue"]}");
             }
         }
     }
