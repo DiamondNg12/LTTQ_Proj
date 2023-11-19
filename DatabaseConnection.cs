@@ -68,5 +68,18 @@ namespace LTTQ_Proj
             cmd.ExecuteNonQuery();
             this.closeConnection();
         }
+
+        public void addSinhVien(string ma_sinh_vien, string ten_sinh_vien, string ngay_sinh, string gioi_tinh, string ma_que, string ma_khoa, string ma_lop)
+        {
+            try
+            {
+                string insert_sinh_vien_query = $"insert into SinhVien values (N'{ma_sinh_vien}', N'{ten_sinh_vien}', '{ngay_sinh}', N'{gioi_tinh}', N'{ma_que}', N'{ma_khoa}', N'{ma_lop}')";
+                this.dbQuery(insert_sinh_vien_query);
+            } catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            
+        }
     }
 }
