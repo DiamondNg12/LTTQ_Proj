@@ -62,7 +62,7 @@ namespace LTTQ_Proj
         }
 
         public void dbQuery(string sql)
-        {           
+        {
             this.openConnection();
             SqlCommand cmd = new SqlCommand(sql, this.con);
             cmd.ExecuteNonQuery();
