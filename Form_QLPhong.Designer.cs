@@ -35,9 +35,8 @@
             btnPSua = new Button();
             btnPThem = new Button();
             grbPLoaiPhong = new GroupBox();
-            rdbPVip = new RadioButton();
-            rdbPThuong = new RadioButton();
-            rdbPCoBan = new RadioButton();
+            rdbPNu = new RadioButton();
+            rdbPNam = new RadioButton();
             cmbPSoNguoiToiDa = new ComboBox();
             txtPGhiChu = new TextBox();
             txtPSoNguoiDangO = new TextBox();
@@ -111,6 +110,7 @@
             btnPXoa.TabIndex = 3;
             btnPXoa.Text = "Xoá";
             btnPXoa.UseVisualStyleBackColor = true;
+            btnPXoa.Click += btnPXoa_Click;
             // 
             // btnPSua
             // 
@@ -134,9 +134,8 @@
             // 
             // grbPLoaiPhong
             // 
-            grbPLoaiPhong.Controls.Add(rdbPVip);
-            grbPLoaiPhong.Controls.Add(rdbPThuong);
-            grbPLoaiPhong.Controls.Add(rdbPCoBan);
+            grbPLoaiPhong.Controls.Add(rdbPNu);
+            grbPLoaiPhong.Controls.Add(rdbPNam);
             grbPLoaiPhong.Location = new Point(13, 161);
             grbPLoaiPhong.Name = "grbPLoaiPhong";
             grbPLoaiPhong.Size = new Size(392, 83);
@@ -144,38 +143,27 @@
             grbPLoaiPhong.TabStop = false;
             grbPLoaiPhong.Text = "Loại phòng";
             // 
-            // rdbPVip
+            // rdbPNu
             // 
-            rdbPVip.AutoSize = true;
-            rdbPVip.Location = new Point(270, 36);
-            rdbPVip.Name = "rdbPVip";
-            rdbPVip.Size = new Size(52, 24);
-            rdbPVip.TabIndex = 0;
-            rdbPVip.TabStop = true;
-            rdbPVip.Text = "Vip";
-            rdbPVip.UseVisualStyleBackColor = true;
+            rdbPNu.AutoSize = true;
+            rdbPNu.Location = new Point(257, 36);
+            rdbPNu.Name = "rdbPNu";
+            rdbPNu.Size = new Size(50, 24);
+            rdbPNu.TabIndex = 0;
+            rdbPNu.TabStop = true;
+            rdbPNu.Text = "Nữ";
+            rdbPNu.UseVisualStyleBackColor = true;
             // 
-            // rdbPThuong
+            // rdbPNam
             // 
-            rdbPThuong.AutoSize = true;
-            rdbPThuong.Location = new Point(129, 36);
-            rdbPThuong.Name = "rdbPThuong";
-            rdbPThuong.Size = new Size(81, 24);
-            rdbPThuong.TabIndex = 0;
-            rdbPThuong.TabStop = true;
-            rdbPThuong.Text = "Thường";
-            rdbPThuong.UseVisualStyleBackColor = true;
-            // 
-            // rdbPCoBan
-            // 
-            rdbPCoBan.AutoSize = true;
-            rdbPCoBan.Location = new Point(6, 36);
-            rdbPCoBan.Name = "rdbPCoBan";
-            rdbPCoBan.Size = new Size(81, 24);
-            rdbPCoBan.TabIndex = 0;
-            rdbPCoBan.TabStop = true;
-            rdbPCoBan.Text = "Cơ  bản";
-            rdbPCoBan.UseVisualStyleBackColor = true;
+            rdbPNam.AutoSize = true;
+            rdbPNam.Location = new Point(64, 36);
+            rdbPNam.Name = "rdbPNam";
+            rdbPNam.Size = new Size(62, 24);
+            rdbPNam.TabIndex = 0;
+            rdbPNam.TabStop = true;
+            rdbPNam.Text = "Nam";
+            rdbPNam.UseVisualStyleBackColor = true;
             // 
             // cmbPSoNguoiToiDa
             // 
@@ -391,8 +379,8 @@
         private Label label3;
         private GroupBox grbPLoaiPhong;
         private RadioButton rdbPVip;
-        private RadioButton rdbPThuong;
-        private RadioButton rdbPCoBan;
+        private RadioButton rdbPNu;
+        private RadioButton rdbPNam;
         private ComboBox cmbPSoNguoiToiDa;
         private Button btnPSua;
         private Button btnPThem;

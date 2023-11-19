@@ -37,7 +37,7 @@ namespace LTTQ_Proj
             {
                 con.Close();
             }
-            con.Dispose();
+          //  con.Dispose();
         }
 
         public DataTable dataTable(string selectQuery)

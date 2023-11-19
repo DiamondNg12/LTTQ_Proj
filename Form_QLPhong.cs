@@ -109,15 +109,67 @@ namespace LTTQ_Proj
 
         private void btnPSua_Click(object sender, EventArgs e)
         {
-            string sql;
-            sql = "Update PHONG SET ";
+            // Check if connection is open, otherwise open it
+            if (con.State != ConnectionState.Open)
+                con.Open();
+
+            // Validate input data
+            if (txtPMaPhong.Text.Trim() == "")
+            {
+                errorP.SetError(txtPMaPhong, "Nhập mã phòng");
+                return;
+            }
+
+            if (txtPTenPhong.Text.Trim() == "")
+            {
+                errorP.SetError(txtPTenPhong, "Nhập tên phòng");
+                return;
+            }
+            if (txtPMaNha.Text.Trim() == "")
+            {
+                errorP.SetError(txtPMaNha, "Nhập mã nhà");
+                return;
+            }
+            if (grbPLoaiPhong.Controls.OfType<RadioButton>().Where(r => r.Checked).FirstOrDefault() == null)
+            {
+                errorP.SetError(grbPLoaiPhong, "Chọn loại phòng");
+                return;
+            }
+            if (cmbPSoNguoiToiDa.Text.Trim() == "")
+            {
+                errorP.SetError(cmbPSoNguoiToiDa, "Chọn số người ở tối đa của 1 phòng");
+                return;
+            }
+
+
+            if (txtPTienThue.Text.Trim() == "")
+            {
+                errorP.SetError(txtPTienThue, "Nhập tiền thuê");
+                return;
+            }
+
+            // Construct the SQL update statement
+            string sql = "UPDATE Phong SET ";
             sql += "TenPhong = N'" + txtPTenPhong.Text + "',";
-            sql += "SoNguoiToiDa= '" + cmbPSoNguoiToiDa + "',";
-            sql += "SoNguoiDangO = '" + cmbPSoNguoiToiDa + "',";
-            sql += "TienThue = N'" + txtPTienThue.Text + "',";
+            sql += "SoNguoiToiDa = " + cmbPSoNguoiToiDa.Text + ",";
+            sql += "SoNguoiDangO = " + txtPSoNguoiDangO.Text + ",";
+            sql += "TienThue = " + txtPTienThue.Text + ",";
             sql += "GhiChu = N'" + txtPGhiChu.Text + "' ";
-            sql += "Where MaPhong = N'" + txtPMaPhong.Text + "'";
-            sql += "Where MaNha = N'" + txtPMaNha.Text + "'";
+            sql += "WHERE MaPhong = N'" + txtPMaPhong.Text + "'";
+
+            // Execute the SQL update statement
+            SqlCommand cmd = new SqlCommand(sql, con);
+            int rowsAffected = cmd.ExecuteNonQuery();
+            dgvPDanhSachPhong.DataSource = DB.dataTable("select * from PHONG");
+            // Display update success message
+            if (rowsAffected > 0)
+            {
+                MessageBox.Show("Cập nhật phòng thành công!");
+            }
+            else
+            {
+                MessageBox.Show("Không thể cập nhật thông tin phòng");
+            }
         }
         private void btnPThem_Click(object sender, EventArgs e)
         {
@@ -202,6 +254,44 @@ namespace LTTQ_Proj
 
             //Đóng kết nối
             con.Close();
+        }
+
+        private void btnPXoa_Click(object sender, EventArgs e)
+        {
+            // Check if connection is open, otherwise open it
+            if (con.State != ConnectionState.Open)
+                con.Open();
+
+            // Validate input data
+            if (txtPMaPhong.Text.Trim() == "")
+            {
+                errorP.SetError(txtPMaPhong, "Please enter a room ID to delete");
+                return;
+            }
+
+            // xác nhân xoá hay không xoá
+            DialogResult result = MessageBox.Show("Bạn có muốn xoá phòng này?", "Xác nhận xoá", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result != DialogResult.Yes)
+            {
+                return;
+            }
+
+           
+            string sql = "DELETE FROM Phong WHERE MaPhong = N'" + txtPMaPhong.Text + "'";
+
+            // Thực thi câu lệnh để xoá
+            SqlCommand cmd = new SqlCommand(sql, con);
+            int rowsAffected = cmd.ExecuteNonQuery();
+            dgvPDanhSachPhong.DataSource = DB.dataTable("select * from PHONG");
+            // Hiển thị thông báo khi xoá thành công
+            if (rowsAffected > 0)
+            {
+                MessageBox.Show("Xoá phòng thành công");
+            }
+            else
+            {
+                MessageBox.Show("Không thể xoá phòng");
+            }
         }
     }
 
