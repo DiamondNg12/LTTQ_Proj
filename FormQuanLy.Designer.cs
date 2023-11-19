@@ -488,7 +488,6 @@
             // inputSVMaLop
             // 
             inputSVMaLop.FormattingEnabled = true;
-            inputSVMaLop.Items.AddRange(new object[] { "Nam", "Nữ" });
             inputSVMaLop.Location = new Point(149, 292);
             inputSVMaLop.Margin = new Padding(3, 4, 3, 4);
             inputSVMaLop.Name = "inputSVMaLop";
@@ -498,7 +497,6 @@
             // inputSVMaKhoa
             // 
             inputSVMaKhoa.FormattingEnabled = true;
-            inputSVMaKhoa.Items.AddRange(new object[] { "Nam", "Nữ" });
             inputSVMaKhoa.Location = new Point(149, 249);
             inputSVMaKhoa.Margin = new Padding(3, 4, 3, 4);
             inputSVMaKhoa.Name = "inputSVMaKhoa";
