@@ -55,5 +55,10 @@ namespace LTTQ_Proj
                 inputSVMaLop.Items.Add($"{lop["MaLop"]} - {lop["TenLop"]}");
             }
         }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
     }
 }
