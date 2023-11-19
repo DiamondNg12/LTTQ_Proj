@@ -89,9 +89,12 @@ namespace LTTQ_Proj
                 dc.addSinhVien(ma_sinh_vien, ten_sinh_vien, ngay_sinh, gioi_tinh, ma_que, ma_khoa, ma_lop);
                 MessageBox.Show("Thêm Sinh viên thành công");
                 dataGridViewSinhVien.DataSource = dc.dataTable("select * from SinhVien");
-            } else {
+            }
+            else
+            {
                 MessageBox.Show("Vui lòng nhập đủ thông tin");
             }
+        }
         private void btnPThoat_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("Bạn có muốn thoát không?", "Thông báo",

@@ -73,6 +73,8 @@
             dataGridViewSinhVien = new DataGridView();
             groupBoxSinhVien2 = new GroupBox();
             btnSVThem = new Button();
+            btnSVSua = new Button();
+            btnSVXoa = new Button();
             groupBoxSinhVien1 = new GroupBox();
             inputSVMaLop = new ComboBox();
             inputSVMaKhoa = new ComboBox();
