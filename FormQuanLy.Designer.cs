@@ -30,6 +30,7 @@
         {
             tabControl1 = new TabControl();
             tabPage1 = new TabPage();
+
             btnPThoat = new Button();
             btnPTimKiem = new Button();
             btnPXoa = new Button();
@@ -489,6 +490,7 @@
             inputSVMaKhoa.Name = "inputSVMaKhoa";
             inputSVMaKhoa.Size = new Size(111, 28);
             inputSVMaKhoa.TabIndex = 3;
+            inputSVMaKhoa.SelectedIndexChanged += inputSVMaKhoa_SelectedIndexChanged;
             // 
             // inputSVMaQue
             // 
