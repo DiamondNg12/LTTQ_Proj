@@ -37,13 +37,15 @@ namespace LTTQ_Proj
             // tabpanel SinhVien
             dataGridViewSinhVien.DataSource = dc.dataTable("Select * from SinhVien");
 
+            //tabpanel Thue Phong
+            ThuePhong();
             // combobox inputSVMaQue
             DataTable ques = dc.dataTable("Select * from Que");
             foreach (DataRow que in ques.Rows)
             {
                 inputSVMaQue.Items.Add($"{que["MaQue"]} - {que["TenQue"]}");
             }
-
+            
             // combobox inputSVMaKhoa
             DataTable khoas = dc.dataTable("Select * from Khoa");
             inputSVMaKhoa.DisplayMember = "Text";
@@ -296,6 +298,16 @@ namespace LTTQ_Proj
 
         }
 
+        private void ThuePhong()
+        {
+            string sql = "Select * from Phong  WHERE (SoNguoiDangO < SoNGuoiToiDa)";
+            string sql1 = "select * from SinhVien where MaSinhVien not in (select  MaSV from ThuePhong)";
+            dvgDSSVThuePhong.DataSource = dc.dataTable(sql1);
+            dc.dbQuery(sql);
+            dgvDSPhongConTrong.DataSource = dc.dataTable(sql);
+            ;
+        }
+        
         private void dataGridViewSinhVien_SelectionChanged(object sender, EventArgs e)
         {
             if (dataGridViewSinhVien.SelectedRows.Count > 0)
@@ -322,6 +334,7 @@ namespace LTTQ_Proj
                 string delete_sql = $"delete from SinhVien where MaSinhVien = N'{inputSVMaSinhVien.Text}'";
                 dc.dbQuery(delete_sql);
                 MessageBox.Show("Xóa Sinh Viên Thành Công");
+                dataGridViewSinhVien.DataSource = dc.dataTable("Select * from SinhVien");
             }
             catch (Exception ex)
             {
@@ -374,13 +387,14 @@ namespace LTTQ_Proj
             {
                 dc.dbQuery(update_sql);
                 MessageBox.Show("Sửa Sinh Viên Thành Công");
+                dataGridViewSinhVien.DataSource = dc.dataTable("Select * from SinhVien");
             }
             catch (Exception ex)
             {
                 //MessageBox.Show(ex.Message);
                 MessageBox.Show("Sửa Sinh Viên Không Thành Công");
              }
-            dataGridViewSinhVien.DataSource = dc.dataTable("Select * from SinhVien");
+            
             
         }
     }
