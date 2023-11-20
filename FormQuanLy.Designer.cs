@@ -104,6 +104,7 @@
             dateTimePicker2 = new DateTimePicker();
             label15 = new Label();
             txtGhiChuThue = new TextBox();
+            errorSV = new ErrorProvider(components);
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             grbDannhSachPhong.SuspendLayout();
@@ -122,6 +123,7 @@
             groupBoxSinhVien2.SuspendLayout();
             groupBoxSinhVien1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)errorPhong).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)errorSV).BeginInit();
             SuspendLayout();
             // 
             // tabControl1
@@ -433,7 +435,7 @@
             label9.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point);
             label9.Location = new Point(602, 20);
             label9.Name = "label9";
-            label9.Size = new Size(246, 25);
+            label9.Size = new Size(363, 38);
             label9.TabIndex = 4;
             label9.Text = "Thuê Phòng cho Sinh Viên";
             // 
@@ -610,6 +612,7 @@
             btnSVXoa.TabIndex = 0;
             btnSVXoa.Text = "Xoá";
             btnSVXoa.UseVisualStyleBackColor = true;
+            btnSVXoa.Click += btnSVXoa_Click;
             // 
             // btnSVSua
             // 
@@ -620,6 +623,7 @@
             btnSVSua.TabIndex = 0;
             btnSVSua.Text = "Sửa";
             btnSVSua.UseVisualStyleBackColor = true;
+            btnSVSua.Click += btnSVSua_Click;
             // 
             // btnSVThem
             // 
@@ -928,6 +932,7 @@
             groupBoxSinhVien1.ResumeLayout(false);
             groupBoxSinhVien1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)errorPhong).EndInit();
+            ((System.ComponentModel.ISupportInitialize)errorSV).EndInit();
             ResumeLayout(false);
         }
 
@@ -1008,5 +1013,6 @@
         private TextBox txtMaPhongThue;
         private Label label15;
         private TextBox txtGhiChuThue;
+        private ErrorProvider errorSV;
     }
 }

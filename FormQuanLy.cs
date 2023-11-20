@@ -313,8 +313,89 @@ namespace LTTQ_Proj
             if (dataGridViewSinhVien.SelectedRows.Count > 0)
             {
                 inputSVMaSinhVien.Text = dataGridViewSinhVien.SelectedRows[0].Cells["MaSinhVien"].Value.ToString();
+                inputSVTenSinhVien.Text = dataGridViewSinhVien.SelectedRows[0].Cells["TenSinhVien"].Value.ToString();
+                inputSVNgaySinh.Text = dataGridViewSinhVien.SelectedRows[0].Cells["NgaySinh"].Value.ToString();
+                inputSVGioiTinh.Text = dataGridViewSinhVien.SelectedRows[0].Cells["GioiTinh"].Value.ToString();
+                inputSVMaQue.Text = dataGridViewSinhVien.SelectedRows[0].Cells["MaQue"].Value.ToString();
+                inputSVMaKhoa.Text = dataGridViewSinhVien.SelectedRows[0].Cells["MaKhoa"].Value.ToString();
+                inputSVMaLop.Text = dataGridViewSinhVien.SelectedRows[0].Cells["MaLop"].Value.ToString();
+
             }
-                
+
+
+
+        }
+
+        private void btnSVXoa_Click(object sender, EventArgs e)
+        {
+            //inputSVMaSinhVien.text
+            try
+            {
+                string delete_sql = $"delete from SinhVien where MaSinhVien = N'{inputSVMaSinhVien.Text}'";
+                dc.dbQuery(delete_sql);
+                MessageBox.Show("Xóa Sinh Viên Thành Công");
+                dataGridViewSinhVien.DataSource = dc.dataTable("Select * from SinhVien");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Xóa Sinh Viên Không Thành Công");
+            }
+
+
+
+        }
+
+        private void btnSVSua_Click(object sender, EventArgs e)
+        {
+            if (inputSVMaSinhVien.Text.Trim() == "")
+            {
+                errorSV.SetError(inputSVMaSinhVien, "Nhập mã sinh viên");
+                return;
+            }
+            if (inputSVTenSinhVien.Text.Trim() == "")
+            {
+                errorSV.SetError(inputSVTenSinhVien, "Nhập tên sinh viên"); 
+            }
+            if (inputSVNgaySinh.Text.Trim() == "")
+            {
+                errorSV.SetError(inputSVNgaySinh, "Nhập Ngày Sinh");
+            }
+            if (inputSVGioiTinh.Text.Trim() == "")
+            {
+                errorSV.SetError(inputSVGioiTinh, "Nhập Giới Tính");
+            }
+            if (inputSVMaQue.Text.Trim() == "")
+            {
+                errorSV.SetError(inputSVMaQue, "Nhập Quê");
+            }
+            if (inputSVMaKhoa.Text.Trim() == "")
+            {
+                errorSV.SetError(inputSVMaKhoa, "Nhập Khoa");
+            }
+            if (inputSVMaLop.Text.Trim() == "")
+            {
+                errorSV.SetError(inputSVMaLop, "Nhập Lớp");
+            }
+
+            String update_sql = $"update SinhVien set TenSinhVien =  N'{inputSVTenSinhVien.Text}'," +
+            $" NgaySinh = N'{inputSVNgaySinh.Text}'," +
+            $" GioiTinh = N'{inputSVGioiTinh.Text}'," +
+            $" MaQue = N'{inputSVMaQue.Text}'," +
+            $" MaKhoa = N'{inputSVMaKhoa.Text}'," +
+            $" MaLop = N'{inputSVMaLop.Text}' where MaSinhVien = N'{inputSVMaSinhVien.Text}'";
+            try
+            {
+                dc.dbQuery(update_sql);
+                MessageBox.Show("Sửa Sinh Viên Thành Công");
+                dataGridViewSinhVien.DataSource = dc.dataTable("Select * from SinhVien");
+            }
+            catch (Exception ex)
+            {
+                //MessageBox.Show(ex.Message);
+                MessageBox.Show("Sửa Sinh Viên Không Thành Công");
+             }
+            
+            
         }
     }
 }
