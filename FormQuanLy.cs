@@ -37,13 +37,15 @@ namespace LTTQ_Proj
             // tabpanel SinhVien
             dataGridViewSinhVien.DataSource = dc.dataTable("Select * from SinhVien");
 
+            //tabpanel Thue Phong
+            ThuePhong();
             // combobox inputSVMaQue
             DataTable ques = dc.dataTable("Select * from Que");
             foreach (DataRow que in ques.Rows)
             {
                 inputSVMaQue.Items.Add($"{que["MaQue"]} - {que["TenQue"]}");
             }
-
+            
             // combobox inputSVMaKhoa
             DataTable khoas = dc.dataTable("Select * from Khoa");
             inputSVMaKhoa.DisplayMember = "Text";
@@ -269,7 +271,7 @@ namespace LTTQ_Proj
 
             // Execute the SQL update statement
             //SqlCommand cmd = new SqlCommand(sql, con);
-           // int rowsAffected = cmd.ExecuteNonQuery();
+            // int rowsAffected = cmd.ExecuteNonQuery();
             try
             {
                 dc.dbQuery(sql);
@@ -295,5 +297,15 @@ namespace LTTQ_Proj
         {
 
         }
+        private void ThuePhong()
+        {
+            string sql = "Select * from Phong  WHERE (SoNguoiDangO < SoNGuoiToiDa)";
+            string sql1 = "select * from SinhVien where MaSinhVien not in (select  MaSV from ThuePhong)";
+            dvgDSSVThuePhong.DataSource = dc.dataTable(sql1);
+            dc.dbQuery(sql);
+            dgvDSPhongConTrong.DataSource = dc.dataTable(sql);
+            ;
+        }
+        
     }
 }
