@@ -297,6 +297,7 @@ namespace LTTQ_Proj
         {
 
         }
+
         private void ThuePhong()
         {
             string sql = "Select * from Phong  WHERE (SoNguoiDangO < SoNGuoiToiDa)";
@@ -307,5 +308,13 @@ namespace LTTQ_Proj
             ;
         }
         
+        private void dataGridViewSinhVien_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dataGridViewSinhVien.SelectedRows.Count > 0)
+            {
+                inputSVMaSinhVien.Text = dataGridViewSinhVien.SelectedRows[0].Cells["MaSinhVien"].Value.ToString();
+            }
+                
+        }
     }
 }

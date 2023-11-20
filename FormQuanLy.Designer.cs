@@ -433,7 +433,7 @@
             label9.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point);
             label9.Location = new Point(602, 20);
             label9.Name = "label9";
-            label9.Size = new Size(296, 31);
+            label9.Size = new Size(246, 25);
             label9.TabIndex = 4;
             label9.Text = "Thuê Phòng cho Sinh Viên";
             // 
@@ -586,6 +586,7 @@
             dataGridViewSinhVien.RowTemplate.Height = 25;
             dataGridViewSinhVien.Size = new Size(868, 516);
             dataGridViewSinhVien.TabIndex = 0;
+            dataGridViewSinhVien.SelectionChanged += dataGridViewSinhVien_SelectionChanged;
             // 
             // groupBoxSinhVien2
             // 
