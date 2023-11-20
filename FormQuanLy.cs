@@ -269,7 +269,7 @@ namespace LTTQ_Proj
 
             // Execute the SQL update statement
             //SqlCommand cmd = new SqlCommand(sql, con);
-           // int rowsAffected = cmd.ExecuteNonQuery();
+            // int rowsAffected = cmd.ExecuteNonQuery();
             try
             {
                 dc.dbQuery(sql);
@@ -295,5 +295,11 @@ namespace LTTQ_Proj
         {
 
         }
+
+        private void dataGridViewSinhVien_SelectionChanged(object sender, EventArgs e)
+        {
+            MessageBox.Show("oke");
+        }
+
     }
 }
