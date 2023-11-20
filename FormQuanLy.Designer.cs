@@ -72,9 +72,9 @@
             groupBoxSinhVienViewData = new GroupBox();
             dataGridViewSinhVien = new DataGridView();
             groupBoxSinhVien2 = new GroupBox();
-            btnSVThem = new Button();
-            btnSVSua = new Button();
             btnSVXoa = new Button();
+            btnSVSua = new Button();
+            btnSVThem = new Button();
             groupBoxSinhVien1 = new GroupBox();
             inputSVMaLop = new ComboBox();
             inputSVMaKhoa = new ComboBox();
@@ -91,7 +91,6 @@
             inputSVMaSinhVien = new TextBox();
             labelSVMaSV = new Label();
             tabPage3 = new TabPage();
-
             errorPhong = new ErrorProvider(components);
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
@@ -109,7 +108,6 @@
             ((System.ComponentModel.ISupportInitialize)dataGridViewSinhVien).BeginInit();
             groupBoxSinhVien2.SuspendLayout();
             groupBoxSinhVien1.SuspendLayout();
-
             ((System.ComponentModel.ISupportInitialize)errorPhong).BeginInit();
             SuspendLayout();
             // 
@@ -440,7 +438,7 @@
             label9.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point);
             label9.Location = new Point(527, 15);
             label9.Name = "label9";
-            label9.Size = new Size(296, 31);
+            label9.Size = new Size(246, 25);
             label9.TabIndex = 4;
             label9.Text = "Thuê Phòng cho Sinh Viên";
             // 
@@ -485,11 +483,11 @@
             // 
             dgvDSPhongConTrong.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvDSPhongConTrong.Dock = DockStyle.Fill;
-            dgvDSPhongConTrong.Location = new Point(3, 23);
+            dgvDSPhongConTrong.Location = new Point(3, 19);
             dgvDSPhongConTrong.Name = "dgvDSPhongConTrong";
             dgvDSPhongConTrong.RowHeadersWidth = 51;
             dgvDSPhongConTrong.RowTemplate.Height = 29;
-            dgvDSPhongConTrong.Size = new Size(610, 327);
+            dgvDSPhongConTrong.Size = new Size(610, 331);
             dgvDSPhongConTrong.TabIndex = 0;
             // 
             // groupBox3
@@ -506,11 +504,11 @@
             // 
             dvgDSSVThuePhong.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dvgDSSVThuePhong.Dock = DockStyle.Fill;
-            dvgDSSVThuePhong.Location = new Point(3, 23);
+            dvgDSSVThuePhong.Location = new Point(3, 19);
             dvgDSSVThuePhong.Name = "dvgDSSVThuePhong";
             dvgDSSVThuePhong.RowHeadersWidth = 51;
             dvgDSSVThuePhong.RowTemplate.Height = 29;
-            dvgDSSVThuePhong.Size = new Size(601, 327);
+            dvgDSSVThuePhong.Size = new Size(601, 331);
             dvgDSSVThuePhong.TabIndex = 0;
             // 
             // groupBox1
@@ -532,7 +530,7 @@
             tabSinhVien.Location = new Point(4, 24);
             tabSinhVien.Name = "tabSinhVien";
             tabSinhVien.Padding = new Padding(3, 4, 3, 4);
-            tabSinhVien.Size = new Size(1252, 645);
+            tabSinhVien.Size = new Size(1094, 480);
             tabSinhVien.TabIndex = 1;
             tabSinhVien.Text = "Sinh Viên";
             tabSinhVien.UseVisualStyleBackColor = true;
@@ -566,6 +564,7 @@
             dataGridViewSinhVien.RowTemplate.Height = 25;
             dataGridViewSinhVien.Size = new Size(676, 386);
             dataGridViewSinhVien.TabIndex = 0;
+            dataGridViewSinhVien.SelectionChanged += dataGridViewSinhVien_SelectionChanged;
             // 
             // groupBoxSinhVien2
             // 
@@ -577,6 +576,24 @@
             groupBoxSinhVien2.Size = new Size(390, 110);
             groupBoxSinhVien2.TabIndex = 1;
             groupBoxSinhVien2.TabStop = false;
+            // 
+            // btnSVXoa
+            // 
+            btnSVXoa.Location = new Point(270, 46);
+            btnSVXoa.Name = "btnSVXoa";
+            btnSVXoa.Size = new Size(90, 30);
+            btnSVXoa.TabIndex = 0;
+            btnSVXoa.Text = "Xoá";
+            btnSVXoa.UseVisualStyleBackColor = true;
+            // 
+            // btnSVSua
+            // 
+            btnSVSua.Location = new Point(153, 46);
+            btnSVSua.Name = "btnSVSua";
+            btnSVSua.Size = new Size(90, 30);
+            btnSVSua.TabIndex = 0;
+            btnSVSua.Text = "Sửa";
+            btnSVSua.UseVisualStyleBackColor = true;
             // 
             // btnSVThem
             // 
@@ -733,28 +750,11 @@
             tabPage3.Location = new Point(4, 24);
             tabPage3.Name = "tabPage3";
             tabPage3.Padding = new Padding(3, 4, 3, 4);
-            tabPage3.Size = new Size(1252, 645);
+            tabPage3.Size = new Size(1094, 480);
             tabPage3.TabIndex = 3;
             tabPage3.Text = "tabPage3";
             tabPage3.UseVisualStyleBackColor = true;
             // 
-            // btnSVSua
-            // 
-            btnSVSua.Location = new Point(153, 46);
-            btnSVSua.Name = "btnSVSua";
-            btnSVSua.Size = new Size(90, 30);
-            btnSVSua.TabIndex = 0;
-            btnSVSua.Text = "Sửa";
-            btnSVSua.UseVisualStyleBackColor = true;
-            // 
-            // btnSVXoa
-            // 
-            btnSVXoa.Location = new Point(270, 46);
-            btnSVXoa.Name = "btnSVXoa";
-            btnSVXoa.Size = new Size(90, 30);
-            btnSVXoa.TabIndex = 0;
-            btnSVXoa.Text = "Xoá";
-            btnSVXoa.UseVisualStyleBackColor = true;
             // errorPhong
             // 
             errorPhong.ContainerControl = this;
@@ -790,7 +790,6 @@
             groupBoxSinhVien2.ResumeLayout(false);
             groupBoxSinhVien1.ResumeLayout(false);
             groupBoxSinhVien1.PerformLayout();
-
             ((System.ComponentModel.ISupportInitialize)errorPhong).EndInit();
             ResumeLayout(false);
         }
