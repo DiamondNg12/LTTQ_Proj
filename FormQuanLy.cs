@@ -366,31 +366,44 @@ namespace LTTQ_Proj
             if (inputSVMaSinhVien.Text.Trim() == "")
             {
                 errorSV.SetError(inputSVMaSinhVien, "Nhập mã sinh viên");
+                MessageBox.Show("Vui lòng nhập đủ thông tin");
                 return;
             }
             if (inputSVTenSinhVien.Text.Trim() == "")
             {
                 errorSV.SetError(inputSVTenSinhVien, "Nhập tên sinh viên");
+                MessageBox.Show("Vui lòng nhập đủ thông tin");
+                return;
             }
             if (inputSVNgaySinh.Text.Trim() == "")
             {
                 errorSV.SetError(inputSVNgaySinh, "Nhập Ngày Sinh");
+                MessageBox.Show("Vui lòng nhập đủ thông tin");
+                return;
             }
             if (inputSVGioiTinh.Text.Trim() == "")
             {
                 errorSV.SetError(inputSVGioiTinh, "Nhập Giới Tính");
+                MessageBox.Show("Vui lòng nhập đủ thông tin");
+                return;
             }
             if (inputSVMaQue.Text.Trim() == "")
             {
                 errorSV.SetError(inputSVMaQue, "Nhập Quê");
+                MessageBox.Show("Vui lòng nhập đủ thông tin");
+                return;
             }
             if (inputSVMaKhoa.Text.Trim() == "")
             {
                 errorSV.SetError(inputSVMaKhoa, "Nhập Khoa");
+                MessageBox.Show("Vui lòng nhập đủ thông tin");
+                return;
             }
             if (inputSVMaLop.Text.Trim() == "")
             {
                 errorSV.SetError(inputSVMaLop, "Nhập Lớp");
+                MessageBox.Show("Vui lòng nhập đủ thông tin");
+                return;
             }
 
             String update_sql = $"update SinhVien set TenSinhVien =  N'{inputSVTenSinhVien.Text}'," +
