@@ -366,31 +366,44 @@ namespace LTTQ_Proj
             if (inputSVMaSinhVien.Text.Trim() == "")
             {
                 errorSV.SetError(inputSVMaSinhVien, "Nhập mã sinh viên");
+                MessageBox.Show("Vui Lòng Nhập Đủ Thông Tin");
                 return;
             }
             if (inputSVTenSinhVien.Text.Trim() == "")
             {
                 errorSV.SetError(inputSVTenSinhVien, "Nhập tên sinh viên");
+                MessageBox.Show("Vui Lòng Nhập Đủ Thông Tin");
+                return;
             }
             if (inputSVNgaySinh.Text.Trim() == "")
             {
                 errorSV.SetError(inputSVNgaySinh, "Nhập Ngày Sinh");
+                MessageBox.Show("Vui Lòng Nhập Đủ Thông Tin");
+                return;
             }
             if (inputSVGioiTinh.Text.Trim() == "")
             {
                 errorSV.SetError(inputSVGioiTinh, "Nhập Giới Tính");
+                MessageBox.Show("Vui Lòng Nhập Đủ Thông Tin");
+                return;
             }
             if (inputSVMaQue.Text.Trim() == "")
             {
                 errorSV.SetError(inputSVMaQue, "Nhập Quê");
+                MessageBox.Show("Vui Lòng Nhập Đủ Thông Tin");
+                return;
             }
             if (inputSVMaKhoa.Text.Trim() == "")
             {
                 errorSV.SetError(inputSVMaKhoa, "Nhập Khoa");
+                MessageBox.Show("Vui Lòng Nhập Đủ Thông Tin");
+                return;
             }
             if (inputSVMaLop.Text.Trim() == "")
             {
                 errorSV.SetError(inputSVMaLop, "Nhập Lớp");
+                MessageBox.Show("Vui Lòng Nhập Đủ Thông Tin");
+                return;
             }
 
             String update_sql = $"update SinhVien set TenSinhVien =  N'{inputSVTenSinhVien.Text}'," +
@@ -407,7 +420,7 @@ namespace LTTQ_Proj
             }
             catch (Exception ex)
             {
-                //MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message);
                 MessageBox.Show("Sửa Sinh Viên Không Thành Công");
             }
 
