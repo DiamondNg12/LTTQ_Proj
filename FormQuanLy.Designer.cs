@@ -101,6 +101,7 @@
             inputSVMaSinhVien = new TextBox();
             labelSVMaSV = new Label();
             tabPage4 = new TabPage();
+            btnUpdateCurentMonth = new Button();
             btnLuu = new Button();
             btnTinhTien = new Button();
             btn = new Button();
@@ -135,7 +136,6 @@
             errorPhong = new ErrorProvider(components);
             errorSV = new ErrorProvider(components);
             errorThuePhong = new ErrorProvider(components);
-            btnUpdateCurentMonth = new Button();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             grbDannhSachPhong.SuspendLayout();
@@ -257,7 +257,7 @@
             grbDannhSachPhong.Margin = new Padding(3, 2, 3, 2);
             grbDannhSachPhong.Name = "grbDannhSachPhong";
             grbDannhSachPhong.Padding = new Padding(3, 2, 3, 2);
-            grbDannhSachPhong.Size = new Size(794, 333);
+            grbDannhSachPhong.Size = new Size(718, 333);
             grbDannhSachPhong.TabIndex = 3;
             grbDannhSachPhong.TabStop = false;
             grbDannhSachPhong.Text = "Danh Sách Phòng";
@@ -271,7 +271,7 @@
             dgvPDanhSachPhong.Name = "dgvPDanhSachPhong";
             dgvPDanhSachPhong.RowHeadersWidth = 51;
             dgvPDanhSachPhong.RowTemplate.Height = 29;
-            dgvPDanhSachPhong.Size = new Size(788, 313);
+            dgvPDanhSachPhong.Size = new Size(712, 313);
             dgvPDanhSachPhong.TabIndex = 0;
             dgvPDanhSachPhong.CellContentClick += dgvPDanhSachPhong_CellContentClick;
             // 
@@ -706,7 +706,7 @@
             groupBoxSinhVienViewData.Controls.Add(dataGridViewSinhVien);
             groupBoxSinhVienViewData.Location = new Point(406, 64);
             groupBoxSinhVienViewData.Name = "groupBoxSinhVienViewData";
-            groupBoxSinhVienViewData.Size = new Size(765, 408);
+            groupBoxSinhVienViewData.Size = new Size(681, 408);
             groupBoxSinhVienViewData.TabIndex = 2;
             groupBoxSinhVienViewData.TabStop = false;
             // 
@@ -718,7 +718,7 @@
             dataGridViewSinhVien.Name = "dataGridViewSinhVien";
             dataGridViewSinhVien.RowHeadersWidth = 51;
             dataGridViewSinhVien.RowTemplate.Height = 25;
-            dataGridViewSinhVien.Size = new Size(759, 386);
+            dataGridViewSinhVien.Size = new Size(675, 386);
             dataGridViewSinhVien.TabIndex = 0;
             dataGridViewSinhVien.SelectionChanged += dataGridViewSinhVien_SelectionChanged;
             // 
@@ -920,6 +920,16 @@
             tabPage4.TabIndex = 4;
             tabPage4.Text = "Thu Tiền Phòng";
             tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // btnUpdateCurentMonth
+            // 
+            btnUpdateCurentMonth.Location = new Point(927, 408);
+            btnUpdateCurentMonth.Margin = new Padding(3, 2, 3, 2);
+            btnUpdateCurentMonth.Name = "btnUpdateCurentMonth";
+            btnUpdateCurentMonth.Size = new Size(126, 32);
+            btnUpdateCurentMonth.TabIndex = 5;
+            btnUpdateCurentMonth.Text = "Cập nhật hoá đơn";
+            btnUpdateCurentMonth.UseVisualStyleBackColor = true;
             // 
             // btnLuu
             // 
@@ -1242,16 +1252,6 @@
             // errorThuePhong
             // 
             errorThuePhong.ContainerControl = this;
-            // 
-            // btnUpdateCurentMonth
-            // 
-            btnUpdateCurentMonth.Location = new Point(927, 408);
-            btnUpdateCurentMonth.Margin = new Padding(3, 2, 3, 2);
-            btnUpdateCurentMonth.Name = "btnUpdateCurentMonth";
-            btnUpdateCurentMonth.Size = new Size(126, 32);
-            btnUpdateCurentMonth.TabIndex = 5;
-            btnUpdateCurentMonth.Text = "Cập nhật hoá đơn";
-            btnUpdateCurentMonth.UseVisualStyleBackColor = true;
             // 
             // FormQuanLy
             // 
