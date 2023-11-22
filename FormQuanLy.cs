@@ -503,11 +503,38 @@ namespace LTTQ_Proj
                     return;
                 }
             }
-            //MessageBox.Show($"MSV: {txtMSVThue.Text}, MP: {txtMaPhongThue.Text}, BD: {dtpNgayBD.Value}, KT: {dtpNgayKT.Value}");
 
 
-            //Thông báo đã thêm thành công
-            MessageBox.Show("Thêm phòng thành công!");
+            DataTable danh_sach_thue_phong = dc.dataTable("select * from ThuePhong");
+            int new_MST;
+            if (danh_sach_thue_phong.Rows.Count == 0)
+            {
+                new_MST = 1;
+            }
+            else
+            {
+                int max_MST = Int32.Parse(danh_sach_thue_phong.Rows[danh_sach_thue_phong.Rows.Count - 1]["MaSoThue"].ToString());
+                new_MST = max_MST + 1;
+            }
+            string MaSoThue = new_MST.ToString().PadLeft(5, '0');
+
+            try
+            {
+                string insert_sql = $"insert into ThuePhong values (N'{MaSoThue}', N'{txtMSVThue.Text}', N'{txtMaPhongThue.Text}', '{dtpNgayBD.Value}', '{dtpNgayKT.Value}', N'{txtGhiChuThue.Text}')";
+                dc.dbQuery(insert_sql);
+                MessageBox.Show("Thuê phòng thành công!");
+                string update_phong = $"update Phong set SoNguoiDangO = SoNguoiDangO + 1 where MaPhong = N'{txtMaPhongThue.Text}'";
+                dc.dbQuery(update_phong);
+                string sql = $"select * from Phong where SoNguoiDangO < SoNguoiToiDa";
+                dgvDSPhongConTrong.DataSource = dc.dataTable(sql);
+                string sql1 = "select * from SinhVien where MaSinhVien not in (select  MaSV from ThuePhong)";
+                dvgDSSVThuePhong.DataSource = dc.dataTable(sql1);
+
+            } catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message );
+                MessageBox.Show("Thuê phòng không thành công!");
+            }
         }
 
         private void tabPage3_Click(object sender, EventArgs e)
