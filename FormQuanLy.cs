@@ -463,7 +463,7 @@ namespace LTTQ_Proj
         //Thêm Sv muốn thuê vào phòng còn trống
         private void btnTThem_Click(object sender, EventArgs e)
         {
-            
+
             //Kiểm tra điều kiện ngày
             if (dtpNgayBD.Value < DateTime.Now)
             {
@@ -484,28 +484,45 @@ namespace LTTQ_Proj
             {
                 MessageBox.Show($"Không tìm thấy sinh viên có mã sinh viên: {txtMSVThue.Text}");
                 return;
-            } else if (check_phong_cho_thue.Rows.Count == 0)
+            }
+            else if (check_phong_cho_thue.Rows.Count == 0)
             {
                 MessageBox.Show($"Không tìm thấy Phòng có mã phòng: {txtMaPhongThue.Text}");
                 return;
-            } else
+            }
+            else
             {
                 if (Int32.Parse(check_phong_cho_thue.Rows[0]["SoNguoiDangO"].ToString()) >= Int32.Parse(check_phong_cho_thue.Rows[0]["SoNguoiToiDa"].ToString()))
                 {
                     MessageBox.Show($"Phòng không còn chỗ trống");
                     return;
                 }
-                if (check_phong_cho_thue.Rows[0]["LoaiPhong"].ToString() != check_SV_thue.Rows[0]["GioiTinh"].ToString()) 
+                if (check_phong_cho_thue.Rows[0]["LoaiPhong"].ToString() != check_SV_thue.Rows[0]["GioiTinh"].ToString())
                 {
                     MessageBox.Show($"Loại phòng không phù hợp với giới tính Sinh Viên");
                     return;
                 }
             }
             //MessageBox.Show($"MSV: {txtMSVThue.Text}, MP: {txtMaPhongThue.Text}, BD: {dtpNgayBD.Value}, KT: {dtpNgayKT.Value}");
-            
+
 
             //Thông báo đã thêm thành công
             MessageBox.Show("Thêm phòng thành công!");
+        }
+
+        private void tabPage3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox6_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }
