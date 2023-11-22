@@ -521,7 +521,7 @@
             dvgDSSVThuePhong.RowTemplate.Height = 29;
             dvgDSSVThuePhong.Size = new Size(688, 443);
             dvgDSSVThuePhong.TabIndex = 0;
-            dvgDSSVThuePhong.CellContentClick += dvgDSSVThuePhong_CellContentClick;
+            //dvgDSSVThuePhong.CellContentClick += dvgDSSVThuePhong_CellContentClick;
             dvgDSSVThuePhong.SelectionChanged += dvgDSSVThuePhong_SelectionChanged;
             // 
             // grbThongTinThue

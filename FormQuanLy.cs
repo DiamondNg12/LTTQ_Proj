@@ -301,7 +301,6 @@ namespace LTTQ_Proj
             dvgDSSVThuePhong.DataSource = dc.dataTable(sql1);
             dc.dbQuery(sql);
             dgvDSPhongConTrong.DataSource = dc.dataTable(sql);
-            ;
         }
         private void groupBox1_Enter(object sender, EventArgs e)
         {
@@ -341,9 +340,6 @@ namespace LTTQ_Proj
                 inputSVMaLop.Text = dataGridViewSinhVien.SelectedRows[0].Cells["MaLop"].Value.ToString();
 
             }
-
-
-
         }
 
 
@@ -428,6 +424,8 @@ namespace LTTQ_Proj
 
                 // Lấy giá trị từ các ô trong dòng đó và Gán giá trị vào TextBox trong GroupBox
                 txtMSVThue.Text = selectedRow.Cells["MaSinhVien"].Value.ToString();
+                string sql = $"select * from Phong where LoaiPhong = N'{selectedRow.Cells["GioiTinh"].Value.ToString()}' and SoNguoiDangO < SoNguoiToiDa";
+                dgvDSPhongConTrong.DataSource = dc.dataTable(sql);
             }
         }
 
@@ -450,35 +448,6 @@ namespace LTTQ_Proj
                 this.Close();
         }
 
-        private void dvgDSSVThuePhong_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-            if (e.RowIndex >= 0)
-            {
-                DataGridViewRow selectedRow = dvgDSSVThuePhong.Rows[e.RowIndex];
-
-                if (selectedRow.Cells["MaSinhVien"].Value is string maSinhVien && !string.IsNullOrEmpty(maSinhVien))
-                {
-                    string sql = $"SELECT P.* FROM Phong P " +
-                                 $"JOIN ThuePhong TP ON P.MaPhong = TP.MaPhong " +
-                                 $"JOIN SinhVien SV ON TP.MaSV = SV.MaSinhVien " +
-                                 $"WHERE P.LoaiPhong = SV.GioiTinh " +
-                                 $"AND SV.MaSinhVien = '{maSinhVien}' " +
-                                 $"AND TP.MaSV IS NULL";
-
-                    DataTable resultTable = dc.dataTable(sql);
-
-                    if (resultTable.Rows.Count > 0)
-                    {
-                        dgvDSPhongConTrong.DataSource = resultTable;
-                    }
-                    else
-                    {
-                        MessageBox.Show("Không có phòng phù hợp.");
-                    }
-                }
-            }
-        }
         //Thêm Sv muốn thuê vào phòng còn trống
         private void btnTThem_Click(object sender, EventArgs e)
         {
