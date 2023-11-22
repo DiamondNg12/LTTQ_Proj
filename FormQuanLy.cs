@@ -299,7 +299,6 @@ namespace LTTQ_Proj
             string sql = "Select * from Phong  WHERE (SoNguoiDangO < SoNGuoiToiDa)";
             string sql1 = "select * from SinhVien where MaSinhVien not in (select  MaSV from ThuePhong)";
             dvgDSSVThuePhong.DataSource = dc.dataTable(sql1);
-            dc.dbQuery(sql);
             dgvDSPhongConTrong.DataSource = dc.dataTable(sql);
         }
         private void groupBox1_Enter(object sender, EventArgs e)
@@ -453,14 +452,10 @@ namespace LTTQ_Proj
         {
             
             //Kiểm tra điều kiện ngày
-            if (dtpNgayBD.Value > DateTime.Now)
+            if (dtpNgayBD.Value < DateTime.Now)
             {
-                errorThuePhong.SetError(dtpNgayBD, "Ngày sản xuất không hợp lệ!");
+                errorThuePhong.SetError(dtpNgayBD, "Ngày bắt đầu không hợp lệ!");
                 return;
-            }
-            else
-            {
-                errorThuePhong.Clear();
             }
 
             if (dtpNgayBD.Value > dtpNgayKT.Value)
@@ -468,29 +463,36 @@ namespace LTTQ_Proj
                 errorThuePhong.SetError(lableKT, "Ngày kết thúc phải sau ngày bắt đầu");
                 return;
             }
-            else
+            errorThuePhong.Clear();
+            //Kiểm tra điều kiện thuê phòng
+            DataTable check_SV_thue = dc.dataTable($"select * from SinhVien where MaSinhVien = N'{txtMSVThue.Text}'");
+            DataTable check_phong_cho_thue = dc.dataTable($"select * from Phong where MaPhong = N'{txtMaPhongThue.Text}'");
+            if (check_SV_thue.Rows.Count == 0)
             {
-                errorThuePhong.Clear();
-            }
-            //Kiểm tra xem mã phong và mã sv đã tồn tại chưa đẻ tránh việc insert mới bị lỗi
-            DataTable db = dc.dataTable($"Select * from ThuePhong Where MaPhong = N'{txtMaPhongThue.Text}'");
-            DataTable db1 = dc.dataTable($"Select * from Phong Where MaPhong = N'{txtPMaPhong.Text}'");
-            if (db.Rows.Count > 0)
-            {
-                errorPhong.SetError(txtPMaPhong, "Mã phòng trùng trong cơ sở dữ liệu");
+                MessageBox.Show($"Không tìm thấy sinh viên có mã sinh viên: {txtMSVThue.Text}");
                 return;
+            } else if (check_phong_cho_thue.Rows.Count == 0)
+            {
+                MessageBox.Show($"Không tìm thấy Phòng có mã phòng: {txtMaPhongThue.Text}");
+                return;
+            } else
+            {
+                if (Int32.Parse(check_phong_cho_thue.Rows[0]["SoNguoiDangO"].ToString()) >= Int32.Parse(check_phong_cho_thue.Rows[0]["SoNguoiToiDa"].ToString()))
+                {
+                    MessageBox.Show($"Phòng không còn chỗ trống");
+                    return;
+                }
+                if (check_phong_cho_thue.Rows[0]["LoaiPhong"].ToString() != check_SV_thue.Rows[0]["GioiTinh"].ToString()) 
+                {
+                    MessageBox.Show($"Loại phòng không phù hợp với giới tính Sinh Viên");
+                    return;
+                }
             }
-            errorPhong.Clear();
-            //////Insert vao CSDL
-            string loaiPhong = grbLoaiPhong.Controls.OfType<RadioButton>().Where(r => r.Checked).FirstOrDefault().Text;
-            //sql = "INSERT INTO PHONG VALUES (";
-            //sql += "N'" + txtPMaPhong.Text + "',N'" + txtPTenPhong.Text + "', N'" + txtPMaNha.Text + "','" + loaiPhong + "', "cmbPSoNguoiToiDa.Text + "'," + txtPSoNguoiDangO.Text + "," + txtPTienThue.Text + ",N'" + txtPGhiChu.Text + "')";
-            string sql = $"INSERT INTO PHONG VALUES (N'{txtPMaPhong.Text}', N'{txtPTenPhong.Text}', N'{txtPMaNha.Text}', N'{loaiPhong}', {cmbPSoNguoiToiDa.Text}, {txtPSoNguoiDangO.Text}, {txtPTienThue.Text}, N'{txtPGhiChu.Text}')";
-            dc.dbQuery(sql);
-            dgvPDanhSachPhong.DataSource = dc.dataTable("select * from PHONG");
+            //MessageBox.Show($"MSV: {txtMSVThue.Text}, MP: {txtMaPhongThue.Text}, BD: {dtpNgayBD.Value}, KT: {dtpNgayKT.Value}");
+            
+
             //Thông báo đã thêm thành công
             MessageBox.Show("Thêm phòng thành công!");
-
         }
     }
 }
