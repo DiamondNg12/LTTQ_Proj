@@ -45,7 +45,7 @@ namespace LTTQ_Proj
             {
                 inputSVMaQue.Items.Add($"{que["MaQue"]} - {que["TenQue"]}");
             }
-            
+
             // combobox inputSVMaKhoa
             DataTable khoas = dc.dataTable("Select * from Khoa");
             inputSVMaKhoa.DisplayMember = "Text";
@@ -69,10 +69,6 @@ namespace LTTQ_Proj
             }
         }
 
-        private void groupBox1_Enter(object sender, EventArgs e)
-        {
-
-        }
 
         private void btnSVThem_Click(object sender, EventArgs e)
         {
@@ -303,11 +299,33 @@ namespace LTTQ_Proj
             string sql = "Select * from Phong  WHERE (SoNguoiDangO < SoNGuoiToiDa)";
             string sql1 = "select * from SinhVien where MaSinhVien not in (select  MaSV from ThuePhong)";
             dvgDSSVThuePhong.DataSource = dc.dataTable(sql1);
-            dc.dbQuery(sql);
             dgvDSPhongConTrong.DataSource = dc.dataTable(sql);
-            ;
         }
-        
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+            if (dataGridViewSinhVien.SelectedRows.Count > 0)
+            {
+                if (dataGridViewSinhVien.SelectedRows[0].Cells["MaSinhVien"].Value.ToString() != "")
+                {
+                    inputSVMaSinhVien.Text = dataGridViewSinhVien.SelectedRows[0].Cells["MaSinhVien"].Value.ToString();
+                }
+            }
+        }
+        //private void grbThongTinThue_SelectionChanged(object sender, EventArgs e)
+        //{
+        //    if (dataGridViewSinhVien.SelectedRows.Count > 0)
+        //    {
+        //        if (dataGridViewSinhVien.SelectedRows[0].Cells["MaSinhVien"].Value.ToString() != "")
+        //        {
+        //            inputSVMaSinhVien.Text = dataGridViewSinhVien.SelectedRows[0].Cells["MaSinhVien"].Value.ToString();
+        //        }
+        //    }
+
+
+
+        //}
+
+
         private void dataGridViewSinhVien_SelectionChanged(object sender, EventArgs e)
         {
             if (dataGridViewSinhVien.SelectedRows.Count > 0)
@@ -321,10 +339,8 @@ namespace LTTQ_Proj
                 inputSVMaLop.Text = dataGridViewSinhVien.SelectedRows[0].Cells["MaLop"].Value.ToString();
 
             }
-
-
-
         }
+
 
         private void btnSVXoa_Click(object sender, EventArgs e)
         {
@@ -406,9 +422,90 @@ namespace LTTQ_Proj
             {
                 MessageBox.Show(ex.Message);
                 MessageBox.Show("Sửa Sinh Viên Không Thành Công");
-             }
+            }
+
+
+        }
+
+        private void dvgDSSVThuePhong_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dvgDSSVThuePhong.SelectedRows.Count > 0)
+            {
+                // Lấy dòng đang được chọn
+                DataGridViewRow selectedRow = dvgDSSVThuePhong.SelectedRows[0];
+
+                // Lấy giá trị từ các ô trong dòng đó và Gán giá trị vào TextBox trong GroupBox
+                txtMSVThue.Text = selectedRow.Cells["MaSinhVien"].Value.ToString();
+                string sql = $"select * from Phong where LoaiPhong = N'{selectedRow.Cells["GioiTinh"].Value.ToString()}' and SoNguoiDangO < SoNguoiToiDa";
+                dgvDSPhongConTrong.DataSource = dc.dataTable(sql);
+            }
+        }
+
+        private void dgvDSPhongConTrong_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dgvDSPhongConTrong.SelectedRows.Count > 0)
+            {
+                // Lấy dòng đang được chọn
+                DataGridViewRow selectedRow = dgvDSPhongConTrong.SelectedRows[0];
+                // Lấy giá trị từ các ô trong dòng đó và Gán giá trị vào TextBox trong GroupBox
+                txtMaPhongThue.Text = selectedRow.Cells["MaPhong"].Value.ToString();
+            }
+        }
+        //thoat Thue Phong
+        private void btnTThoat_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Bạn có muốn thoát không?", "Thông báo",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.Yes)
+                this.Close();
+        }
+
+        //Thêm Sv muốn thuê vào phòng còn trống
+        private void btnTThem_Click(object sender, EventArgs e)
+        {
             
+            //Kiểm tra điều kiện ngày
+            if (dtpNgayBD.Value < DateTime.Now)
+            {
+                errorThuePhong.SetError(dtpNgayBD, "Ngày bắt đầu không hợp lệ!");
+                return;
+            }
+
+            if (dtpNgayBD.Value > dtpNgayKT.Value)
+            {
+                errorThuePhong.SetError(lableKT, "Ngày kết thúc phải sau ngày bắt đầu");
+                return;
+            }
+            errorThuePhong.Clear();
+            //Kiểm tra điều kiện thuê phòng
+            DataTable check_SV_thue = dc.dataTable($"select * from SinhVien where MaSinhVien = N'{txtMSVThue.Text}'");
+            DataTable check_phong_cho_thue = dc.dataTable($"select * from Phong where MaPhong = N'{txtMaPhongThue.Text}'");
+            if (check_SV_thue.Rows.Count == 0)
+            {
+                MessageBox.Show($"Không tìm thấy sinh viên có mã sinh viên: {txtMSVThue.Text}");
+                return;
+            } else if (check_phong_cho_thue.Rows.Count == 0)
+            {
+                MessageBox.Show($"Không tìm thấy Phòng có mã phòng: {txtMaPhongThue.Text}");
+                return;
+            } else
+            {
+                if (Int32.Parse(check_phong_cho_thue.Rows[0]["SoNguoiDangO"].ToString()) >= Int32.Parse(check_phong_cho_thue.Rows[0]["SoNguoiToiDa"].ToString()))
+                {
+                    MessageBox.Show($"Phòng không còn chỗ trống");
+                    return;
+                }
+                if (check_phong_cho_thue.Rows[0]["LoaiPhong"].ToString() != check_SV_thue.Rows[0]["GioiTinh"].ToString()) 
+                {
+                    MessageBox.Show($"Loại phòng không phù hợp với giới tính Sinh Viên");
+                    return;
+                }
+            }
+            //MessageBox.Show($"MSV: {txtMSVThue.Text}, MP: {txtMaPhongThue.Text}, BD: {dtpNgayBD.Value}, KT: {dtpNgayKT.Value}");
             
+
+            //Thông báo đã thêm thành công
+            MessageBox.Show("Thêm phòng thành công!");
         }
     }
 }

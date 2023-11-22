@@ -66,12 +66,12 @@
             dgvDSPhongConTrong = new DataGridView();
             groupBox3 = new GroupBox();
             dvgDSSVThuePhong = new DataGridView();
-            groupBox1 = new GroupBox();
-            dateTimePicker2 = new DateTimePicker();
+            grbThongTinThue = new GroupBox();
+            dtpNgayKT = new DateTimePicker();
             dtpNgayBD = new DateTimePicker();
             label11 = new Label();
             label13 = new Label();
-            dtpNgayKT = new Label();
+            lableKT = new Label();
             label15 = new Label();
             label12 = new Label();
             label10 = new Label();
@@ -105,6 +105,7 @@
             tabPage3 = new TabPage();
             errorPhong = new ErrorProvider(components);
             errorSV = new ErrorProvider(components);
+            errorThuePhong = new ErrorProvider(components);
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             grbDannhSachPhong.SuspendLayout();
@@ -116,7 +117,7 @@
             ((System.ComponentModel.ISupportInitialize)dgvDSPhongConTrong).BeginInit();
             groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dvgDSSVThuePhong).BeginInit();
-            groupBox1.SuspendLayout();
+            grbThongTinThue.SuspendLayout();
             tabSinhVien.SuspendLayout();
             groupBoxSinhVienViewData.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewSinhVien).BeginInit();
@@ -124,6 +125,7 @@
             groupBoxSinhVien1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)errorPhong).BeginInit();
             ((System.ComponentModel.ISupportInitialize)errorSV).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)errorThuePhong).BeginInit();
             SuspendLayout();
             // 
             // tabControl1
@@ -137,7 +139,7 @@
             tabControl1.Margin = new Padding(4, 5, 4, 5);
             tabControl1.Name = "tabControl1";
             tabControl1.SelectedIndex = 0;
-            tabControl1.Size = new Size(1692, 846);
+            tabControl1.Size = new Size(1354, 850);
             tabControl1.TabIndex = 0;
             // 
             // tabPage1
@@ -153,8 +155,8 @@
             tabPage1.Location = new Point(4, 34);
             tabPage1.Margin = new Padding(4, 5, 4, 5);
             tabPage1.Name = "tabPage1";
-            tabPage1.Padding = new Padding(4, 5, 4, 5);
-            tabPage1.Size = new Size(1684, 808);
+            tabPage1.Padding = new Padding(3, 4, 3, 4);
+            tabPage1.Size = new Size(1346, 817);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Quản Lý Phòng";
             tabPage1.UseVisualStyleBackColor = true;
@@ -448,12 +450,12 @@
             tabPage2.Controls.Add(btnThueTimKiem);
             tabPage2.Controls.Add(groupBox2);
             tabPage2.Controls.Add(groupBox3);
-            tabPage2.Controls.Add(groupBox1);
-            tabPage2.Location = new Point(4, 34);
-            tabPage2.Margin = new Padding(4, 5, 4, 5);
+            tabPage2.Controls.Add(grbThongTinThue);
+            tabPage2.Location = new Point(4, 29);
+            tabPage2.Margin = new Padding(3, 4, 3, 4);
             tabPage2.Name = "tabPage2";
-            tabPage2.Padding = new Padding(4, 5, 4, 5);
-            tabPage2.Size = new Size(1684, 808);
+            tabPage2.Padding = new Padding(3, 4, 3, 4);
+            tabPage2.Size = new Size(1346, 817);
             tabPage2.TabIndex = 2;
             tabPage2.Text = "Thuê Phòng";
             tabPage2.UseVisualStyleBackColor = true;
@@ -465,34 +467,36 @@
             label9.Location = new Point(752, 25);
             label9.Margin = new Padding(4, 0, 4, 0);
             label9.Name = "label9";
-            label9.Size = new Size(363, 38);
+            label9.Size = new Size(296, 31);
             label9.TabIndex = 4;
             label9.Text = "Thuê Phòng cho Sinh Viên";
             // 
             // btnTThoat
             // 
-            btnTThoat.Location = new Point(1312, 951);
-            btnTThoat.Margin = new Padding(4, 5, 4, 5);
+            btnTThoat.Location = new Point(1061, 735);
+            btnTThoat.Margin = new Padding(3, 4, 3, 4);
             btnTThoat.Name = "btnTThoat";
             btnTThoat.Size = new Size(172, 70);
             btnTThoat.TabIndex = 3;
             btnTThoat.Text = "Thoát";
             btnTThoat.UseVisualStyleBackColor = true;
+            btnTThoat.Click += btnTThoat_Click;
             // 
             // btnTThem
             // 
-            btnTThem.Location = new Point(800, 951);
-            btnTThem.Margin = new Padding(4, 5, 4, 5);
+            btnTThem.Location = new Point(651, 735);
+            btnTThem.Margin = new Padding(3, 4, 3, 4);
             btnTThem.Name = "btnTThem";
             btnTThem.Size = new Size(172, 70);
             btnTThem.TabIndex = 3;
             btnTThem.Text = "Thêm";
             btnTThem.UseVisualStyleBackColor = true;
+            btnTThem.Click += btnTThem_Click;
             // 
             // btnThueTimKiem
             // 
-            btnThueTimKiem.Location = new Point(189, 951);
-            btnThueTimKiem.Margin = new Padding(4, 5, 4, 5);
+            btnThueTimKiem.Location = new Point(143, 735);
+            btnThueTimKiem.Margin = new Padding(3, 4, 3, 4);
             btnThueTimKiem.Name = "btnThueTimKiem";
             btnThueTimKiem.Size = new Size(172, 70);
             btnThueTimKiem.TabIndex = 3;
@@ -522,6 +526,7 @@
             dgvDSPhongConTrong.RowTemplate.Height = 29;
             dgvDSPhongConTrong.Size = new Size(872, 555);
             dgvDSPhongConTrong.TabIndex = 0;
+            dgvDSPhongConTrong.SelectionChanged += dgvDSPhongConTrong_SelectionChanged;
             // 
             // groupBox3
             // 
@@ -546,30 +551,131 @@
             dvgDSSVThuePhong.RowTemplate.Height = 29;
             dvgDSSVThuePhong.Size = new Size(860, 555);
             dvgDSSVThuePhong.TabIndex = 0;
+            //dvgDSSVThuePhong.CellContentClick += dvgDSSVThuePhong_CellContentClick;
+            dvgDSSVThuePhong.SelectionChanged += dvgDSSVThuePhong_SelectionChanged;
             // 
-            // groupBox1
+            // grbThongTinThue
             // 
-            groupBox1.Controls.Add(dateTimePicker2);
-            groupBox1.Controls.Add(dtpNgayBD);
-            groupBox1.Controls.Add(label11);
-            groupBox1.Controls.Add(label13);
-            groupBox1.Controls.Add(dtpNgayKT);
-            groupBox1.Controls.Add(label15);
-            groupBox1.Controls.Add(label12);
-            groupBox1.Controls.Add(label10);
-            groupBox1.Controls.Add(txtGhiChuThue);
-            groupBox1.Controls.Add(txtMaSoThue);
-            groupBox1.Controls.Add(txtMSVThue);
-            groupBox1.Controls.Add(txtMaPhongThue);
-            groupBox1.Location = new Point(12, 81);
-            groupBox1.Margin = new Padding(4, 5, 4, 5);
-            groupBox1.Name = "groupBox1";
-            groupBox1.Padding = new Padding(4, 5, 4, 5);
-            groupBox1.Size = new Size(1541, 209);
-            groupBox1.TabIndex = 0;
-            groupBox1.TabStop = false;
-            groupBox1.Text = "Thông Tin";
-            groupBox1.Enter += groupBox1_Enter;
+            grbThongTinThue.Controls.Add(dtpNgayKT);
+            grbThongTinThue.Controls.Add(dtpNgayBD);
+            grbThongTinThue.Controls.Add(label11);
+            grbThongTinThue.Controls.Add(label13);
+            grbThongTinThue.Controls.Add(lableKT);
+            grbThongTinThue.Controls.Add(label15);
+            grbThongTinThue.Controls.Add(label12);
+            grbThongTinThue.Controls.Add(label10);
+            grbThongTinThue.Controls.Add(txtGhiChuThue);
+            grbThongTinThue.Controls.Add(txtMaSoThue);
+            grbThongTinThue.Controls.Add(txtMSVThue);
+            grbThongTinThue.Controls.Add(txtMaPhongThue);
+            grbThongTinThue.Location = new Point(10, 65);
+            grbThongTinThue.Margin = new Padding(3, 4, 3, 4);
+            grbThongTinThue.Name = "grbThongTinThue";
+            grbThongTinThue.Padding = new Padding(3, 4, 3, 4);
+            grbThongTinThue.Size = new Size(1233, 167);
+            grbThongTinThue.TabIndex = 0;
+            grbThongTinThue.TabStop = false;
+            grbThongTinThue.Text = "Thông Tin";
+            grbThongTinThue.Enter += groupBox1_Enter;
+            // 
+            // dtpNgayKT
+            // 
+            dtpNgayKT.Format = DateTimePickerFormat.Short;
+            dtpNgayKT.Location = new Point(440, 92);
+            dtpNgayKT.Name = "dtpNgayKT";
+            dtpNgayKT.Size = new Size(250, 27);
+            dtpNgayKT.TabIndex = 3;
+            // 
+            // dtpNgayBD
+            // 
+            dtpNgayBD.Format = DateTimePickerFormat.Short;
+            dtpNgayBD.Location = new Point(441, 40);
+            dtpNgayBD.Name = "dtpNgayBD";
+            dtpNgayBD.Size = new Size(250, 27);
+            dtpNgayBD.TabIndex = 3;
+            // 
+            // label11
+            // 
+            label11.AutoSize = true;
+            label11.Location = new Point(32, 78);
+            label11.Name = "label11";
+            label11.Size = new Size(95, 20);
+            label11.TabIndex = 2;
+            label11.Text = "Mã Sinh Viên";
+            // 
+            // label13
+            // 
+            label13.AutoSize = true;
+            label13.Location = new Point(32, 119);
+            label13.Name = "label13";
+            label13.Size = new Size(76, 20);
+            label13.TabIndex = 2;
+            label13.Text = "Mã Phòng";
+            // 
+            // lableKT
+            // 
+            lableKT.AutoSize = true;
+            lableKT.Location = new Point(329, 92);
+            lableKT.Name = "lableKT";
+            lableKT.Size = new Size(105, 20);
+            lableKT.TabIndex = 2;
+            lableKT.Text = "Ngày Kết Thúc";
+            // 
+            // label15
+            // 
+            label15.AutoSize = true;
+            label15.Location = new Point(750, 39);
+            label15.Name = "label15";
+            label15.Size = new Size(60, 20);
+            label15.TabIndex = 2;
+            label15.Text = "Ghi Chú";
+            // 
+            // label12
+            // 
+            label12.AutoSize = true;
+            label12.Location = new Point(329, 43);
+            label12.Name = "label12";
+            label12.Size = new Size(101, 20);
+            label12.TabIndex = 2;
+            label12.Text = "Ngày Bắt Đầu";
+            // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.Location = new Point(32, 35);
+            label10.Name = "label10";
+            label10.Size = new Size(87, 20);
+            label10.TabIndex = 2;
+            label10.Text = "Mã Số Thuê";
+            // 
+            // txtGhiChuThue
+            // 
+            txtGhiChuThue.Location = new Point(814, 38);
+            txtGhiChuThue.Multiline = true;
+            txtGhiChuThue.Name = "txtGhiChuThue";
+            txtGhiChuThue.Size = new Size(402, 81);
+            txtGhiChuThue.TabIndex = 1;
+            // 
+            // txtMaSoThue
+            // 
+            txtMaSoThue.Location = new Point(133, 32);
+            txtMaSoThue.Name = "txtMaSoThue";
+            txtMaSoThue.Size = new Size(125, 27);
+            txtMaSoThue.TabIndex = 1;
+            // 
+            // txtMSVThue
+            // 
+            txtMSVThue.Location = new Point(133, 78);
+            txtMSVThue.Name = "txtMSVThue";
+            txtMSVThue.Size = new Size(125, 27);
+            txtMSVThue.TabIndex = 0;
+            // 
+            // txtMaPhongThue
+            // 
+            txtMaPhongThue.Location = new Point(133, 116);
+            txtMaPhongThue.Name = "txtMaPhongThue";
+            txtMaPhongThue.Size = new Size(125, 27);
+            txtMaPhongThue.TabIndex = 0;
             // 
             // dateTimePicker2
             // 
@@ -689,8 +795,8 @@
             tabSinhVien.Location = new Point(4, 34);
             tabSinhVien.Margin = new Padding(4, 5, 4, 5);
             tabSinhVien.Name = "tabSinhVien";
-            tabSinhVien.Padding = new Padding(4, 6, 4, 6);
-            tabSinhVien.Size = new Size(1684, 808);
+            tabSinhVien.Padding = new Padding(3, 5, 3, 5);
+            tabSinhVien.Size = new Size(1346, 817);
             tabSinhVien.TabIndex = 1;
             tabSinhVien.Text = "Sinh Viên";
             tabSinhVien.UseVisualStyleBackColor = true;
@@ -937,8 +1043,8 @@
             tabPage3.Location = new Point(4, 34);
             tabPage3.Margin = new Padding(4, 5, 4, 5);
             tabPage3.Name = "tabPage3";
-            tabPage3.Padding = new Padding(4, 6, 4, 6);
-            tabPage3.Size = new Size(1684, 808);
+            tabPage3.Padding = new Padding(3, 5, 3, 5);
+            tabPage3.Size = new Size(1346, 817);
             tabPage3.TabIndex = 3;
             tabPage3.Text = "Trả Phòng";
             tabPage3.UseVisualStyleBackColor = true;
@@ -951,11 +1057,15 @@
             // 
             errorSV.ContainerControl = this;
             // 
+            // errorThuePhong
+            // 
+            errorThuePhong.ContainerControl = this;
+            // 
             // FormQuanLy
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1692, 846);
+            ClientSize = new Size(1354, 850);
             Controls.Add(tabControl1);
             Margin = new Padding(4, 5, 4, 5);
             Name = "FormQuanLy";
@@ -976,8 +1086,8 @@
             ((System.ComponentModel.ISupportInitialize)dgvDSPhongConTrong).EndInit();
             groupBox3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dvgDSSVThuePhong).EndInit();
-            groupBox1.ResumeLayout(false);
-            groupBox1.PerformLayout();
+            grbThongTinThue.ResumeLayout(false);
+            grbThongTinThue.PerformLayout();
             tabSinhVien.ResumeLayout(false);
             tabSinhVien.PerformLayout();
             groupBoxSinhVienViewData.ResumeLayout(false);
@@ -987,6 +1097,7 @@
             groupBoxSinhVien1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)errorPhong).EndInit();
             ((System.ComponentModel.ISupportInitialize)errorSV).EndInit();
+            ((System.ComponentModel.ISupportInitialize)errorThuePhong).EndInit();
             ResumeLayout(false);
         }
 
@@ -1044,7 +1155,7 @@
         private Button btnPSua;
         private GroupBox groupBox3;
         private GroupBox groupBox2;
-        private GroupBox groupBox1;
+        private GroupBox grbThongTinThue;
         private DataGridView dgvDSPhongConTrong;
         private DataGridView dvgDSSVThuePhong;
         private Button btnTThoat;
@@ -1055,11 +1166,11 @@
         private Button btnSVSua;
         private Button btnSVXoa;
         private ErrorProvider errorPhong;
-        private DateTimePicker dateTimePicker2;
+        private DateTimePicker dtpNgayKT;
         private DateTimePicker dtpNgayBD;
         private Label label11;
         private Label label13;
-        private Label dtpNgayKT;
+        private Label lableKT;
         private Label label12;
         private Label label10;
         private TextBox txtMaSoThue;
@@ -1068,5 +1179,6 @@
         private Label label15;
         private TextBox txtGhiChuThue;
         private ErrorProvider errorSV;
+        private ErrorProvider errorThuePhong;
     }
 }
