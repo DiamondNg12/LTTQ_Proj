@@ -102,15 +102,12 @@
             labelSVMaSV = new Label();
             tabPage4 = new TabPage();
             btnUpdateCurentMonth = new Button();
-            btnLuu = new Button();
-            btnTinhTien = new Button();
-            btn = new Button();
             grbKhoanDong = new GroupBox();
             label16 = new Label();
+            btnLuu = new Button();
             dateTimePicker2 = new DateTimePicker();
-            dateTimePicker1 = new DateTimePicker();
+            btnTinhTien = new Button();
             label24 = new Label();
-            label23 = new Label();
             label22 = new Label();
             label21 = new Label();
             label20 = new Label();
@@ -126,6 +123,7 @@
             txtTongTienPhong = new TextBox();
             label25 = new Label();
             txttNamThuTien = new TextBox();
+            btn = new Button();
             txtThangThuTien = new TextBox();
             label18 = new Label();
             txtMaPhongThuTien = new TextBox();
@@ -136,6 +134,9 @@
             errorPhong = new ErrorProvider(components);
             errorSV = new ErrorProvider(components);
             errorThuePhong = new ErrorProvider(components);
+            btnTTPHoaDonChuaThanhToan = new Button();
+            btnTTPExit = new Button();
+            btnTTPThanhToanHoaDon = new Button();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             grbDannhSachPhong.SuspendLayout();
@@ -905,10 +906,8 @@
             // 
             // tabPage4
             // 
+            tabPage4.Controls.Add(btnTTPExit);
             tabPage4.Controls.Add(btnUpdateCurentMonth);
-            tabPage4.Controls.Add(btnLuu);
-            tabPage4.Controls.Add(btnTinhTien);
-            tabPage4.Controls.Add(btn);
             tabPage4.Controls.Add(grbKhoanDong);
             tabPage4.Controls.Add(groupBox4);
             tabPage4.Controls.Add(grbThongTinThuTienPhong);
@@ -923,51 +922,23 @@
             // 
             // btnUpdateCurentMonth
             // 
-            btnUpdateCurentMonth.Location = new Point(927, 408);
+            btnUpdateCurentMonth.Location = new Point(58, 468);
             btnUpdateCurentMonth.Margin = new Padding(3, 2, 3, 2);
             btnUpdateCurentMonth.Name = "btnUpdateCurentMonth";
-            btnUpdateCurentMonth.Size = new Size(126, 32);
+            btnUpdateCurentMonth.Size = new Size(126, 44);
             btnUpdateCurentMonth.TabIndex = 5;
-            btnUpdateCurentMonth.Text = "Cập nhật hoá đơn";
+            btnUpdateCurentMonth.Text = "Cập nhật hoá đơn tháng";
             btnUpdateCurentMonth.UseVisualStyleBackColor = true;
-            // 
-            // btnLuu
-            // 
-            btnLuu.Location = new Point(767, 409);
-            btnLuu.Margin = new Padding(3, 2, 3, 2);
-            btnLuu.Name = "btnLuu";
-            btnLuu.Size = new Size(102, 32);
-            btnLuu.TabIndex = 5;
-            btnLuu.Text = "Lưu";
-            btnLuu.UseVisualStyleBackColor = true;
-            // 
-            // btnTinhTien
-            // 
-            btnTinhTien.Location = new Point(604, 409);
-            btnTinhTien.Margin = new Padding(3, 2, 3, 2);
-            btnTinhTien.Name = "btnTinhTien";
-            btnTinhTien.Size = new Size(102, 32);
-            btnTinhTien.TabIndex = 5;
-            btnTinhTien.Text = "Tính Tiền";
-            btnTinhTien.UseVisualStyleBackColor = true;
-            // 
-            // btn
-            // 
-            btn.Location = new Point(450, 409);
-            btn.Margin = new Padding(3, 2, 3, 2);
-            btn.Name = "btn";
-            btn.Size = new Size(102, 32);
-            btn.TabIndex = 5;
-            btn.Text = "Tìm Kiếm";
-            btn.UseVisualStyleBackColor = true;
+            btnUpdateCurentMonth.Click += btnUpdateCurentMonth_Click;
             // 
             // grbKhoanDong
             // 
+            grbKhoanDong.Controls.Add(btnTTPThanhToanHoaDon);
             grbKhoanDong.Controls.Add(label16);
+            grbKhoanDong.Controls.Add(btnLuu);
             grbKhoanDong.Controls.Add(dateTimePicker2);
-            grbKhoanDong.Controls.Add(dateTimePicker1);
+            grbKhoanDong.Controls.Add(btnTinhTien);
             grbKhoanDong.Controls.Add(label24);
-            grbKhoanDong.Controls.Add(label23);
             grbKhoanDong.Controls.Add(label22);
             grbKhoanDong.Controls.Add(label21);
             grbKhoanDong.Controls.Add(label20);
@@ -977,11 +948,11 @@
             grbKhoanDong.Controls.Add(txtTienVeSinh);
             grbKhoanDong.Controls.Add(txtTienDien);
             grbKhoanDong.Controls.Add(txtTienNha);
-            grbKhoanDong.Location = new Point(29, 202);
+            grbKhoanDong.Location = new Point(40, 222);
             grbKhoanDong.Margin = new Padding(3, 2, 3, 2);
             grbKhoanDong.Name = "grbKhoanDong";
             grbKhoanDong.Padding = new Padding(3, 2, 3, 2);
-            grbKhoanDong.Size = new Size(381, 239);
+            grbKhoanDong.Size = new Size(381, 211);
             grbKhoanDong.TabIndex = 4;
             grbKhoanDong.TabStop = false;
             grbKhoanDong.Text = "Các khoản ";
@@ -995,6 +966,16 @@
             label16.TabIndex = 3;
             label16.Text = "Tiền Phạt";
             // 
+            // btnLuu
+            // 
+            btnLuu.Location = new Point(259, 68);
+            btnLuu.Margin = new Padding(3, 2, 3, 2);
+            btnLuu.Name = "btnLuu";
+            btnLuu.Size = new Size(102, 32);
+            btnLuu.TabIndex = 5;
+            btnLuu.Text = "Cập nhật";
+            btnLuu.UseVisualStyleBackColor = true;
+            // 
             // dateTimePicker2
             // 
             dateTimePicker2.Format = DateTimePickerFormat.Short;
@@ -1004,14 +985,15 @@
             dateTimePicker2.Size = new Size(110, 23);
             dateTimePicker2.TabIndex = 2;
             // 
-            // dateTimePicker1
+            // btnTinhTien
             // 
-            dateTimePicker1.Format = DateTimePickerFormat.Short;
-            dateTimePicker1.Location = new Point(115, 202);
-            dateTimePicker1.Margin = new Padding(3, 2, 3, 2);
-            dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(110, 23);
-            dateTimePicker1.TabIndex = 2;
+            btnTinhTien.Location = new Point(259, 20);
+            btnTinhTien.Margin = new Padding(3, 2, 3, 2);
+            btnTinhTien.Name = "btnTinhTien";
+            btnTinhTien.Size = new Size(102, 32);
+            btnTinhTien.TabIndex = 5;
+            btnTinhTien.Text = "Tính Tiền";
+            btnTinhTien.UseVisualStyleBackColor = true;
             // 
             // label24
             // 
@@ -1021,15 +1003,6 @@
             label24.Size = new Size(82, 15);
             label24.TabIndex = 1;
             label24.Text = "Ngày Hết Hạn";
-            // 
-            // label23
-            // 
-            label23.AutoSize = true;
-            label23.Location = new Point(18, 206);
-            label23.Name = "label23";
-            label23.Size = new Size(67, 15);
-            label23.TabIndex = 1;
-            label23.Text = "Ngày Đóng";
             // 
             // label22
             // 
@@ -1112,14 +1085,14 @@
             // groupBox4
             // 
             groupBox4.Controls.Add(dgvThuTienPhong);
-            groupBox4.Location = new Point(427, 48);
+            groupBox4.Location = new Point(427, 68);
             groupBox4.Margin = new Padding(3, 2, 3, 2);
             groupBox4.Name = "groupBox4";
             groupBox4.Padding = new Padding(3, 2, 3, 2);
-            groupBox4.Size = new Size(660, 337);
+            groupBox4.Size = new Size(660, 473);
             groupBox4.TabIndex = 3;
             groupBox4.TabStop = false;
-            groupBox4.Text = "groupBox4";
+            groupBox4.Text = "Danh sách hoá đơn";
             // 
             // dgvThuTienPhong
             // 
@@ -1130,21 +1103,23 @@
             dgvThuTienPhong.Name = "dgvThuTienPhong";
             dgvThuTienPhong.RowHeadersWidth = 51;
             dgvThuTienPhong.RowTemplate.Height = 29;
-            dgvThuTienPhong.Size = new Size(654, 317);
+            dgvThuTienPhong.Size = new Size(654, 453);
             dgvThuTienPhong.TabIndex = 2;
             dgvThuTienPhong.CellContentClick += dataGridView1_CellContentClick;
             // 
             // grbThongTinThuTienPhong
             // 
+            grbThongTinThuTienPhong.Controls.Add(btnTTPHoaDonChuaThanhToan);
             grbThongTinThuTienPhong.Controls.Add(txtTongTienPhong);
             grbThongTinThuTienPhong.Controls.Add(label25);
             grbThongTinThuTienPhong.Controls.Add(txttNamThuTien);
+            grbThongTinThuTienPhong.Controls.Add(btn);
             grbThongTinThuTienPhong.Controls.Add(txtThangThuTien);
             grbThongTinThuTienPhong.Controls.Add(label18);
             grbThongTinThuTienPhong.Controls.Add(txtMaPhongThuTien);
             grbThongTinThuTienPhong.Controls.Add(label17);
             grbThongTinThuTienPhong.Controls.Add(lbMPThuTien);
-            grbThongTinThuTienPhong.Location = new Point(29, 48);
+            grbThongTinThuTienPhong.Location = new Point(40, 68);
             grbThongTinThuTienPhong.Margin = new Padding(3, 2, 3, 2);
             grbThongTinThuTienPhong.Name = "grbThongTinThuTienPhong";
             grbThongTinThuTienPhong.Padding = new Padding(3, 2, 3, 2);
@@ -1176,6 +1151,16 @@
             txttNamThuTien.Name = "txttNamThuTien";
             txttNamThuTien.Size = new Size(110, 23);
             txttNamThuTien.TabIndex = 0;
+            // 
+            // btn
+            // 
+            btn.Location = new Point(259, 20);
+            btn.Margin = new Padding(3, 2, 3, 2);
+            btn.Name = "btn";
+            btn.Size = new Size(102, 40);
+            btn.TabIndex = 5;
+            btn.Text = "Tìm kiếm hoá đơn";
+            btn.UseVisualStyleBackColor = true;
             // 
             // txtThangThuTien
             // 
@@ -1252,6 +1237,33 @@
             // errorThuePhong
             // 
             errorThuePhong.ContainerControl = this;
+            // 
+            // btnTTPHoaDonChuaThanhToan
+            // 
+            btnTTPHoaDonChuaThanhToan.Location = new Point(259, 80);
+            btnTTPHoaDonChuaThanhToan.Name = "btnTTPHoaDonChuaThanhToan";
+            btnTTPHoaDonChuaThanhToan.Size = new Size(102, 56);
+            btnTTPHoaDonChuaThanhToan.TabIndex = 6;
+            btnTTPHoaDonChuaThanhToan.Text = "Hoá đơn chưa thanh toán";
+            btnTTPHoaDonChuaThanhToan.UseVisualStyleBackColor = true;
+            // 
+            // btnTTPExit
+            // 
+            btnTTPExit.Location = new Point(239, 468);
+            btnTTPExit.Name = "btnTTPExit";
+            btnTTPExit.Size = new Size(134, 44);
+            btnTTPExit.TabIndex = 6;
+            btnTTPExit.Text = "Thoát";
+            btnTTPExit.UseVisualStyleBackColor = true;
+            // 
+            // btnTTPThanhToanHoaDon
+            // 
+            btnTTPThanhToanHoaDon.Location = new Point(259, 112);
+            btnTTPThanhToanHoaDon.Name = "btnTTPThanhToanHoaDon";
+            btnTTPThanhToanHoaDon.Size = new Size(102, 46);
+            btnTTPThanhToanHoaDon.TabIndex = 6;
+            btnTTPThanhToanHoaDon.Text = "Thanh toán hoá đơn";
+            btnTTPThanhToanHoaDon.UseVisualStyleBackColor = true;
             // 
             // FormQuanLy
             // 
@@ -1396,10 +1408,8 @@
         private TextBox txtThangThuTien;
         private Label label18;
         private Label label17;
-        private Label label23;
         private TextBox txtTienNuoc;
         private DateTimePicker dateTimePicker2;
-        private DateTimePicker dateTimePicker1;
         private Label label24;
         private Label label16;
         private TextBox txtTienPhat;
@@ -1409,5 +1419,8 @@
         private Button btnTinhTien;
         private Button btn;
         private Button btnUpdateCurentMonth;
+        private Button btnTTPExit;
+        private Button btnTTPThanhToanHoaDon;
+        private Button btnTTPHoaDonChuaThanhToan;
     }
 }

@@ -199,8 +199,6 @@ namespace LTTQ_Proj
             errorPhong.Clear();
             //////Insert vao CSDL
             string loaiPhong = grbLoaiPhong.Controls.OfType<RadioButton>().Where(r => r.Checked).FirstOrDefault().Text;
-            //sql = "INSERT INTO PHONG VALUES (";
-            //sql += "N'" + txtPMaPhong.Text + "',N'" + txtPTenPhong.Text + "', N'" + txtPMaNha.Text + "','" + loaiPhong + "', "cmbPSoNguoiToiDa.Text + "'," + txtPSoNguoiDangO.Text + "," + txtPTienThue.Text + ",N'" + txtPGhiChu.Text + "')";
             sql = $"INSERT INTO PHONG VALUES (N'{txtPMaPhong.Text}', N'{txtPTenPhong.Text}', N'{txtPMaNha.Text}', N'{loaiPhong}', {cmbPSoNguoiToiDa.Text}, {txtPSoNguoiDangO.Text}, {txtPTienThue.Text}, N'{txtPGhiChu.Text}')";
             dc.dbQuery(sql);
             dgvPDanhSachPhong.DataSource = dc.dataTable("select * from PHONG");
@@ -530,9 +528,10 @@ namespace LTTQ_Proj
                 string sql1 = "select * from SinhVien where MaSinhVien not in (select  MaSV from ThuePhong)";
                 dvgDSSVThuePhong.DataSource = dc.dataTable(sql1);
 
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
-                MessageBox.Show(ex.Message );
+                MessageBox.Show(ex.Message);
                 MessageBox.Show("Thuê phòng không thành công!");
             }
         }
@@ -555,6 +554,25 @@ namespace LTTQ_Proj
         private void label9_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnUpdateCurentMonth_Click(object sender, EventArgs e)
+        {
+            String sDate = DateTime.Now.ToString();
+            DateTime datevalue = (Convert.ToDateTime(sDate.ToString()));
+
+            String dd = datevalue.Day.ToString();
+            String mm = datevalue.Month.ToString();
+            String yy = datevalue.Year.ToString();
+            DataTable phong_co_nguoi_o_chua_co_hoa_don = dc.dataTable($"select MaPhong from Phong where SoNguoiDangO > 0 and MaPhong not in (select MaPhong from ThuTienPhong where Thang = {mm} and Nam = {yy})");
+            string insert_sql = $"insert into ThuTienPhong value";
+            if (phong_co_nguoi_o_chua_co_hoa_don.Rows.Count > 0)
+            {
+                foreach (var phong in phong_co_nguoi_o_chua_co_hoa_don.Rows)
+                {
+
+                }
+            }
         }
     }
 }
