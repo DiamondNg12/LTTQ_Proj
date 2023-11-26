@@ -28,6 +28,22 @@ namespace LTTQ_Proj
             cmbPSoNguoiToiDa.Items.Add("6");
             cmbPSoNguoiToiDa.Items.Add("8");
         }
+
+        private void refreshDgvThuTienPhongData()
+        {
+            dgvThuTienPhong.DataSource = dc.dataTable("select * from ThuTienPhong");
+            dgvThuTienPhong.Columns[0].HeaderText = "Mã Phòng";
+            dgvThuTienPhong.Columns[1].HeaderText = "Tháng";
+            dgvThuTienPhong.Columns[2].HeaderText = "Năm";
+            dgvThuTienPhong.Columns[3].HeaderText = "Tiền nhà";
+            dgvThuTienPhong.Columns[4].HeaderText = "Tiền điện";
+            dgvThuTienPhong.Columns[5].HeaderText = "Tiền nước";
+            dgvThuTienPhong.Columns[6].HeaderText = "Tiền vệ sinh";
+            dgvThuTienPhong.Columns[7].HeaderText = "Tiền phạt";
+            dgvThuTienPhong.Columns[8].HeaderText = "Ngày hết hạn";
+            dgvThuTienPhong.Columns[9].HeaderText = "Ngày đóng";
+        }
+
         private void FormQuanLy_Load(object sender, EventArgs e)
         {
             //tabpanel Phong
@@ -55,6 +71,10 @@ namespace LTTQ_Proj
             {
                 inputSVMaKhoa.Items.Add(new { Text = $"{khoa["MaKhoa"]} - {khoa["TenKhoa"]}", Value = khoa["MaKhoa"] });
             }
+
+
+            // Thu Tien Phong
+            this.refreshDgvThuTienPhongData();
         }
 
         private void inputSVMaKhoa_SelectedIndexChanged(object sender, EventArgs e)
@@ -276,15 +296,6 @@ namespace LTTQ_Proj
                 MessageBox.Show("Không thể cập nhật thông tin phòng");
             }
             dgvPDanhSachPhong.DataSource = dc.dataTable("select * from PHONG");
-            //// Display update success message
-            //if (rowsAffected > 0)
-            //{
-            //    MessageBox.Show("Cập nhật phòng thành công!");
-            //}
-            //else
-            //{
-            //    MessageBox.Show("Không thể cập nhật thông tin phòng");
-            //}
         }
 
         private void btnPXoa_Click(object sender, EventArgs e)
@@ -309,20 +320,6 @@ namespace LTTQ_Proj
                 }
             }
         }
-        //private void grbThongTinThue_SelectionChanged(object sender, EventArgs e)
-        //{
-        //    if (dataGridViewSinhVien.SelectedRows.Count > 0)
-        //    {
-        //        if (dataGridViewSinhVien.SelectedRows[0].Cells["MaSinhVien"].Value.ToString() != "")
-        //        {
-        //            inputSVMaSinhVien.Text = dataGridViewSinhVien.SelectedRows[0].Cells["MaSinhVien"].Value.ToString();
-        //        }
-        //    }
-
-
-
-        //}
-
 
         private void dataGridViewSinhVien_SelectionChanged(object sender, EventArgs e)
         {
@@ -561,18 +558,58 @@ namespace LTTQ_Proj
             String sDate = DateTime.Now.ToString();
             DateTime datevalue = (Convert.ToDateTime(sDate.ToString()));
 
-            String dd = datevalue.Day.ToString();
             String mm = datevalue.Month.ToString();
             String yy = datevalue.Year.ToString();
-            DataTable phong_co_nguoi_o_chua_co_hoa_don = dc.dataTable($"select MaPhong from Phong where SoNguoiDangO > 0 and MaPhong not in (select MaPhong from ThuTienPhong where Thang = {mm} and Nam = {yy})");
-            string insert_sql = $"insert into ThuTienPhong value";
+
+            int current_month = Int32.Parse(mm);
+            int next_month = current_month + 1;
+            int next_year = Int32.Parse(yy);
+            if (current_month == 12)
+            {
+                next_month = 1;
+                next_year += 1;
+            }
+
+
+            // Create a DateTime variable
+            DateTime next_date = new DateTime(next_year, next_month, 7);
+
+            DataTable phong_co_nguoi_o_chua_co_hoa_don = dc.dataTable($"select * from Phong where SoNguoiDangO > 0 and MaPhong not in (select MaPhong from ThuTienPhong where Thang = {mm} and Nam = {yy})");
+            string insert_sql = $"insert into ThuTienPhong (MaPhong, Thang, Nam, TienNha, NgayHetHan) values ";
             if (phong_co_nguoi_o_chua_co_hoa_don.Rows.Count > 0)
             {
-                foreach (var phong in phong_co_nguoi_o_chua_co_hoa_don.Rows)
+                for (int i = 0; i < phong_co_nguoi_o_chua_co_hoa_don.Rows.Count; i++)
                 {
-
+                    insert_sql += $"(N'{phong_co_nguoi_o_chua_co_hoa_don.Rows[i]["MaPhong"]}', {mm}, {yy}, {phong_co_nguoi_o_chua_co_hoa_don.Rows[i]["TienThue"]}, '{next_date.ToString()}')";
+                    if (i != phong_co_nguoi_o_chua_co_hoa_don.Rows.Count - 1)
+                    {
+                        insert_sql += ", ";
+                    }
+                }
+                try
+                {
+                    dc.dbQuery(insert_sql);
+                    MessageBox.Show("Cập nhật hành công");
+                    this.refreshDgvThuTienPhongData();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                    MessageBox.Show("Có lỗi xảy ra. Cập nhật không thành công.");
                 }
             }
+            else
+            {
+                MessageBox.Show("Các phòng đã được cập nhật từ trước.");
+            }
+        }
+
+        private void btnTTPExit_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Bạn có muốn thoát không?", "Thông báo",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.Yes)
+                this.Close();
         }
     }
 }
