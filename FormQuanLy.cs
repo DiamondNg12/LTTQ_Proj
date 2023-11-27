@@ -147,22 +147,25 @@ namespace LTTQ_Proj
             dgvPDanhSachPhong.DataSource = dc.dataTable(sql);
         }
 
-        private void dgvPDanhSachPhong_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void dgvPDanhSachPhong_SelectionChanged(object sender, EventArgs e)
         {
-            try
+            if (dgvPDanhSachPhong.SelectedRows.Count > 0)
             {
-
-                txtPMaPhong.Text = dgvPDanhSachPhong[0, e.RowIndex].Value.ToString();
-                txtPTenPhong.Text = dgvPDanhSachPhong[1, e.RowIndex].Value.ToString();
-                txtPMaNha.Text = dgvPDanhSachPhong[2, e.RowIndex].Value.ToString();
-                cmbPSoNguoiToiDa.SelectedIndex = cmbPSoNguoiToiDa.Items.IndexOf(dgvPDanhSachPhong[4, e.RowIndex].Value.ToString());
-                txtPSoNguoiDangO.Text = dgvPDanhSachPhong[4, e.RowIndex].Value.ToString();
-                txtPTienThue.Text = dgvPDanhSachPhong[5, e.RowIndex].Value.ToString();
-                txtPGhiChu.Text = dgvPDanhSachPhong[6, e.RowIndex].Value.ToString();
-    
-            }
-            catch (Exception ex)
-            {
+                txtPMaPhong.Text = dgvPDanhSachPhong.SelectedRows[0].Cells["MaPhong"].Value.ToString();
+                txtPTenPhong.Text = dgvPDanhSachPhong.SelectedRows[0].Cells["TenPhong"].Value.ToString();
+                txtPMaNha.Text = dgvPDanhSachPhong.SelectedRows[0].Cells["MaNha"].Value.ToString();
+                if (dgvPDanhSachPhong.SelectedRows[0].Cells["LoaiPhong"].Value.ToString() == "Nam")
+                {
+                    rdbPNam.Checked = true;
+                }
+                else
+                {
+                    rdbPNu.Checked = true;
+                }
+                cmbPSoNguoiToiDa.Text = dgvPDanhSachPhong.SelectedRows[0].Cells["SoNguoiToiDa"].Value.ToString();
+                txtPSoNguoiDangO.Text = dgvPDanhSachPhong.SelectedRows[0].Cells["SoNguoiDangO"].Value.ToString();
+                txtPTienThue.Text = dgvPDanhSachPhong.SelectedRows[0].Cells["TienThue"].Value.ToString();
+                txtPGhiChu.Text = dgvPDanhSachPhong.SelectedRows[0].Cells["GhiChu"].Value.ToString();
             }
         }
 
@@ -200,9 +203,32 @@ namespace LTTQ_Proj
             {
                 errorPhong.Clear();
             }
+            string LoaiPhong;
+            if (rdbPNam.Checked == true)
+            {
+                LoaiPhong = "Nam";
+            }
+            else if (rdbPNu.Checked == true)
+            {
+                LoaiPhong = "Nữ";
+            }
+            else
+            {
+                MessageBox.Show("Chọn loại phòng");
+                return;
+            }
             if (txtPSoNguoiDangO.Text.Trim() == "")
             {
                 errorPhong.SetError(txtPMaNha, "Bạn không để trống số người đang ở!");
+                return;
+            }
+            else
+            {
+                errorPhong.Clear();
+            }
+            if (txtPTienThue.Text.Trim() == "")
+            {
+                errorPhong.SetError(txtPTienThue, "Bạn không để trống tiền thuê!");
                 return;
             }
             else
@@ -214,24 +240,33 @@ namespace LTTQ_Proj
             DataTable db = dc.dataTable($"Select * from Phong Where MaPhong = N'{txtPMaPhong.Text}'");
             if (db.Rows.Count > 0)
             {
-                errorPhong.SetError(txtPMaPhong, "Mã phòng trùng trong cơ sở dữ liệu");
+               MessageBox.Show("Mã phòng trùng trong cơ sở dữ liệu");
                 return;
+     
             }
-            errorPhong.Clear();
+
             //////Insert vao CSDL
-            string loaiPhong = grbLoaiPhong.Controls.OfType<RadioButton>().Where(r => r.Checked).FirstOrDefault().Text;
-            sql = $"INSERT INTO PHONG VALUES (N'{txtPMaPhong.Text}', N'{txtPTenPhong.Text}', N'{txtPMaNha.Text}', N'{loaiPhong}', {cmbPSoNguoiToiDa.Text}, {txtPSoNguoiDangO.Text}, {txtPTienThue.Text}, N'{txtPGhiChu.Text}')";
-            dc.dbQuery(sql);
-            dgvPDanhSachPhong.DataSource = dc.dataTable("select * from PHONG");
-            //Thông báo đã thêm thành công
-            MessageBox.Show("Thêm phòng thành công!");
+            try
+            {
+                sql = $"INSERT INTO PHONG VALUES (N'{txtPMaPhong.Text}', N'{txtPTenPhong.Text}', N'{txtPMaNha.Text}', N'{LoaiPhong}', {cmbPSoNguoiToiDa.Text}, {txtPSoNguoiDangO.Text}, {txtPTienThue.Text}, N'{txtPGhiChu.Text}')";
+                dc.dbQuery(sql);
+                dgvPDanhSachPhong.DataSource = dc.dataTable("select * from PHONG");
+                //Thông báo đã thêm thành công
+                MessageBox.Show("Thêm phòng thành công!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Thêm không thành công");
+                MessageBox.Show(ex.Message);
+            }
 
             //Clear các control
             txtPMaPhong.Text = "";
             txtPTenPhong.Text = "";
             txtPMaNha.Text = "";
             txtPSoNguoiDangO.Text = "";
-            grbLoaiPhong.Controls.OfType<RadioButton>().ToList().ForEach(r => r.Checked = false);
+            rdbPNam.Checked = false;
+            rdbPNu.Checked = false;
             cmbPSoNguoiToiDa.SelectedIndex = -1;
             txtPTienThue.Text = "";
             txtPGhiChu.Text = "";
