@@ -312,7 +312,7 @@
             dgvPDanhSachPhong.RowTemplate.Height = 29;
             dgvPDanhSachPhong.Size = new Size(815, 418);
             dgvPDanhSachPhong.TabIndex = 0;
-            dgvPDanhSachPhong.CellContentClick += dgvPDanhSachPhong_CellContentClick;
+            dgvPDanhSachPhong.SelectionChanged += dgvPDanhSachPhong_SelectionChanged;
             // 
             // grbThongTinPhong
             // 
