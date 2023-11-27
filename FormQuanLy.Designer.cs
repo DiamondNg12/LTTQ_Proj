@@ -133,6 +133,18 @@
             lbMPThuTien = new Label();
             label14 = new Label();
             tabPage3 = new TabPage();
+            button1 = new Button();
+            btnTimKiemTraPhong = new Button();
+            grbThongTinTra = new GroupBox();
+            txtNgayTra = new TextBox();
+            txtMaSoThueTra = new TextBox();
+            textBox1 = new TextBox();
+            label27 = new Label();
+            label26 = new Label();
+            label10 = new Label();
+            grbDanhSachTraPhong = new GroupBox();
+            dgvDanhSachTraPhong = new DataGridView();
+            label28 = new Label();
             errorPhong = new ErrorProvider(components);
             errorSV = new ErrorProvider(components);
             errorThuePhong = new ErrorProvider(components);
@@ -158,6 +170,10 @@
             groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvThuTienPhong).BeginInit();
             grbThongTinThuTienPhong.SuspendLayout();
+            tabPage3.SuspendLayout();
+            grbThongTinTra.SuspendLayout();
+            grbDanhSachTraPhong.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvDanhSachTraPhong).BeginInit();
             ((System.ComponentModel.ISupportInitialize)errorPhong).BeginInit();
             ((System.ComponentModel.ISupportInitialize)errorSV).BeginInit();
             ((System.ComponentModel.ISupportInitialize)errorThuePhong).BeginInit();
@@ -1218,6 +1234,11 @@
             // 
             // tabPage3
             // 
+            tabPage3.Controls.Add(button1);
+            tabPage3.Controls.Add(btnTimKiemTraPhong);
+            tabPage3.Controls.Add(grbThongTinTra);
+            tabPage3.Controls.Add(grbDanhSachTraPhong);
+            tabPage3.Controls.Add(label28);
             tabPage3.Location = new Point(4, 29);
             tabPage3.Margin = new Padding(3, 4, 3, 4);
             tabPage3.Name = "tabPage3";
@@ -1227,6 +1248,119 @@
             tabPage3.Text = "Trả Phòng";
             tabPage3.UseVisualStyleBackColor = true;
             tabPage3.Click += tabPage3_Click;
+            // 
+            // button1
+            // 
+            button1.Location = new Point(308, 290);
+            button1.Name = "button1";
+            button1.Size = new Size(123, 40);
+            button1.TabIndex = 2;
+            button1.Text = "button2";
+            button1.UseVisualStyleBackColor = true;
+            // 
+            // btnTimKiemTraPhong
+            // 
+            btnTimKiemTraPhong.Location = new Point(110, 290);
+            btnTimKiemTraPhong.Name = "btnTimKiemTraPhong";
+            btnTimKiemTraPhong.Size = new Size(123, 40);
+            btnTimKiemTraPhong.TabIndex = 2;
+            btnTimKiemTraPhong.Text = "Tìm Kiếm";
+            btnTimKiemTraPhong.UseVisualStyleBackColor = true;
+            // 
+            // grbThongTinTra
+            // 
+            grbThongTinTra.Controls.Add(txtNgayTra);
+            grbThongTinTra.Controls.Add(txtMaSoThueTra);
+            grbThongTinTra.Controls.Add(textBox1);
+            grbThongTinTra.Controls.Add(label27);
+            grbThongTinTra.Controls.Add(label26);
+            grbThongTinTra.Controls.Add(label10);
+            grbThongTinTra.Location = new Point(37, 58);
+            grbThongTinTra.Name = "grbThongTinTra";
+            grbThongTinTra.Size = new Size(538, 203);
+            grbThongTinTra.TabIndex = 1;
+            grbThongTinTra.TabStop = false;
+            grbThongTinTra.Text = "Thông tin";
+            // 
+            // txtNgayTra
+            // 
+            txtNgayTra.Location = new Point(145, 75);
+            txtNgayTra.Name = "txtNgayTra";
+            txtNgayTra.ReadOnly = true;
+            txtNgayTra.Size = new Size(167, 27);
+            txtNgayTra.TabIndex = 0;
+            // 
+            // txtMaSoThueTra
+            // 
+            txtMaSoThueTra.Location = new Point(145, 25);
+            txtMaSoThueTra.Name = "txtMaSoThueTra";
+            txtMaSoThueTra.Size = new Size(167, 27);
+            txtMaSoThueTra.TabIndex = 0;
+            // 
+            // textBox1
+            // 
+            textBox1.Location = new Point(145, 129);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(167, 27);
+            textBox1.TabIndex = 0;
+            // 
+            // label27
+            // 
+            label27.AutoSize = true;
+            label27.Location = new Point(16, 132);
+            label27.Name = "label27";
+            label27.Size = new Size(95, 20);
+            label27.TabIndex = 2;
+            label27.Text = "Tiền Vi Phạm";
+            // 
+            // label26
+            // 
+            label26.AutoSize = true;
+            label26.Location = new Point(16, 82);
+            label26.Name = "label26";
+            label26.Size = new Size(68, 20);
+            label26.TabIndex = 2;
+            label26.Text = "Ngày Trả";
+            // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.Location = new Point(16, 28);
+            label10.Name = "label10";
+            label10.Size = new Size(87, 20);
+            label10.TabIndex = 2;
+            label10.Text = "Mã Số Thuê";
+            // 
+            // grbDanhSachTraPhong
+            // 
+            grbDanhSachTraPhong.Controls.Add(dgvDanhSachTraPhong);
+            grbDanhSachTraPhong.Location = new Point(581, 58);
+            grbDanhSachTraPhong.Name = "grbDanhSachTraPhong";
+            grbDanhSachTraPhong.Size = new Size(664, 275);
+            grbDanhSachTraPhong.TabIndex = 0;
+            grbDanhSachTraPhong.TabStop = false;
+            grbDanhSachTraPhong.Text = "Danh sách trả phòng";
+            // 
+            // dgvDanhSachTraPhong
+            // 
+            dgvDanhSachTraPhong.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvDanhSachTraPhong.Dock = DockStyle.Fill;
+            dgvDanhSachTraPhong.Location = new Point(3, 23);
+            dgvDanhSachTraPhong.Name = "dgvDanhSachTraPhong";
+            dgvDanhSachTraPhong.RowHeadersWidth = 51;
+            dgvDanhSachTraPhong.RowTemplate.Height = 29;
+            dgvDanhSachTraPhong.Size = new Size(658, 249);
+            dgvDanhSachTraPhong.TabIndex = 0;
+            // 
+            // label28
+            // 
+            label28.AutoSize = true;
+            label28.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point);
+            label28.Location = new Point(551, 17);
+            label28.Name = "label28";
+            label28.Size = new Size(122, 31);
+            label28.TabIndex = 2;
+            label28.Text = "Trả Phòng";
             // 
             // errorPhong
             // 
@@ -1282,6 +1416,12 @@
             ((System.ComponentModel.ISupportInitialize)dgvThuTienPhong).EndInit();
             grbThongTinThuTienPhong.ResumeLayout(false);
             grbThongTinThuTienPhong.PerformLayout();
+            tabPage3.ResumeLayout(false);
+            tabPage3.PerformLayout();
+            grbThongTinTra.ResumeLayout(false);
+            grbThongTinTra.PerformLayout();
+            grbDanhSachTraPhong.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dgvDanhSachTraPhong).EndInit();
             ((System.ComponentModel.ISupportInitialize)errorPhong).EndInit();
             ((System.ComponentModel.ISupportInitialize)errorSV).EndInit();
             ((System.ComponentModel.ISupportInitialize)errorThuePhong).EndInit();
@@ -1397,5 +1537,17 @@
         private Button btnTinhTien;
         private Button btn;
         private Button btnUpdateCurentMonth;
+        private GroupBox grbThongTinTra;
+        private TextBox textBox1;
+        private Label label10;
+        private GroupBox grbDanhSachTraPhong;
+        private DataGridView dgvDanhSachTraPhong;
+        private Button btnTimKiemTraPhong;
+        private Label label27;
+        private Label label26;
+        private TextBox txtMaSoThueTra;
+        private Label label28;
+        private Button button1;
+        private TextBox txtNgayTra;
     }
 }
