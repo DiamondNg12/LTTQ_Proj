@@ -219,7 +219,7 @@ namespace LTTQ_Proj
             }
             if (txtPSoNguoiDangO.Text.Trim() == "")
             {
-                errorPhong.SetError(txtPMaNha, "Bạn không để trống số người đang ở!");
+                errorPhong.SetError(txtPMaNha, "Bạn không để trống số người đang ở ");
                 return;
             }
             else
@@ -228,7 +228,7 @@ namespace LTTQ_Proj
             }
             if (txtPTienThue.Text.Trim() == "")
             {
-                errorPhong.SetError(txtPTienThue, "Bạn không để trống tiền thuê!");
+                errorPhong.SetError(txtPTienThue, "Bạn không để trống tiền thuê");
                 return;
             }
             else
