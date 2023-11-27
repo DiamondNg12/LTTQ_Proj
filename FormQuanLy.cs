@@ -675,14 +675,7 @@ namespace LTTQ_Proj
                 txtThangThuTien.Text = dgvThuTienPhong.SelectedRows[0].Cells["Thang"].Value.ToString();
                 txttNamThuTien.Text = dgvThuTienPhong.SelectedRows[0].Cells["Nam"].Value.ToString();
                 txtTienNha.Text = dgvThuTienPhong.SelectedRows[0].Cells["TienNha"].Value.ToString();
-                try
-                {
-                    dateTimePicker2.Value = DateTime.Parse(dgvThuTienPhong.SelectedRows[0].Cells["NgayHetHan"].Value.ToString());
-                }
-                catch (Exception ex)
-                {
-
-                }
+                dateTimePicker2.Value = DateTime.Parse(dgvThuTienPhong.SelectedRows[0].Cells["NgayHetHan"].Value.ToString());
                 txtTienDien.Text = dgvThuTienPhong.SelectedRows[0].Cells["TienDien"].Value.ToString();
                 txtTienNuoc.Text = dgvThuTienPhong.SelectedRows[0].Cells["TienNuoc"].Value.ToString();
                 txtTienVeSinh.Text = dgvThuTienPhong.SelectedRows[0].Cells["TienVeSinh"].Value.ToString();
@@ -738,16 +731,15 @@ namespace LTTQ_Proj
                 return;
             }
             // Sql
-            string update_sql = $"Update ThuTienPhong set TienNha = {txtTienNha.Text}, TienDien = {txtTienDien.Text}, TienNuoc = {txtTienNuoc.Text}, TienVeSinh = {txtTienVeSinh.Text}, NgayHetHan = '{dateTimePicker2.Value.ToString()}' where MaPhong = N'{txtMaPhongThuTien.Text}' and Thang = {txtThangThuTien.Text} and Nam = {txttNamThuTien.Text}";
+            string update_sql = $"Update ThuTienPhong set TienNha = {txtTienNha.Text}, TienDien = {txtTienDien.Text}, TienNuoc = {txtTienNuoc.Text}, TienVeSinh = {txtTienVeSinh.Text} where MaPhong = N'{txtMaPhongThuTien.Text}' and Thang = {txtThangThuTien.Text} and Nam = {txttNamThuTien.Text}";
             try
             {
                 dc.dbQuery(update_sql);
-                dgvThuTienPhong.DataSource = dc.dataTable("select * from ThuTienPhong");
+                dgvThuTienPhong.DataSource = dc.dataTable("select * from ThuTienPhong where NgayDong is null");
                 MessageBox.Show("Cập nhật thành công.");
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
                 MessageBox.Show("Có lỗi xảy ra. Cập nhật không thành công");
                 return;
             }
@@ -755,111 +747,7 @@ namespace LTTQ_Proj
 
         private void btnTinhTien_Click(object sender, EventArgs e)
         {
-            if (txtTienDien.Text.Trim() == "")
-            {
-                MessageBox.Show("Vui lòng nhập tiền điện");
-                return;
-            }
-            if (txtTienNuoc.Text.Trim() == "")
-            {
-                MessageBox.Show("Vui lòng nhập tiền nước");
-                return;
-            }
-            if (txtTienVeSinh.Text.Trim() == "")
-            {
-                MessageBox.Show("Vui lòng nhập tiền vệ sinh");
-                return;
-            }
-            DateTime now = DateTime.Now;
-            int tien_phat;
-            if (now <= dateTimePicker2.Value)
-            {
-                txtTienPhat.Text = "0";
-                tien_phat = 0;
-            }
-            else
-            {
-                tien_phat = (int)now.Subtract(dateTimePicker2.Value).TotalDays * 10000;
-                txtTienPhat.Text = (tien_phat).ToString();
-            }
-            decimal.TryParse(txtTienNha.Text, out decimal tien_nha_decimal);
-            decimal.TryParse(txtTienDien.Text, out decimal tien_dien_decimal);
-            decimal.TryParse(txtTienNuoc.Text, out decimal tien_nuoc_decimal);
-            decimal.TryParse(txtTienVeSinh.Text, out decimal tien_ve_sinh_decimal);
 
-            int tong_tien = (int)tien_nha_decimal + (int)tien_dien_decimal + (int)tien_nuoc_decimal + (int)tien_ve_sinh_decimal + tien_phat;
-            txtTongTienPhong.Text = tong_tien.ToString();
-        }
-
-        private void btnTTPThanhToanHoaDon_Click(object sender, EventArgs e)
-        {
-            if (txtMaPhongThuTien.Text.Trim() == "")
-            {
-                MessageBox.Show("Vui lòng nhập Mã Phòng");
-                return;
-            }
-            if (txtThangThuTien.Text.Trim() == "")
-            {
-                MessageBox.Show("Vui lòng nhập tháng thu tiền");
-                return;
-            }
-            if (txttNamThuTien.Text.Trim() == "")
-            {
-                MessageBox.Show("Vui lòng nhập năm thu tiền");
-                return;
-            }
-            if (txtTienDien.Text.Trim() == "")
-            {
-                MessageBox.Show("Vui lòng nhập tiền điện");
-                return;
-            }
-            if (txtTienNuoc.Text.Trim() == "")
-            {
-                MessageBox.Show("Vui lòng nhập tiền nước");
-                return;
-            }
-            if (txtTienVeSinh.Text.Trim() == "")
-            {
-                MessageBox.Show("Vui lòng nhập tiền vệ sinh");
-                return;
-            }
-
-            DataTable check_thu_tien_phong = dc.dataTable($"select * from ThuTienPhong where MaPhong = N'{txtMaPhongThuTien.Text}' and Thang = {txtThangThuTien.Text} and Nam = {txttNamThuTien.Text}");
-            if (check_thu_tien_phong.Rows.Count > 0)
-            {
-                if (check_thu_tien_phong.Rows[0]["NgayDong"].ToString() != "")
-                {
-                    MessageBox.Show("Hoá đơn này đã được đóng, không thể cập nhật.");
-                    return;
-                }
-            }
-            else
-            {
-                MessageBox.Show("Không tìm thấy hoá đơn");
-                return;
-            }
-            DateTime now = DateTime.Now;
-            int tien_phat;
-            if (now <= dateTimePicker2.Value)
-            {
-                txtTienPhat.Text = "0";
-                tien_phat = 0;
-            }
-            else
-            {
-                tien_phat = (int)now.Subtract(dateTimePicker2.Value).TotalDays * 10000;
-                txtTienPhat.Text = (tien_phat).ToString();
-            }
-            string update_sql = $"Update ThuTienPhong set TienNha = {txtTienNha.Text}, TienDien = {txtTienDien.Text}, TienNuoc = {txtTienNuoc.Text}, TienVeSinh = {txtTienVeSinh.Text}, NgayHetHan = '{dateTimePicker2.Value.ToString()}', TienPhat = {tien_phat}, NgayDong = '{now}' where MaPhong = N'{txtMaPhongThuTien.Text}' and Thang = {txtThangThuTien.Text} and Nam = {txttNamThuTien.Text}";
-            try
-            {
-                dc.dbQuery(update_sql);
-                MessageBox.Show("Thanh toán hoá đơn thành công.");
-                dgvThuTienPhong.DataSource = dc.dataTable("select * from ThuTienPhong");
-            } catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
         }
     }
 }
