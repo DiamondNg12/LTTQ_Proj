@@ -543,10 +543,6 @@ namespace LTTQ_Proj
 
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
 
         private void label9_Click(object sender, EventArgs e)
         {
@@ -610,6 +606,148 @@ namespace LTTQ_Proj
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.Yes)
                 this.Close();
+        }
+
+        private void btnThueTimKiem_Click(object sender, EventArgs e)
+        {
+            if (txtMSVThue.Text.Trim() == "" && txtMaPhongThue.Text.Trim() == "")
+            {
+                MessageBox.Show("Vui lòng điền Mã Sinh Viên hoặc Mã Phòng cần tìm.");
+                return;
+            }
+            if (txtMSVThue.Text.Trim() != "")
+            {
+                string select_sql_SV = $"select * from SinhVien where MaSinhVien = N'{txtMSVThue.Text}' and MaSinhVien not in (select  MaSV from ThuePhong)";
+                dvgDSSVThuePhong.DataSource = dc.dataTable(select_sql_SV);
+            }
+            if (txtMaPhongThue.Text.Trim() != "")
+            {
+                string select_sql_SV = $"select * from Phong where MaPhong = N'{txtMaPhongThue.Text}' and SoNguoiDangO < SoNguoiToiDa";
+                dgvDSPhongConTrong.DataSource = dc.dataTable(select_sql_SV);
+            }
+        }
+
+
+        private void btnTTPSearch_Click(object sender, EventArgs e)
+        {
+            if (txtMaPhongThuTien.Text.Trim() == "" && txtThangThuTien.Text.Trim() == "" && txttNamThuTien.Text.Trim() == "")
+            {
+                MessageBox.Show("Vui lòng điền Mã Phòng hoặc Tháng, Năm cần tìm.");
+                return;
+            }
+            bool need_and = false;
+            string select_sql = "select * from ThuTienPhong where ";
+            if (txtMaPhongThuTien.Text.Trim() != "")
+            {
+                select_sql += $"MaPhong = N'{txtMaPhongThuTien.Text}' ";
+                need_and = true;
+            }
+            if (txtThangThuTien.Text.Trim() != "")
+            {
+                if (need_and)
+                {
+                    select_sql += "and ";
+                }
+                select_sql += $"Thang = {txtThangThuTien.Text} ";
+                need_and = true;
+            }
+            if (txttNamThuTien.Text.Trim() != "")
+            {
+                if (need_and)
+                {
+                    select_sql += "and ";
+                }
+                select_sql += $"Nam = {txttNamThuTien.Text} ";
+            }
+            dgvThuTienPhong.DataSource = dc.dataTable(select_sql);
+        }
+
+        private void btnTTPHoaDonChuaThanhToan_Click(object sender, EventArgs e)
+        {
+            dgvThuTienPhong.DataSource = dc.dataTable("select * from ThuTienPhong where NgayDong is null");
+        }
+
+        private void dgvThuTienPhong_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dgvThuTienPhong.SelectedRows.Count > 0)
+            {
+                txtMaPhongThuTien.Text = dgvThuTienPhong.SelectedRows[0].Cells["MaPhong"].Value.ToString();
+                txtThangThuTien.Text = dgvThuTienPhong.SelectedRows[0].Cells["Thang"].Value.ToString();
+                txttNamThuTien.Text = dgvThuTienPhong.SelectedRows[0].Cells["Nam"].Value.ToString();
+                txtTienNha.Text = dgvThuTienPhong.SelectedRows[0].Cells["TienNha"].Value.ToString();
+                dateTimePicker2.Value = DateTime.Parse(dgvThuTienPhong.SelectedRows[0].Cells["NgayHetHan"].Value.ToString());
+                txtTienDien.Text = dgvThuTienPhong.SelectedRows[0].Cells["TienDien"].Value.ToString();
+                txtTienNuoc.Text = dgvThuTienPhong.SelectedRows[0].Cells["TienNuoc"].Value.ToString();
+                txtTienVeSinh.Text = dgvThuTienPhong.SelectedRows[0].Cells["TienVeSinh"].Value.ToString();
+                txtTienPhat.Text = dgvThuTienPhong.SelectedRows[0].Cells["TienPhat"].Value.ToString();
+            }
+        }
+
+        private void btnLuu_Click(object sender, EventArgs e)
+        {
+            if (txtMaPhongThuTien.Text.Trim() == "")
+            {
+                MessageBox.Show("Vui lòng nhập Mã Phòng");
+                return;
+            }
+            if (txtThangThuTien.Text.Trim() == "")
+            {
+                MessageBox.Show("Vui lòng nhập tháng thu tiền");
+                return;
+            }
+            if (txttNamThuTien.Text.Trim() == "")
+            {
+                MessageBox.Show("Vui lòng nhập năm thu tiền");
+                return;
+            }
+            if (txtTienDien.Text.Trim() == "")
+            {
+                MessageBox.Show("Vui lòng nhập tiền điện");
+                return;
+            }
+            if (txtTienNuoc.Text.Trim() == "")
+            {
+                MessageBox.Show("Vui lòng nhập tiền nước");
+                return;
+            }
+            if (txtTienVeSinh.Text.Trim() == "")
+            {
+                MessageBox.Show("Vui lòng nhập tiền vệ sinh");
+                return;
+            }
+
+            DataTable check_thu_tien_phong = dc.dataTable($"select * from ThuTienPhong where MaPhong = N'{txtMaPhongThuTien.Text}' and Thang = {txtThangThuTien.Text} and Nam = {txttNamThuTien.Text}");
+            if (check_thu_tien_phong.Rows.Count > 0)
+            {
+                if (check_thu_tien_phong.Rows[0]["NgayDong"].ToString() != "")
+                {
+                    MessageBox.Show("Hoá đơn này đã được đóng, không thể cập nhật.");
+                    return;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Không tìm thấy hoá đơn");
+                return;
+            }
+            // Sql
+            string update_sql = $"Update ThuTienPhong set TienNha = {txtTienNha.Text}, TienDien = {txtTienDien.Text}, TienNuoc = {txtTienNuoc.Text}, TienVeSinh = {txtTienVeSinh.Text} where MaPhong = N'{txtMaPhongThuTien.Text}' and Thang = {txtThangThuTien.Text} and Nam = {txttNamThuTien.Text}";
+            try
+            {
+                dc.dbQuery(update_sql);
+                dgvThuTienPhong.DataSource = dc.dataTable("select * from ThuTienPhong where NgayDong is null");
+                MessageBox.Show("Cập nhật thành công.");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Có lỗi xảy ra. Cập nhật không thành công");
+                return;
+            }
+        }
+
+        private void btnTinhTien_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
