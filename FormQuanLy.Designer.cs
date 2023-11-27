@@ -995,6 +995,7 @@
             btnTTPThanhToanHoaDon.TabIndex = 6;
             btnTTPThanhToanHoaDon.Text = "Thanh toán hoá đơn";
             btnTTPThanhToanHoaDon.UseVisualStyleBackColor = true;
+            btnTTPThanhToanHoaDon.Click += btnTTPThanhToanHoaDon_Click;
             // 
             // label16
             // 
