@@ -856,7 +856,8 @@ namespace LTTQ_Proj
                 dc.dbQuery(update_sql);
                 MessageBox.Show("Thanh toán hoá đơn thành công.");
                 dgvThuTienPhong.DataSource = dc.dataTable("select * from ThuTienPhong");
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
