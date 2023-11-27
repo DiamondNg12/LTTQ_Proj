@@ -159,6 +159,7 @@ namespace LTTQ_Proj
                 txtPSoNguoiDangO.Text = dgvPDanhSachPhong[4, e.RowIndex].Value.ToString();
                 txtPTienThue.Text = dgvPDanhSachPhong[5, e.RowIndex].Value.ToString();
                 txtPGhiChu.Text = dgvPDanhSachPhong[6, e.RowIndex].Value.ToString();
+    
             }
             catch (Exception ex)
             {
@@ -290,17 +291,33 @@ namespace LTTQ_Proj
             {
                 dc.dbQuery(sql);
                 MessageBox.Show("Cập nhật phòng thành công!");
+                dgvPDanhSachPhong.DataSource = dc.dataTable("select * from PHONG");
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Không thể cập nhật thông tin phòng");
             }
-            dgvPDanhSachPhong.DataSource = dc.dataTable("select * from PHONG");
+            
         }
 
         private void btnPXoa_Click(object sender, EventArgs e)
         {
-
+            if (txtPMaPhong.Text.Trim() == "")
+            {
+                MessageBox.Show("Vui lòng nhập mã phòng");
+                return;
+            }
+            try
+            { 
+            string delete_phong = $"delete from Phong where MaPhong = N'{txtPMaPhong.Text}'";
+                dc.dbQuery(delete_phong);
+                MessageBox.Show("Xóa phòng thành công");
+                dgvPDanhSachPhong.DataSource = dc.dataTable("select * from Phong");
+             }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Xóa phòng không thành công");
+            }
         }
 
         private void ThuePhong()
@@ -339,6 +356,12 @@ namespace LTTQ_Proj
 
         private void btnSVXoa_Click(object sender, EventArgs e)
         {
+           if(inputSVMaSinhVien.Text.Trim() == "")
+            {
+                MessageBox.Show("Vui lòng điền mã sinh viên");
+                return;
+            }
+            
             //inputSVMaSinhVien.text
             try
             {
