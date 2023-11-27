@@ -134,6 +134,17 @@
             lbMPThuTien = new Label();
             label14 = new Label();
             tabPage3 = new TabPage();
+            label27 = new Label();
+            btnTimKiemTraPhong = new Button();
+            groupBox5 = new GroupBox();
+            dgvDanhSachTraPhong = new DataGridView();
+            groupBox1 = new GroupBox();
+            txtTienViPham = new TextBox();
+            txtNgayTraPhong = new TextBox();
+            txtMaSoThueTra = new TextBox();
+            label26 = new Label();
+            label23 = new Label();
+            label10 = new Label();
             errorPhong = new ErrorProvider(components);
             errorSV = new ErrorProvider(components);
             errorThuePhong = new ErrorProvider(components);
@@ -159,6 +170,10 @@
             groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvThuTienPhong).BeginInit();
             grbThongTinThuTienPhong.SuspendLayout();
+            tabPage3.SuspendLayout();
+            groupBox5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvDanhSachTraPhong).BeginInit();
+            groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)errorPhong).BeginInit();
             ((System.ComponentModel.ISupportInitialize)errorSV).BeginInit();
             ((System.ComponentModel.ISupportInitialize)errorThuePhong).BeginInit();
@@ -1254,7 +1269,12 @@
             // 
             // tabPage3
             // 
-            tabPage3.Location = new Point(4, 24);
+            tabPage3.Controls.Add(label27);
+            tabPage3.Controls.Add(btnTimKiemTraPhong);
+            tabPage3.Controls.Add(groupBox5);
+            tabPage3.Controls.Add(groupBox1);
+            tabPage3.Location = new Point(4, 29);
+            tabPage3.Margin = new Padding(3, 4, 3, 4);
             tabPage3.Name = "tabPage3";
             tabPage3.Padding = new Padding(3, 4, 3, 4);
             tabPage3.Size = new Size(1095, 555);
@@ -1262,6 +1282,110 @@
             tabPage3.Text = "Trả Phòng";
             tabPage3.UseVisualStyleBackColor = true;
             tabPage3.Click += tabPage3_Click;
+            // 
+            // label27
+            // 
+            label27.AutoSize = true;
+            label27.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point);
+            label27.Location = new Point(588, 19);
+            label27.Name = "label27";
+            label27.Size = new Size(122, 31);
+            label27.TabIndex = 3;
+            label27.Text = "Trả Phòng";
+            // 
+            // btnTimKiemTraPhong
+            // 
+            btnTimKiemTraPhong.Location = new Point(143, 365);
+            btnTimKiemTraPhong.Name = "btnTimKiemTraPhong";
+            btnTimKiemTraPhong.Size = new Size(128, 40);
+            btnTimKiemTraPhong.TabIndex = 2;
+            btnTimKiemTraPhong.Text = "Tìm Kiếm";
+            btnTimKiemTraPhong.UseVisualStyleBackColor = true;
+            // 
+            // groupBox5
+            // 
+            groupBox5.Controls.Add(dgvDanhSachTraPhong);
+            groupBox5.Location = new Point(401, 65);
+            groupBox5.Name = "groupBox5";
+            groupBox5.Size = new Size(830, 340);
+            groupBox5.TabIndex = 1;
+            groupBox5.TabStop = false;
+            groupBox5.Text = "Danh sách trả phòng";
+            // 
+            // dgvDanhSachTraPhong
+            // 
+            dgvDanhSachTraPhong.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvDanhSachTraPhong.Dock = DockStyle.Fill;
+            dgvDanhSachTraPhong.Location = new Point(3, 23);
+            dgvDanhSachTraPhong.Name = "dgvDanhSachTraPhong";
+            dgvDanhSachTraPhong.RowHeadersWidth = 51;
+            dgvDanhSachTraPhong.RowTemplate.Height = 29;
+            dgvDanhSachTraPhong.Size = new Size(824, 314);
+            dgvDanhSachTraPhong.TabIndex = 0;
+            // 
+            // groupBox1
+            // 
+            groupBox1.Controls.Add(txtTienViPham);
+            groupBox1.Controls.Add(txtNgayTraPhong);
+            groupBox1.Controls.Add(txtMaSoThueTra);
+            groupBox1.Controls.Add(label26);
+            groupBox1.Controls.Add(label23);
+            groupBox1.Controls.Add(label10);
+            groupBox1.Location = new Point(46, 65);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Size = new Size(349, 287);
+            groupBox1.TabIndex = 0;
+            groupBox1.TabStop = false;
+            groupBox1.Text = "Thông tin";
+            // 
+            // txtTienViPham
+            // 
+            txtTienViPham.Location = new Point(127, 174);
+            txtTienViPham.Name = "txtTienViPham";
+            txtTienViPham.Size = new Size(181, 27);
+            txtTienViPham.TabIndex = 1;
+            // 
+            // txtNgayTraPhong
+            // 
+            txtNgayTraPhong.Location = new Point(127, 97);
+            txtNgayTraPhong.Name = "txtNgayTraPhong";
+            txtNgayTraPhong.ReadOnly = true;
+            txtNgayTraPhong.Size = new Size(181, 27);
+            txtNgayTraPhong.TabIndex = 1;
+            // 
+            // txtMaSoThueTra
+            // 
+            txtMaSoThueTra.Location = new Point(127, 31);
+            txtMaSoThueTra.Name = "txtMaSoThueTra";
+            txtMaSoThueTra.Size = new Size(181, 27);
+            txtMaSoThueTra.TabIndex = 1;
+            // 
+            // label26
+            // 
+            label26.AutoSize = true;
+            label26.Location = new Point(27, 177);
+            label26.Name = "label26";
+            label26.Size = new Size(94, 20);
+            label26.TabIndex = 0;
+            label26.Text = "Tiền vi phạm";
+            // 
+            // label23
+            // 
+            label23.AutoSize = true;
+            label23.Location = new Point(27, 97);
+            label23.Name = "label23";
+            label23.Size = new Size(66, 20);
+            label23.TabIndex = 0;
+            label23.Text = "Ngày trả";
+            // 
+            // label10
+            // 
+            label10.AutoSize = true;
+            label10.Location = new Point(27, 31);
+            label10.Name = "label10";
+            label10.Size = new Size(82, 20);
+            label10.TabIndex = 0;
+            label10.Text = "Mã số thuê";
             // 
             // errorPhong
             // 
@@ -1316,6 +1440,12 @@
             ((System.ComponentModel.ISupportInitialize)dgvThuTienPhong).EndInit();
             grbThongTinThuTienPhong.ResumeLayout(false);
             grbThongTinThuTienPhong.PerformLayout();
+            tabPage3.ResumeLayout(false);
+            tabPage3.PerformLayout();
+            groupBox5.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dgvDanhSachTraPhong).EndInit();
+            groupBox1.ResumeLayout(false);
+            groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)errorPhong).EndInit();
             ((System.ComponentModel.ISupportInitialize)errorSV).EndInit();
             ((System.ComponentModel.ISupportInitialize)errorThuePhong).EndInit();
@@ -1432,5 +1562,18 @@
         private Button btnTTPExit;
         private Button btnTTPThanhToanHoaDon;
         private Button btnTTPHoaDonChuaThanhToan;
+        private Button button2;
+        private Button btnTimKiemTraPhong;
+        private GroupBox groupBox5;
+        private GroupBox groupBox1;
+        private TextBox txtTienViPham;
+        private TextBox txtNgayTraPhong;
+        private TextBox txtMaSoThueTra;
+        private Label label26;
+        private Label label23;
+        private Label label10;
+        private Label label27;
+        private DataGridView dgvDanhSachTraPhong;
+
     }
 }
