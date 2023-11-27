@@ -749,48 +749,5 @@ namespace LTTQ_Proj
         {
 
         }
-        // tab control TinhTienPhong
-        //button Lưu
-        private void btnLuu_Click(object sender, EventArgs e)
-        {
-            if (txtMaPhongThuTien.Text.Trim() == "")
-            {
-                MessageBox.Show("Vui Lòng nhập Mã Phòng");
-            }
-            if (txtThangThuTien.Text.Trim() == "")
-            {
-                MessageBox.Show("Vui Lòng nhập tháng thu tiền");
-            }
-            if (txtNamThuTien.Text.Trim() == "")
-            {
-                MessageBox.Show("Vui Lòng nhập năm thu tiền");
-            }
-            if (dtpNgayHetHan.Value.ToString() == "")
-            {
-                MessageBox.Show("Vui Lòng nhập ngày hết hạn");
-            }
-            if (dtpNgayDong.Value.ToString() == "")
-            {
-                MessageBox.Show("Vui Lòng nhập ngày đóng");
-            }
-            if (txtTienDien.Text.Trim() == "")
-            {
-                MessageBox.Show("Vui Lòng nhập tiền điện");
-            }
-            if (txtTienNuoc.Text.Trim() == "")
-            {
-                MessageBox.Show("Vui Lòng nhập tiền nước");
-            }
-            if (txtTienVeSinh.Text.Trim() == "")
-            {
-                MessageBox.Show("Vui Lòng nhập tiền vệ sinh");
-            }
-            // Sql
-            string sql = $"INSERT INTO PHONG VALUES (N'{txtMaPhongThuTien.Text}', N'{txtThangThuTien.Text}', N'{txtThangThuTien.Text}', " +
-                $"{txtTienDien.Text}, {txtTienNuoc.Text}, N'{txtTienVeSinh.Text}',{dtpNgayHetHan.Value},{dtpNgayDong.Value})";
-            dgvThuTienPhong.DataSource = dc.dataTable("select * from ThuTienPhong");
-            MessageBox.Show("Lưu thông tin thu phòng thàng công!");
-
-        }
     }
 }
