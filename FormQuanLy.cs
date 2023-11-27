@@ -28,6 +28,22 @@ namespace LTTQ_Proj
             cmbPSoNguoiToiDa.Items.Add("6");
             cmbPSoNguoiToiDa.Items.Add("8");
         }
+
+        private void refreshDgvThuTienPhongData()
+        {
+            dgvThuTienPhong.DataSource = dc.dataTable("select * from ThuTienPhong");
+            dgvThuTienPhong.Columns[0].HeaderText = "Mã Phòng";
+            dgvThuTienPhong.Columns[1].HeaderText = "Tháng";
+            dgvThuTienPhong.Columns[2].HeaderText = "Năm";
+            dgvThuTienPhong.Columns[3].HeaderText = "Tiền nhà";
+            dgvThuTienPhong.Columns[4].HeaderText = "Tiền điện";
+            dgvThuTienPhong.Columns[5].HeaderText = "Tiền nước";
+            dgvThuTienPhong.Columns[6].HeaderText = "Tiền vệ sinh";
+            dgvThuTienPhong.Columns[7].HeaderText = "Tiền phạt";
+            dgvThuTienPhong.Columns[8].HeaderText = "Ngày hết hạn";
+            dgvThuTienPhong.Columns[9].HeaderText = "Ngày đóng";
+        }
+
         private void FormQuanLy_Load(object sender, EventArgs e)
         {
             //tabpanel Phong
@@ -55,6 +71,10 @@ namespace LTTQ_Proj
             {
                 inputSVMaKhoa.Items.Add(new { Text = $"{khoa["MaKhoa"]} - {khoa["TenKhoa"]}", Value = khoa["MaKhoa"] });
             }
+
+
+            // Thu Tien Phong
+            this.refreshDgvThuTienPhongData();
         }
 
         private void inputSVMaKhoa_SelectedIndexChanged(object sender, EventArgs e)
@@ -199,8 +219,6 @@ namespace LTTQ_Proj
             errorPhong.Clear();
             //////Insert vao CSDL
             string loaiPhong = grbLoaiPhong.Controls.OfType<RadioButton>().Where(r => r.Checked).FirstOrDefault().Text;
-            //sql = "INSERT INTO PHONG VALUES (";
-            //sql += "N'" + txtPMaPhong.Text + "',N'" + txtPTenPhong.Text + "', N'" + txtPMaNha.Text + "','" + loaiPhong + "', "cmbPSoNguoiToiDa.Text + "'," + txtPSoNguoiDangO.Text + "," + txtPTienThue.Text + ",N'" + txtPGhiChu.Text + "')";
             sql = $"INSERT INTO PHONG VALUES (N'{txtPMaPhong.Text}', N'{txtPTenPhong.Text}', N'{txtPMaNha.Text}', N'{loaiPhong}', {cmbPSoNguoiToiDa.Text}, {txtPSoNguoiDangO.Text}, {txtPTienThue.Text}, N'{txtPGhiChu.Text}')";
             dc.dbQuery(sql);
             dgvPDanhSachPhong.DataSource = dc.dataTable("select * from PHONG");
@@ -278,15 +296,6 @@ namespace LTTQ_Proj
                 MessageBox.Show("Không thể cập nhật thông tin phòng");
             }
             dgvPDanhSachPhong.DataSource = dc.dataTable("select * from PHONG");
-            //// Display update success message
-            //if (rowsAffected > 0)
-            //{
-            //    MessageBox.Show("Cập nhật phòng thành công!");
-            //}
-            //else
-            //{
-            //    MessageBox.Show("Không thể cập nhật thông tin phòng");
-            //}
         }
 
         private void btnPXoa_Click(object sender, EventArgs e)
@@ -311,20 +320,6 @@ namespace LTTQ_Proj
                 }
             }
         }
-        //private void grbThongTinThue_SelectionChanged(object sender, EventArgs e)
-        //{
-        //    if (dataGridViewSinhVien.SelectedRows.Count > 0)
-        //    {
-        //        if (dataGridViewSinhVien.SelectedRows[0].Cells["MaSinhVien"].Value.ToString() != "")
-        //        {
-        //            inputSVMaSinhVien.Text = dataGridViewSinhVien.SelectedRows[0].Cells["MaSinhVien"].Value.ToString();
-        //        }
-        //    }
-
-
-
-        //}
-
 
         private void dataGridViewSinhVien_SelectionChanged(object sender, EventArgs e)
         {
@@ -503,11 +498,39 @@ namespace LTTQ_Proj
                     return;
                 }
             }
-            //MessageBox.Show($"MSV: {txtMSVThue.Text}, MP: {txtMaPhongThue.Text}, BD: {dtpNgayBD.Value}, KT: {dtpNgayKT.Value}");
 
 
-            //Thông báo đã thêm thành công
-            MessageBox.Show("Thêm phòng thành công!");
+            DataTable danh_sach_thue_phong = dc.dataTable("select * from ThuePhong");
+            int new_MST;
+            if (danh_sach_thue_phong.Rows.Count == 0)
+            {
+                new_MST = 1;
+            }
+            else
+            {
+                int max_MST = Int32.Parse(danh_sach_thue_phong.Rows[danh_sach_thue_phong.Rows.Count - 1]["MaSoThue"].ToString());
+                new_MST = max_MST + 1;
+            }
+            string MaSoThue = new_MST.ToString().PadLeft(5, '0');
+
+            try
+            {
+                string insert_sql = $"insert into ThuePhong values (N'{MaSoThue}', N'{txtMSVThue.Text}', N'{txtMaPhongThue.Text}', '{dtpNgayBD.Value}', '{dtpNgayKT.Value}', N'{txtGhiChuThue.Text}')";
+                dc.dbQuery(insert_sql);
+                MessageBox.Show("Thuê phòng thành công!");
+                string update_phong = $"update Phong set SoNguoiDangO = SoNguoiDangO + 1 where MaPhong = N'{txtMaPhongThue.Text}'";
+                dc.dbQuery(update_phong);
+                string sql = $"select * from Phong where SoNguoiDangO < SoNguoiToiDa";
+                dgvDSPhongConTrong.DataSource = dc.dataTable(sql);
+                string sql1 = "select * from SinhVien where MaSinhVien not in (select  MaSV from ThuePhong)";
+                dvgDSSVThuePhong.DataSource = dc.dataTable(sql1);
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                MessageBox.Show("Thuê phòng không thành công!");
+            }
         }
 
         private void tabPage3_Click(object sender, EventArgs e)
@@ -520,12 +543,209 @@ namespace LTTQ_Proj
 
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+
+        private void label9_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void label9_Click(object sender, EventArgs e)
+        private void btnUpdateCurentMonth_Click(object sender, EventArgs e)
+        {
+            String sDate = DateTime.Now.ToString();
+            DateTime datevalue = (Convert.ToDateTime(sDate.ToString()));
+
+            String mm = datevalue.Month.ToString();
+            String yy = datevalue.Year.ToString();
+
+            int current_month = Int32.Parse(mm);
+            int next_month = current_month + 1;
+            int next_year = Int32.Parse(yy);
+            if (current_month == 12)
+            {
+                next_month = 1;
+                next_year += 1;
+            }
+
+
+            // Create a DateTime variable
+            DateTime next_date = new DateTime(next_year, next_month, 7);
+
+            DataTable phong_co_nguoi_o_chua_co_hoa_don = dc.dataTable($"select * from Phong where SoNguoiDangO > 0 and MaPhong not in (select MaPhong from ThuTienPhong where Thang = {mm} and Nam = {yy})");
+            string insert_sql = $"insert into ThuTienPhong (MaPhong, Thang, Nam, TienNha, NgayHetHan) values ";
+            if (phong_co_nguoi_o_chua_co_hoa_don.Rows.Count > 0)
+            {
+                for (int i = 0; i < phong_co_nguoi_o_chua_co_hoa_don.Rows.Count; i++)
+                {
+                    insert_sql += $"(N'{phong_co_nguoi_o_chua_co_hoa_don.Rows[i]["MaPhong"]}', {mm}, {yy}, {phong_co_nguoi_o_chua_co_hoa_don.Rows[i]["TienThue"]}, '{next_date.ToString()}')";
+                    if (i != phong_co_nguoi_o_chua_co_hoa_don.Rows.Count - 1)
+                    {
+                        insert_sql += ", ";
+                    }
+                }
+                try
+                {
+                    dc.dbQuery(insert_sql);
+                    MessageBox.Show("Cập nhật hành công");
+                    this.refreshDgvThuTienPhongData();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                    MessageBox.Show("Có lỗi xảy ra. Cập nhật không thành công.");
+                }
+            }
+            else
+            {
+                MessageBox.Show("Các phòng đã được cập nhật từ trước.");
+            }
+        }
+
+        private void btnTTPExit_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Bạn có muốn thoát không?", "Thông báo",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question) == System.Windows.Forms.DialogResult.Yes)
+                this.Close();
+        }
+
+        private void btnThueTimKiem_Click(object sender, EventArgs e)
+        {
+            if (txtMSVThue.Text.Trim() == "" && txtMaPhongThue.Text.Trim() == "")
+            {
+                MessageBox.Show("Vui lòng điền Mã Sinh Viên hoặc Mã Phòng cần tìm.");
+                return;
+            }
+            if (txtMSVThue.Text.Trim() != "")
+            {
+                string select_sql_SV = $"select * from SinhVien where MaSinhVien = N'{txtMSVThue.Text}' and MaSinhVien not in (select  MaSV from ThuePhong)";
+                dvgDSSVThuePhong.DataSource = dc.dataTable(select_sql_SV);
+            }
+            if (txtMaPhongThue.Text.Trim() != "")
+            {
+                string select_sql_SV = $"select * from Phong where MaPhong = N'{txtMaPhongThue.Text}' and SoNguoiDangO < SoNguoiToiDa";
+                dgvDSPhongConTrong.DataSource = dc.dataTable(select_sql_SV);
+            }
+        }
+
+
+        private void btnTTPSearch_Click(object sender, EventArgs e)
+        {
+            if (txtMaPhongThuTien.Text.Trim() == "" && txtThangThuTien.Text.Trim() == "" && txttNamThuTien.Text.Trim() == "")
+            {
+                MessageBox.Show("Vui lòng điền Mã Phòng hoặc Tháng, Năm cần tìm.");
+                return;
+            }
+            bool need_and = false;
+            string select_sql = "select * from ThuTienPhong where ";
+            if (txtMaPhongThuTien.Text.Trim() != "")
+            {
+                select_sql += $"MaPhong = N'{txtMaPhongThuTien.Text}' ";
+                need_and = true;
+            }
+            if (txtThangThuTien.Text.Trim() != "")
+            {
+                if (need_and)
+                {
+                    select_sql += "and ";
+                }
+                select_sql += $"Thang = {txtThangThuTien.Text} ";
+                need_and = true;
+            }
+            if (txttNamThuTien.Text.Trim() != "")
+            {
+                if (need_and)
+                {
+                    select_sql += "and ";
+                }
+                select_sql += $"Nam = {txttNamThuTien.Text} ";
+            }
+            dgvThuTienPhong.DataSource = dc.dataTable(select_sql);
+        }
+
+        private void btnTTPHoaDonChuaThanhToan_Click(object sender, EventArgs e)
+        {
+            dgvThuTienPhong.DataSource = dc.dataTable("select * from ThuTienPhong where NgayDong is null");
+        }
+
+        private void dgvThuTienPhong_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dgvThuTienPhong.SelectedRows.Count > 0)
+            {
+                txtMaPhongThuTien.Text = dgvThuTienPhong.SelectedRows[0].Cells["MaPhong"].Value.ToString();
+                txtThangThuTien.Text = dgvThuTienPhong.SelectedRows[0].Cells["Thang"].Value.ToString();
+                txttNamThuTien.Text = dgvThuTienPhong.SelectedRows[0].Cells["Nam"].Value.ToString();
+                txtTienNha.Text = dgvThuTienPhong.SelectedRows[0].Cells["TienNha"].Value.ToString();
+                dateTimePicker2.Value = DateTime.Parse(dgvThuTienPhong.SelectedRows[0].Cells["NgayHetHan"].Value.ToString());
+                txtTienDien.Text = dgvThuTienPhong.SelectedRows[0].Cells["TienDien"].Value.ToString();
+                txtTienNuoc.Text = dgvThuTienPhong.SelectedRows[0].Cells["TienNuoc"].Value.ToString();
+                txtTienVeSinh.Text = dgvThuTienPhong.SelectedRows[0].Cells["TienVeSinh"].Value.ToString();
+                txtTienPhat.Text = dgvThuTienPhong.SelectedRows[0].Cells["TienPhat"].Value.ToString();
+            }
+        }
+
+        private void btnLuu_Click(object sender, EventArgs e)
+        {
+            if (txtMaPhongThuTien.Text.Trim() == "")
+            {
+                MessageBox.Show("Vui lòng nhập Mã Phòng");
+                return;
+            }
+            if (txtThangThuTien.Text.Trim() == "")
+            {
+                MessageBox.Show("Vui lòng nhập tháng thu tiền");
+                return;
+            }
+            if (txttNamThuTien.Text.Trim() == "")
+            {
+                MessageBox.Show("Vui lòng nhập năm thu tiền");
+                return;
+            }
+            if (txtTienDien.Text.Trim() == "")
+            {
+                MessageBox.Show("Vui lòng nhập tiền điện");
+                return;
+            }
+            if (txtTienNuoc.Text.Trim() == "")
+            {
+                MessageBox.Show("Vui lòng nhập tiền nước");
+                return;
+            }
+            if (txtTienVeSinh.Text.Trim() == "")
+            {
+                MessageBox.Show("Vui lòng nhập tiền vệ sinh");
+                return;
+            }
+
+            DataTable check_thu_tien_phong = dc.dataTable($"select * from ThuTienPhong where MaPhong = N'{txtMaPhongThuTien.Text}' and Thang = {txtThangThuTien.Text} and Nam = {txttNamThuTien.Text}");
+            if (check_thu_tien_phong.Rows.Count > 0)
+            {
+                if (check_thu_tien_phong.Rows[0]["NgayDong"].ToString() != "")
+                {
+                    MessageBox.Show("Hoá đơn này đã được đóng, không thể cập nhật.");
+                    return;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Không tìm thấy hoá đơn");
+                return;
+            }
+            // Sql
+            string update_sql = $"Update ThuTienPhong set TienNha = {txtTienNha.Text}, TienDien = {txtTienDien.Text}, TienNuoc = {txtTienNuoc.Text}, TienVeSinh = {txtTienVeSinh.Text} where MaPhong = N'{txtMaPhongThuTien.Text}' and Thang = {txtThangThuTien.Text} and Nam = {txttNamThuTien.Text}";
+            try
+            {
+                dc.dbQuery(update_sql);
+                dgvThuTienPhong.DataSource = dc.dataTable("select * from ThuTienPhong where NgayDong is null");
+                MessageBox.Show("Cập nhật thành công.");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Có lỗi xảy ra. Cập nhật không thành công");
+                return;
+            }
+        }
+
+        private void btnTinhTien_Click(object sender, EventArgs e)
         {
 
         }
