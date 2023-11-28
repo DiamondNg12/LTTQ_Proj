@@ -93,6 +93,10 @@ namespace LTTQ_Proj
             // Tra Phong
             dgvTraPhongThuePhong.DataSource = dc.dataTable("select * from ThuePhong");
             dgvDanhSachTraPhong.DataSource = dc.dataTable("select * from TraPhong");
+
+            // RP
+            dataGridViewRPSV.DataSource = dc.dataTable("select * from SinhVien where MaSinhVien in (select MaSV from ThuePhong where MaSoThue not in (select MaSoThue from TraPhong))");
+            dataGridViewDoanhThu.DataSource = dc.dataTable("select * from ThuTienPhong order by MaPhong ASC");
         }
 
         private void inputSVMaKhoa_SelectedIndexChanged(object sender, EventArgs e)

@@ -86,6 +86,7 @@
             txtMaPhongThue = new TextBox();
             tabSinhVien = new TabPage();
             groupBox8 = new GroupBox();
+            btnSVSearch = new Button();
             comboBoxSVSearchPhong = new ComboBox();
             label37 = new Label();
             comboBoxSVSearchClass = new ComboBox();
@@ -187,10 +188,17 @@
             label28 = new Label();
             txtTenKhoa = new TextBox();
             txtMaKhoa = new TextBox();
+            tabPage6 = new TabPage();
+            groupBox9 = new GroupBox();
+            dataGridViewRPSV = new DataGridView();
+            label38 = new Label();
+            tabPage7 = new TabPage();
+            groupBox10 = new GroupBox();
+            dataGridViewDoanhThu = new DataGridView();
+            label39 = new Label();
             errorPhong = new ErrorProvider(components);
             errorSV = new ErrorProvider(components);
             errorThuePhong = new ErrorProvider(components);
-            btnSVSearch = new Button();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             groupBox7.SuspendLayout();
@@ -226,6 +234,12 @@
             ((System.ComponentModel.ISupportInitialize)dgvLop).BeginInit();
             grbKhoa.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvKhoa).BeginInit();
+            tabPage6.SuspendLayout();
+            groupBox9.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewRPSV).BeginInit();
+            tabPage7.SuspendLayout();
+            groupBox10.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewDoanhThu).BeginInit();
             ((System.ComponentModel.ISupportInitialize)errorPhong).BeginInit();
             ((System.ComponentModel.ISupportInitialize)errorSV).BeginInit();
             ((System.ComponentModel.ISupportInitialize)errorThuePhong).BeginInit();
@@ -239,6 +253,8 @@
             tabControl1.Controls.Add(tabPage4);
             tabControl1.Controls.Add(tabPage3);
             tabControl1.Controls.Add(tabPage5);
+            tabControl1.Controls.Add(tabPage6);
+            tabControl1.Controls.Add(tabPage7);
             tabControl1.Dock = DockStyle.Fill;
             tabControl1.Location = new Point(0, 0);
             tabControl1.Name = "tabControl1";
@@ -845,6 +861,16 @@
             groupBox8.TabIndex = 4;
             groupBox8.TabStop = false;
             groupBox8.Text = "Tìm kiếm";
+            // 
+            // btnSVSearch
+            // 
+            btnSVSearch.Location = new Point(404, 28);
+            btnSVSearch.Name = "btnSVSearch";
+            btnSVSearch.Size = new Size(150, 39);
+            btnSVSearch.TabIndex = 4;
+            btnSVSearch.Text = "Tìm kiếm";
+            btnSVSearch.UseVisualStyleBackColor = true;
+            btnSVSearch.Click += btnSVSearch_Click;
             // 
             // comboBoxSVSearchPhong
             // 
@@ -1885,6 +1911,90 @@
             txtMaKhoa.Size = new Size(238, 23);
             txtMaKhoa.TabIndex = 0;
             // 
+            // tabPage6
+            // 
+            tabPage6.Controls.Add(groupBox9);
+            tabPage6.Controls.Add(label38);
+            tabPage6.Location = new Point(4, 24);
+            tabPage6.Name = "tabPage6";
+            tabPage6.Padding = new Padding(3);
+            tabPage6.Size = new Size(1098, 558);
+            tabPage6.TabIndex = 6;
+            tabPage6.Text = "Danh sách Sinh viên đang ở KTX";
+            tabPage6.UseVisualStyleBackColor = true;
+            // 
+            // groupBox9
+            // 
+            groupBox9.Controls.Add(dataGridViewRPSV);
+            groupBox9.Location = new Point(8, 54);
+            groupBox9.Name = "groupBox9";
+            groupBox9.Size = new Size(1082, 496);
+            groupBox9.TabIndex = 1;
+            groupBox9.TabStop = false;
+            // 
+            // dataGridViewRPSV
+            // 
+            dataGridViewRPSV.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridViewRPSV.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewRPSV.Dock = DockStyle.Fill;
+            dataGridViewRPSV.Location = new Point(3, 19);
+            dataGridViewRPSV.Name = "dataGridViewRPSV";
+            dataGridViewRPSV.RowTemplate.Height = 25;
+            dataGridViewRPSV.Size = new Size(1076, 474);
+            dataGridViewRPSV.TabIndex = 0;
+            // 
+            // label38
+            // 
+            label38.AutoSize = true;
+            label38.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
+            label38.Location = new Point(326, 14);
+            label38.Name = "label38";
+            label38.Size = new Size(455, 37);
+            label38.TabIndex = 0;
+            label38.Text = "Danh sách Sinh viên đang ở Ký túc xá";
+            // 
+            // tabPage7
+            // 
+            tabPage7.Controls.Add(groupBox10);
+            tabPage7.Controls.Add(label39);
+            tabPage7.Location = new Point(4, 24);
+            tabPage7.Name = "tabPage7";
+            tabPage7.Padding = new Padding(3);
+            tabPage7.Size = new Size(1098, 558);
+            tabPage7.TabIndex = 7;
+            tabPage7.Text = "Tổng tiền thu";
+            tabPage7.UseVisualStyleBackColor = true;
+            // 
+            // groupBox10
+            // 
+            groupBox10.Controls.Add(dataGridViewDoanhThu);
+            groupBox10.Location = new Point(6, 112);
+            groupBox10.Name = "groupBox10";
+            groupBox10.Size = new Size(1089, 440);
+            groupBox10.TabIndex = 1;
+            groupBox10.TabStop = false;
+            // 
+            // dataGridViewDoanhThu
+            // 
+            dataGridViewDoanhThu.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridViewDoanhThu.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewDoanhThu.Dock = DockStyle.Fill;
+            dataGridViewDoanhThu.Location = new Point(3, 19);
+            dataGridViewDoanhThu.Name = "dataGridViewDoanhThu";
+            dataGridViewDoanhThu.RowTemplate.Height = 25;
+            dataGridViewDoanhThu.Size = new Size(1083, 418);
+            dataGridViewDoanhThu.TabIndex = 0;
+            // 
+            // label39
+            // 
+            label39.AutoSize = true;
+            label39.Font = new Font("Segoe UI", 20.25F, FontStyle.Regular, GraphicsUnit.Point);
+            label39.Location = new Point(304, 22);
+            label39.Name = "label39";
+            label39.Size = new Size(509, 37);
+            label39.TabIndex = 0;
+            label39.Text = "Tổng tiền thu theo tháng của từng phòng";
+            // 
             // errorPhong
             // 
             errorPhong.ContainerControl = this;
@@ -1896,16 +2006,6 @@
             // errorThuePhong
             // 
             errorThuePhong.ContainerControl = this;
-            // 
-            // btnSVSearch
-            // 
-            btnSVSearch.Location = new Point(404, 28);
-            btnSVSearch.Name = "btnSVSearch";
-            btnSVSearch.Size = new Size(150, 39);
-            btnSVSearch.TabIndex = 4;
-            btnSVSearch.Text = "Tìm kiếm";
-            btnSVSearch.UseVisualStyleBackColor = true;
-            btnSVSearch.Click += btnSVSearch_Click;
             // 
             // FormQuanLy
             // 
@@ -1967,6 +2067,14 @@
             grbKhoa.ResumeLayout(false);
             grbKhoa.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvKhoa).EndInit();
+            tabPage6.ResumeLayout(false);
+            tabPage6.PerformLayout();
+            groupBox9.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dataGridViewRPSV).EndInit();
+            tabPage7.ResumeLayout(false);
+            tabPage7.PerformLayout();
+            groupBox10.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dataGridViewDoanhThu).EndInit();
             ((System.ComponentModel.ISupportInitialize)errorPhong).EndInit();
             ((System.ComponentModel.ISupportInitialize)errorSV).EndInit();
             ((System.ComponentModel.ISupportInitialize)errorThuePhong).EndInit();
@@ -2137,5 +2245,13 @@
         private ComboBox comboBoxSVSearchPhong;
         private Label label37;
         private Button btnSVSearch;
+        private TabPage tabPage6;
+        private GroupBox groupBox9;
+        private DataGridView dataGridViewRPSV;
+        private Label label38;
+        private TabPage tabPage7;
+        private Label label39;
+        private GroupBox groupBox10;
+        private DataGridView dataGridViewDoanhThu;
     }
 }
