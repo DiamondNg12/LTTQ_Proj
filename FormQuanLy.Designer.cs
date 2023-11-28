@@ -31,6 +31,13 @@
             components = new System.ComponentModel.Container();
             tabControl1 = new TabControl();
             tabPage1 = new TabPage();
+            groupBox7 = new GroupBox();
+            txtQLPTenSinhVien = new TextBox();
+            label35 = new Label();
+            comboboxQLPLoaiPhong = new ComboBox();
+            label34 = new Label();
+            checkBoxQLPPhongTrong = new CheckBox();
+            btnQLPTimKiemNangCao = new Button();
             btnPThoat = new Button();
             btnPTimKiem = new Button();
             btnPXoa = new Button();
@@ -180,6 +187,7 @@
             errorThuePhong = new ErrorProvider(components);
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
+            groupBox7.SuspendLayout();
             grbDannhSachPhong.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvPDanhSachPhong).BeginInit();
             grbThongTinPhong.SuspendLayout();
@@ -233,6 +241,7 @@
             // 
             // tabPage1
             // 
+            tabPage1.Controls.Add(groupBox7);
             tabPage1.Controls.Add(btnPThoat);
             tabPage1.Controls.Add(btnPTimKiem);
             tabPage1.Controls.Add(btnPXoa);
@@ -249,9 +258,78 @@
             tabPage1.Text = "Quản Lý Phòng";
             tabPage1.UseVisualStyleBackColor = true;
             // 
+            // groupBox7
+            // 
+            groupBox7.Controls.Add(txtQLPTenSinhVien);
+            groupBox7.Controls.Add(label35);
+            groupBox7.Controls.Add(comboboxQLPLoaiPhong);
+            groupBox7.Controls.Add(label34);
+            groupBox7.Controls.Add(checkBoxQLPPhongTrong);
+            groupBox7.Controls.Add(btnQLPTimKiemNangCao);
+            groupBox7.Location = new Point(374, 40);
+            groupBox7.Name = "groupBox7";
+            groupBox7.Size = new Size(712, 76);
+            groupBox7.TabIndex = 5;
+            groupBox7.TabStop = false;
+            groupBox7.Text = "Tìm kiếm nâng cao";
+            // 
+            // txtQLPTenSinhVien
+            // 
+            txtQLPTenSinhVien.Location = new Point(313, 31);
+            txtQLPTenSinhVien.Name = "txtQLPTenSinhVien";
+            txtQLPTenSinhVien.Size = new Size(135, 23);
+            txtQLPTenSinhVien.TabIndex = 5;
+            // 
+            // label35
+            // 
+            label35.AutoSize = true;
+            label35.Location = new Point(232, 33);
+            label35.Name = "label35";
+            label35.Size = new Size(75, 15);
+            label35.TabIndex = 4;
+            label35.Text = "Tên sinh viên";
+            // 
+            // comboboxQLPLoaiPhong
+            // 
+            comboboxQLPLoaiPhong.FormattingEnabled = true;
+            comboboxQLPLoaiPhong.Items.AddRange(new object[] { "Nam", "Nữ" });
+            comboboxQLPLoaiPhong.Location = new Point(90, 31);
+            comboboxQLPLoaiPhong.Name = "comboboxQLPLoaiPhong";
+            comboboxQLPLoaiPhong.Size = new Size(121, 23);
+            comboboxQLPLoaiPhong.TabIndex = 3;
+            // 
+            // label34
+            // 
+            label34.AutoSize = true;
+            label34.Location = new Point(19, 34);
+            label34.Name = "label34";
+            label34.Size = new Size(67, 15);
+            label34.TabIndex = 2;
+            label34.Text = "Loại phòng";
+            // 
+            // checkBoxQLPPhongTrong
+            // 
+            checkBoxQLPPhongTrong.AutoSize = true;
+            checkBoxQLPPhongTrong.Location = new Point(487, 33);
+            checkBoxQLPPhongTrong.Name = "checkBoxQLPPhongTrong";
+            checkBoxQLPPhongTrong.Size = new Size(93, 19);
+            checkBoxQLPPhongTrong.TabIndex = 1;
+            checkBoxQLPPhongTrong.Text = "Phòng trống";
+            checkBoxQLPPhongTrong.UseVisualStyleBackColor = true;
+            // 
+            // btnQLPTimKiemNangCao
+            // 
+            btnQLPTimKiemNangCao.Location = new Point(604, 28);
+            btnQLPTimKiemNangCao.Name = "btnQLPTimKiemNangCao";
+            btnQLPTimKiemNangCao.Size = new Size(81, 27);
+            btnQLPTimKiemNangCao.TabIndex = 0;
+            btnQLPTimKiemNangCao.Text = "Tìm kiếm";
+            btnQLPTimKiemNangCao.UseVisualStyleBackColor = true;
+            btnQLPTimKiemNangCao.Click += btnQLPTimKiemNangCao_Click;
+            // 
             // btnPThoat
             // 
-            btnPThoat.Location = new Point(809, 400);
+            btnPThoat.Location = new Point(200, 481);
             btnPThoat.Margin = new Padding(3, 2, 3, 2);
             btnPThoat.Name = "btnPThoat";
             btnPThoat.Size = new Size(108, 30);
@@ -262,7 +340,7 @@
             // 
             // btnPTimKiem
             // 
-            btnPTimKiem.Location = new Point(494, 400);
+            btnPTimKiem.Location = new Point(55, 481);
             btnPTimKiem.Margin = new Padding(3, 2, 3, 2);
             btnPTimKiem.Name = "btnPTimKiem";
             btnPTimKiem.Size = new Size(108, 30);
@@ -307,11 +385,11 @@
             // grbDannhSachPhong
             // 
             grbDannhSachPhong.Controls.Add(dgvPDanhSachPhong);
-            grbDannhSachPhong.Location = new Point(369, 38);
+            grbDannhSachPhong.Location = new Point(371, 121);
             grbDannhSachPhong.Margin = new Padding(3, 2, 3, 2);
             grbDannhSachPhong.Name = "grbDannhSachPhong";
             grbDannhSachPhong.Padding = new Padding(3, 2, 3, 2);
-            grbDannhSachPhong.Size = new Size(718, 333);
+            grbDannhSachPhong.Size = new Size(718, 406);
             grbDannhSachPhong.TabIndex = 3;
             grbDannhSachPhong.TabStop = false;
             grbDannhSachPhong.Text = "Danh Sách Phòng";
@@ -325,7 +403,7 @@
             dgvPDanhSachPhong.Name = "dgvPDanhSachPhong";
             dgvPDanhSachPhong.RowHeadersWidth = 51;
             dgvPDanhSachPhong.RowTemplate.Height = 29;
-            dgvPDanhSachPhong.Size = new Size(712, 313);
+            dgvPDanhSachPhong.Size = new Size(712, 386);
             dgvPDanhSachPhong.TabIndex = 0;
             dgvPDanhSachPhong.SelectionChanged += dgvPDanhSachPhong_SelectionChanged;
             // 
@@ -552,7 +630,7 @@
             // 
             // btnTThoat
             // 
-            btnTThoat.Location = new Point(825, 494);
+            btnTThoat.Location = new Point(823, 486);
             btnTThoat.Name = "btnTThoat";
             btnTThoat.Size = new Size(121, 42);
             btnTThoat.TabIndex = 3;
@@ -562,7 +640,7 @@
             // 
             // btnTThem
             // 
-            btnTThem.Location = new Point(479, 494);
+            btnTThem.Location = new Point(479, 486);
             btnTThem.Name = "btnTThem";
             btnTThem.Size = new Size(121, 42);
             btnTThem.TabIndex = 3;
@@ -572,7 +650,7 @@
             // 
             // btnThueTimKiem
             // 
-            btnThueTimKiem.Location = new Point(150, 494);
+            btnThueTimKiem.Location = new Point(149, 486);
             btnThueTimKiem.Name = "btnThueTimKiem";
             btnThueTimKiem.Size = new Size(121, 42);
             btnThueTimKiem.TabIndex = 3;
@@ -610,7 +688,7 @@
             groupBox3.Size = new Size(533, 302);
             groupBox3.TabIndex = 2;
             groupBox3.TabStop = false;
-            groupBox3.Text = "Danh sách Sinh Viên muốn thuê";
+            groupBox3.Text = "Danh sách Sinh Viên chưa thuê phòng";
             // 
             // dvgDSSVThuePhong
             // 
@@ -1401,7 +1479,6 @@
             txtTraPhongMaSinhVien.Name = "txtTraPhongMaSinhVien";
             txtTraPhongMaSinhVien.Size = new Size(160, 23);
             txtTraPhongMaSinhVien.TabIndex = 1;
-
             // 
             // btnTraPhongChuaTraPhong
             // 
@@ -1765,6 +1842,8 @@
             tabControl1.ResumeLayout(false);
             tabPage1.ResumeLayout(false);
             tabPage1.PerformLayout();
+            groupBox7.ResumeLayout(false);
+            groupBox7.PerformLayout();
             grbDannhSachPhong.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dgvPDanhSachPhong).EndInit();
             grbThongTinPhong.ResumeLayout(false);
@@ -1966,5 +2045,12 @@
         private Button btnTraPhongTimKiemDSTraPhong;
         private GroupBox groupBox6;
         private DataGridView dgvTraPhongThuePhong;
+        private GroupBox groupBox7;
+        private CheckBox checkBoxQLPPhongTrong;
+        private Button btnQLPTimKiemNangCao;
+        private Label label35;
+        private ComboBox comboboxQLPLoaiPhong;
+        private Label label34;
+        private TextBox txtQLPTenSinhVien;
     }
 }
