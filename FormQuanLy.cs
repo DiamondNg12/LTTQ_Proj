@@ -74,6 +74,18 @@ namespace LTTQ_Proj
                 inputSVMaKhoa.Items.Add(new { Text = $"{khoa["MaKhoa"]} - {khoa["TenKhoa"]}", Value = khoa["MaKhoa"] });
             }
 
+            DataTable lops = dc.dataTable($"Select * from Lop");
+            foreach (DataRow lop in lops.Rows)
+            {
+                comboBoxSVSearchClass.Items.Add($"{lop["MaLop"]} - {lop["TenLop"]}");
+            }
+
+            DataTable phongs = dc.dataTable($"Select * from Phong");
+            foreach (DataRow phong in phongs.Rows)
+            {
+                comboBoxSVSearchPhong.Items.Add($"{phong["MaPhong"]} - {phong["TenPhong"]}");
+            }
+
 
             // Thu Tien Phong
             this.refreshDgvThuTienPhongData();
@@ -1283,6 +1295,34 @@ namespace LTTQ_Proj
                 string select_lop = $"select * from Lop where MaLop = N'{txtMaLop.Text}'";
                 dgvLop.DataSource = dc.dataTable(select_lop);
             }
+        }
+
+        private void btnSVSearch_Click(object sender, EventArgs e)
+        {
+            if (comboBoxSVSearchClass.Text.Trim() == "" && comboBoxSVSearchPhong.Text.Trim() == "")
+            {
+                MessageBox.Show("Vui lòng nhập dữ liệu cần tìm kiếm.");
+                return;
+            }
+            bool need_and = false;
+            string select_sql = "select * from SinhVien where ";
+            if (comboBoxSVSearchClass.Text.Trim() != "")
+            {
+                string[] lop = comboBoxSVSearchClass.Text.Split(" - ");
+                select_sql += $"MaLop = N'{lop[0]}' ";
+                need_and = true;
+            }
+            if (comboBoxSVSearchPhong.Text.Trim() != "")
+            {
+                if (need_and)
+                {
+                    select_sql += "and ";
+                }
+                string[] phong = comboBoxSVSearchPhong.Text.Split(" - ");
+                select_sql += $"MaSinhVien in (select MaSV from ThuePhong where MaPhong = N'{phong[0]}' and MaSoThue not in (select MaSoThue from TraPhong))";
+            }
+            dataGridViewSinhVien.DataSource = dc.dataTable(select_sql);
+
         }
     }
 }

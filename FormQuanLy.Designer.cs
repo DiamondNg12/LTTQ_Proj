@@ -85,6 +85,11 @@
             txtMSVThue = new TextBox();
             txtMaPhongThue = new TextBox();
             tabSinhVien = new TabPage();
+            groupBox8 = new GroupBox();
+            comboBoxSVSearchPhong = new ComboBox();
+            label37 = new Label();
+            comboBoxSVSearchClass = new ComboBox();
+            label36 = new Label();
             labelQLSinhVien = new Label();
             groupBoxSinhVienViewData = new GroupBox();
             dataGridViewSinhVien = new DataGridView();
@@ -185,6 +190,7 @@
             errorPhong = new ErrorProvider(components);
             errorSV = new ErrorProvider(components);
             errorThuePhong = new ErrorProvider(components);
+            btnSVSearch = new Button();
             tabControl1.SuspendLayout();
             tabPage1.SuspendLayout();
             groupBox7.SuspendLayout();
@@ -199,6 +205,7 @@
             ((System.ComponentModel.ISupportInitialize)dvgDSSVThuePhong).BeginInit();
             grbThongTinThue.SuspendLayout();
             tabSinhVien.SuspendLayout();
+            groupBox8.SuspendLayout();
             groupBoxSinhVienViewData.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewSinhVien).BeginInit();
             groupBoxSinhVien2.SuspendLayout();
@@ -812,6 +819,7 @@
             // 
             // tabSinhVien
             // 
+            tabSinhVien.Controls.Add(groupBox8);
             tabSinhVien.Controls.Add(labelQLSinhVien);
             tabSinhVien.Controls.Add(groupBoxSinhVienViewData);
             tabSinhVien.Controls.Add(groupBoxSinhVien2);
@@ -823,6 +831,54 @@
             tabSinhVien.TabIndex = 1;
             tabSinhVien.Text = "Sinh Viên";
             tabSinhVien.UseVisualStyleBackColor = true;
+            // 
+            // groupBox8
+            // 
+            groupBox8.Controls.Add(btnSVSearch);
+            groupBox8.Controls.Add(comboBoxSVSearchPhong);
+            groupBox8.Controls.Add(label37);
+            groupBox8.Controls.Add(comboBoxSVSearchClass);
+            groupBox8.Controls.Add(label36);
+            groupBox8.Location = new Point(406, 67);
+            groupBox8.Name = "groupBox8";
+            groupBox8.Size = new Size(681, 90);
+            groupBox8.TabIndex = 4;
+            groupBox8.TabStop = false;
+            groupBox8.Text = "Tìm kiếm";
+            // 
+            // comboBoxSVSearchPhong
+            // 
+            comboBoxSVSearchPhong.FormattingEnabled = true;
+            comboBoxSVSearchPhong.Location = new Point(169, 49);
+            comboBoxSVSearchPhong.Name = "comboBoxSVSearchPhong";
+            comboBoxSVSearchPhong.Size = new Size(160, 23);
+            comboBoxSVSearchPhong.TabIndex = 3;
+            // 
+            // label37
+            // 
+            label37.AutoSize = true;
+            label37.Location = new Point(66, 52);
+            label37.Name = "label37";
+            label37.Size = new Size(71, 15);
+            label37.TabIndex = 2;
+            label37.Text = "Phòng Thuê";
+            // 
+            // comboBoxSVSearchClass
+            // 
+            comboBoxSVSearchClass.FormattingEnabled = true;
+            comboBoxSVSearchClass.Location = new Point(169, 20);
+            comboBoxSVSearchClass.Name = "comboBoxSVSearchClass";
+            comboBoxSVSearchClass.Size = new Size(160, 23);
+            comboBoxSVSearchClass.TabIndex = 3;
+            // 
+            // label36
+            // 
+            label36.AutoSize = true;
+            label36.Location = new Point(66, 23);
+            label36.Name = "label36";
+            label36.Size = new Size(27, 15);
+            label36.TabIndex = 2;
+            label36.Text = "Lớp";
             // 
             // labelQLSinhVien
             // 
@@ -837,9 +893,9 @@
             // groupBoxSinhVienViewData
             // 
             groupBoxSinhVienViewData.Controls.Add(dataGridViewSinhVien);
-            groupBoxSinhVienViewData.Location = new Point(406, 64);
+            groupBoxSinhVienViewData.Location = new Point(406, 154);
             groupBoxSinhVienViewData.Name = "groupBoxSinhVienViewData";
-            groupBoxSinhVienViewData.Size = new Size(681, 408);
+            groupBoxSinhVienViewData.Size = new Size(681, 318);
             groupBoxSinhVienViewData.TabIndex = 2;
             groupBoxSinhVienViewData.TabStop = false;
             // 
@@ -851,7 +907,7 @@
             dataGridViewSinhVien.Name = "dataGridViewSinhVien";
             dataGridViewSinhVien.RowHeadersWidth = 51;
             dataGridViewSinhVien.RowTemplate.Height = 25;
-            dataGridViewSinhVien.Size = new Size(675, 386);
+            dataGridViewSinhVien.Size = new Size(675, 296);
             dataGridViewSinhVien.TabIndex = 0;
             dataGridViewSinhVien.SelectionChanged += dataGridViewSinhVien_SelectionChanged;
             // 
@@ -1841,6 +1897,16 @@
             // 
             errorThuePhong.ContainerControl = this;
             // 
+            // btnSVSearch
+            // 
+            btnSVSearch.Location = new Point(404, 28);
+            btnSVSearch.Name = "btnSVSearch";
+            btnSVSearch.Size = new Size(150, 39);
+            btnSVSearch.TabIndex = 4;
+            btnSVSearch.Text = "Tìm kiếm";
+            btnSVSearch.UseVisualStyleBackColor = true;
+            btnSVSearch.Click += btnSVSearch_Click;
+            // 
             // FormQuanLy
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -1871,6 +1937,8 @@
             grbThongTinThue.PerformLayout();
             tabSinhVien.ResumeLayout(false);
             tabSinhVien.PerformLayout();
+            groupBox8.ResumeLayout(false);
+            groupBox8.PerformLayout();
             groupBoxSinhVienViewData.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dataGridViewSinhVien).EndInit();
             groupBoxSinhVien2.ResumeLayout(false);
@@ -2063,5 +2131,11 @@
         private ComboBox comboboxQLPLoaiPhong;
         private Label label34;
         private TextBox txtQLPTenSinhVien;
+        private GroupBox groupBox8;
+        private ComboBox comboBoxSVSearchClass;
+        private Label label36;
+        private ComboBox comboBoxSVSearchPhong;
+        private Label label37;
+        private Button btnSVSearch;
     }
 }
