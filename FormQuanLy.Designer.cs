@@ -252,7 +252,7 @@
             tabPage1.Controls.Add(label1);
             tabPage1.Location = new Point(4, 24);
             tabPage1.Name = "tabPage1";
-            tabPage1.Padding = new Padding(3, 3, 3, 3);
+            tabPage1.Padding = new Padding(3);
             tabPage1.Size = new Size(1098, 558);
             tabPage1.TabIndex = 0;
             tabPage1.Text = "Quản Lý Phòng";
@@ -611,7 +611,7 @@
             tabPage2.Controls.Add(grbThongTinThue);
             tabPage2.Location = new Point(4, 24);
             tabPage2.Name = "tabPage2";
-            tabPage2.Padding = new Padding(3, 3, 3, 3);
+            tabPage2.Padding = new Padding(3);
             tabPage2.Size = new Size(1098, 558);
             tabPage2.TabIndex = 2;
             tabPage2.Text = "Thuê Phòng";
@@ -1443,6 +1443,7 @@
             // 
             // dgvDanhSachTraPhong
             // 
+            dgvDanhSachTraPhong.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvDanhSachTraPhong.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvDanhSachTraPhong.Dock = DockStyle.Fill;
             dgvDanhSachTraPhong.Location = new Point(3, 19);
@@ -1708,6 +1709,7 @@
             // 
             // dgvLop
             // 
+            dgvLop.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvLop.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvLop.Location = new Point(-5, 122);
             dgvLop.Margin = new Padding(3, 2, 3, 2);
@@ -1783,6 +1785,7 @@
             // 
             // dgvKhoa
             // 
+            dgvKhoa.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvKhoa.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvKhoa.Location = new Point(5, 122);
             dgvKhoa.Margin = new Padding(3, 2, 3, 2);
