@@ -362,7 +362,7 @@ namespace LTTQ_Proj
         private void ThuePhong()
         {
             string sql = "Select * from Phong  WHERE (SoNguoiDangO < SoNGuoiToiDa)";
-            string sql1 = "select * from SinhVien where MaSinhVien not in (select  MaSV from ThuePhong)";
+            string sql1 = "select * from SinhVien where MaSinhVien not in (select  MaSV from ThuePhong  where MaSoThue not in (select MaSoThue from TraPhong))";
             dvgDSSVThuePhong.DataSource = dc.dataTable(sql1);
             dgvDSPhongConTrong.DataSource = dc.dataTable(sql);
         }
@@ -554,9 +554,22 @@ namespace LTTQ_Proj
                     MessageBox.Show($"Phòng không còn chỗ trống");
                     return;
                 }
-                if (check_phong_cho_thue.Rows[0]["LoaiPhong"].ToString() != check_SV_thue.Rows[0]["GioiTinh"].ToString())
+
+                //if (check_phong_cho_thue.Rows[0]["LoaiPhong"] != check_SV_thue.Rows[0]["GioiTinh"])
+                //{
+                //    MessageBox.Show($"Loại phòng không phù hợp với giới tính Sinh Viên");
+                //    return;
+                //}
+                if (!string.Equals(
+                        check_phong_cho_thue.Rows[0]["LoaiPhong"].ToString(),
+                        check_SV_thue.Rows[0]["GioiTinh"].ToString(),
+                        StringComparison.OrdinalIgnoreCase)
+                    && !string.Equals(
+                        check_phong_cho_thue.Rows[0]["LoaiPhong"].ToString(),
+                        check_SV_thue.Rows[0]["GioiTinh"].ToString(),
+                        StringComparison.CurrentCultureIgnoreCase))
                 {
-                    MessageBox.Show($"Loại phòng không phù hợp với giới tính Sinh Viên");
+                    MessageBox.Show("Loại phòng không phù hợp với giới tính Sinh Viên");
                     return;
                 }
             }
@@ -584,9 +597,9 @@ namespace LTTQ_Proj
                 dc.dbQuery(update_phong);
                 string sql = $"select * from Phong where SoNguoiDangO < SoNguoiToiDa";
                 dgvDSPhongConTrong.DataSource = dc.dataTable(sql);
-                string sql1 = "select * from SinhVien where MaSinhVien not in (select  MaSV from ThuePhong)";
+                string sql1 = "select * from SinhVien where MaSinhVien not in (select MaSV from ThuePhong where MaSoThue not in (select MaSoThue from TraPhong))";
                 dvgDSSVThuePhong.DataSource = dc.dataTable(sql1);
-
+                dgvPDanhSachPhong.DataSource = dc.dataTable("select * from Phong");
             }
             catch (Exception ex)
             {
@@ -679,7 +692,7 @@ namespace LTTQ_Proj
             }
             if (txtMSVThue.Text.Trim() != "")
             {
-                string select_sql_SV = $"select * from SinhVien where MaSinhVien = N'{txtMSVThue.Text}' and MaSinhVien not in (select  MaSV from ThuePhong)";
+                string select_sql_SV = $"select * from SinhVien where MaSinhVien = N'{txtMSVThue.Text}' and MaSinhVien not in (select  MaSV from ThuePhong where MaSoThue not in (select MaSoThue from TraPhong))";
                 dvgDSSVThuePhong.DataSource = dc.dataTable(select_sql_SV);
             }
             if (txtMaPhongThue.Text.Trim() != "")
@@ -981,9 +994,9 @@ namespace LTTQ_Proj
                 MessageBox.Show("Vui lòng nhập Mã số Thuê.");
                 return;
             }
-            
+
             DataTable check_ma_so_thue = dc.dataTable($"select * from ThuePhong where MaSoThue = {txtMaSoThueTra.Text}");
-            if (check_ma_so_thue.Rows.Count == 0 ) 
+            if (check_ma_so_thue.Rows.Count == 0)
             {
                 MessageBox.Show("Mã số thuê này không tồn tại.");
                 return;
@@ -1027,6 +1040,48 @@ namespace LTTQ_Proj
             if (dgvTraPhongThuePhong.SelectedRows.Count > 0)
             {
                 txtMaSoThueTra.Text = dgvTraPhongThuePhong.SelectedRows[0].Cells["MaSoThue"].Value.ToString();
+            }
+        }
+
+        private void btnQLPTimKiemNangCao_Click(object sender, EventArgs e)
+        {
+            if (comboboxQLPLoaiPhong.Text.Trim() == "" && txtQLPTenSinhVien.Text.Trim() == "" && !checkBoxQLPPhongTrong.Checked)
+            {
+                MessageBox.Show("Vui lòng chọn một mục để tìm kiếm");
+                return;
+            }
+            bool need_and = false;
+            string select_sql = "select * from Phong where ";
+            if (comboboxQLPLoaiPhong.Text.Trim() != "")
+            {
+                select_sql += $"LoaiPhong = N'{comboboxQLPLoaiPhong.Text}' ";
+                need_and = true;
+            }
+            if (checkBoxQLPPhongTrong.Checked)
+            {
+                if (need_and)
+                {
+                    select_sql += "and ";
+                }
+                select_sql += "SoNguoiDangO <  SoNguoiToiDa ";
+                need_and = true;
+            }
+            if (txtQLPTenSinhVien.Text.Trim() != "")
+            {
+                if (need_and)
+                {
+                    select_sql += "and ";
+                }
+                string sql = $"select MaPhong from ThuePhong where MaSV in (select MaSinhVien from SinhVien where TenSinhVien like N'%{txtQLPTenSinhVien.Text}%') and MaSoThue not in (select MaSoThue from TraPhong)";
+                select_sql += $"MaPhong in ({sql})";
+            }
+            try
+            {
+                dgvPDanhSachPhong.DataSource = dc.dataTable(select_sql);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Có lỗi xảy ra.");
             }
         }
     }
