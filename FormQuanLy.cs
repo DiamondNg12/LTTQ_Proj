@@ -52,9 +52,6 @@ namespace LTTQ_Proj
             dgvPDanhSachPhong.DataSource = dc.dataTable("Select * from Phong");
             // tabpanel SinhVien
             dataGridViewSinhVien.DataSource = dc.dataTable("Select * from SinhVien");
-            //tabpanel Khoa-Lop
-            dgvKhoa.DataSource = dc.dataTable("select * from Khoa");
-            dgvLop.DataSource = dc.dataTable("select * from Lop");
 
             //tabpanel Thue Phong
             ThuePhong();
@@ -162,7 +159,7 @@ namespace LTTQ_Proj
                 txtPSoNguoiDangO.Text = dgvPDanhSachPhong[4, e.RowIndex].Value.ToString();
                 txtPTienThue.Text = dgvPDanhSachPhong[5, e.RowIndex].Value.ToString();
                 txtPGhiChu.Text = dgvPDanhSachPhong[6, e.RowIndex].Value.ToString();
-
+    
             }
             catch (Exception ex)
             {
@@ -300,7 +297,7 @@ namespace LTTQ_Proj
             {
                 MessageBox.Show("Không thể cập nhật thông tin phòng");
             }
-
+            
         }
 
         private void btnPXoa_Click(object sender, EventArgs e)
@@ -311,13 +308,13 @@ namespace LTTQ_Proj
                 return;
             }
             try
-            {
-                string delete_phong = $"delete from Phong where MaPhong = N'{txtPMaPhong.Text}'";
+            { 
+            string delete_phong = $"delete from Phong where MaPhong = N'{txtPMaPhong.Text}'";
                 dc.dbQuery(delete_phong);
                 MessageBox.Show("Xóa phòng thành công");
                 dgvPDanhSachPhong.DataSource = dc.dataTable("select * from Phong");
-            }
-            catch (Exception ex)
+             }
+            catch(Exception ex)
             {
                 MessageBox.Show("Xóa phòng không thành công");
             }
@@ -359,12 +356,12 @@ namespace LTTQ_Proj
 
         private void btnSVXoa_Click(object sender, EventArgs e)
         {
-            if (inputSVMaSinhVien.Text.Trim() == "")
+           if(inputSVMaSinhVien.Text.Trim() == "")
             {
                 MessageBox.Show("Vui lòng điền mã sinh viên");
                 return;
             }
-
+            
             //inputSVMaSinhVien.text
             try
             {
@@ -886,212 +883,6 @@ namespace LTTQ_Proj
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-            }
-        }
-
-        private void dgvKhoa_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-        //khoa
-        private void btnXoaKhoa_Click(object sender, EventArgs e)
-        {
-            if (txtMaKhoa.Text.Trim() == "")
-            {
-                MessageBox.Show("vui lòng nhập mã khoa");
-                return;
-            }
-            try
-            {
-                string delete_khoa = $"delete from Khoa where MaKhoa = N'{txtMaKhoa.Text}'";
-                dc.dbQuery(delete_khoa);
-                MessageBox.Show("Xóa thành công");
-                dgvKhoa.DataSource = dc.dataTable("select * from Khoa");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Xóa không thành công");
-            }
-
-        }
-
-        private void btnSuaKhoa_Click(object sender, EventArgs e)
-        {
-            if (txtMaKhoa.Text.Trim() == "")
-            {
-                MessageBox.Show("Không thể để trống mã khoa");
-                return;
-            }
-            if (txtTenKhoa.Text.Trim() == "")
-            {
-                MessageBox.Show("Không thể để trống tên khoa");
-                return;
-            }
-
-            string update_khoa = $"update Khoa set TenKhoa = N'{txtTenKhoa.Text}'" +
-                $"where MaKhoa = N'{txtMaKhoa.Text}'";
-            try
-            {
-                dc.dbQuery(update_khoa);
-                MessageBox.Show("Sửa khoa thành công");
-                dgvKhoa.DataSource = dc.dataTable("select * from Khoa");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Sửa khoa không thành công");
-            }
-        }
-
-        private void btnThemKhoa_Click(object sender, EventArgs e)
-        {
-            if (txtMaKhoa.Text.Trim() == "")
-            {
-                MessageBox.Show("Không thể để trống mã khoa");
-                return;
-            }
-            if (txtTenKhoa.Text.Trim() == "")
-            {
-                MessageBox.Show("Không thể để trống tên khoa");
-                return;
-            }
-            DataTable db = dc.dataTable($"Select * from Khoa Where MaKhoa = N'{txtMaKhoa.Text}'");
-            if (db.Rows.Count > 0)
-            {
-                MessageBox.Show("Mã Khoa đã tồn tại");
-                return;
-            }
-            try
-            {
-                string add_khoa = $"insert into Khoa values (N'{txtMaKhoa.Text}', N'{txtTenKhoa.Text}')";
-                dc.dbQuery(add_khoa);
-                MessageBox.Show("Thêm khoa thành công");
-                dgvKhoa.DataSource = dc.dataTable("select * from Khoa");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Thêm khoa thất bại");
-            }
-
-        }
-
-        private void btnTimKiemKhoa_Click(object sender, EventArgs e)
-        {
-            if (txtMaKhoa.Text.Trim() == "")
-            {
-                MessageBox.Show("Vui lòng điền mã khoa");
-                return;
-            }
-            if (txtMaKhoa.Text.Trim() != "")
-            {
-                string select_khoa = $"select * from Khoa where MaKhoa = N'{txtMaKhoa.Text}'";
-                dgvKhoa.DataSource = dc.dataTable(select_khoa);
-            }
-        }
-
-
-        //lop
-        private void txtThemLop_Click(object sender, EventArgs e)
-        {
-            if (txtMaLop.Text.Trim() == "")
-            {
-                MessageBox.Show("Không thể để trống mã lớp");
-                return;
-            }
-            if (txtTenLop.Text.Trim() == "")
-            {
-                MessageBox.Show("Không thể để trống tên lớp");
-                return;
-            }
-            if (txtMaKhoaLop.Text.Trim() == "")
-            {
-                MessageBox.Show("Không thể để trống mã khoa");
-                return;
-            }
-            DataTable db = dc.dataTable($"Select * from Lop Where MaLop = N'{txtMaLop.Text}'");
-            if (db.Rows.Count > 0)
-            {
-                MessageBox.Show("Mã lớp đã tồn tại");
-                return;
-            }
-           
-            try
-            {
-                string add_lop = $"insert into Lop values (N'{txtMaLop.Text}', N'{txtTenLop.Text}',N'{txtMaKhoaLop.Text}')";
-                dc.dbQuery(add_lop);
-                MessageBox.Show("Thêm lop thành công");
-                dgvLop.DataSource = dc.dataTable("select * from Lop");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Thêm lớp thất bại");
-            }
-        }
-
-        private void btnSuaLop_Click(object sender, EventArgs e)
-        {
-            if (txtMaLop.Text.Trim() == "")
-            {
-                MessageBox.Show("Không thể để trống mã lớp");
-                return;
-            }
-            if (txtTenLop.Text.Trim() == "")
-            {
-                MessageBox.Show("Không thể để trống tên lớp");
-                return;
-            }
-            if (txtMaKhoaLop.Text.Trim() == "")
-            {
-                MessageBox.Show("Không thể để trống mã khoa");
-                return;
-            }
-
-            string update_lop = $"update Lop set TenLop = N'{txtTenLop.Text}'," +
-                $"MaKhoa = N'{txtMaKhoaLop.Text}'" +
-                $"where MaLop = N'{txtMaLop.Text}'";
-            try
-            {
-                dc.dbQuery(update_lop);
-                MessageBox.Show("Sửa lớp thành công");
-                dgvLop.DataSource = dc.dataTable("select * from Lop");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Sửa lớp không thành công");
-                MessageBox.Show(ex.Message);
-            }
-        }
-
-        private void btnXoaLop_Click(object sender, EventArgs e)
-        {
-            if (txtMaLop.Text.Trim() == "")
-            {
-                MessageBox.Show("vui lòng nhập mã Lớp");
-                return;
-            }
-            try
-            {
-                string delete_lop = $"delete from Lop where MaLop = N'{txtMaLop.Text}'";
-                dc.dbQuery(delete_lop);
-                MessageBox.Show("Xóa thành công");
-                dgvLop.DataSource = dc.dataTable("select * from Lop");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Xóa không thành công");
-            }
-        }
-
-        private void btnTimKiemLop_Click(object sender, EventArgs e)
-        {
-            if (txtMaLop.Text.Trim() == "")
-            {
-                MessageBox.Show("Vui lòng điền mã lớp");
-                return;
-            }
-            if (txtMaLop.Text.Trim() != "")
-            {
-                string select_lop = $"select * from Lop where MaLop = N'{txtMaLop.Text}'";
-                dgvLop.DataSource = dc.dataTable(select_lop);
             }
         }
     }
