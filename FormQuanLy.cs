@@ -17,6 +17,7 @@ namespace LTTQ_Proj
         public FormQuanLy()
         {
             InitializeComponent();
+            //this.BackColor = System.Drawing.Color.Linen;
         }
 
         DatabaseConnection dc = new DatabaseConnection();

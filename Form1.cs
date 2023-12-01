@@ -5,6 +5,7 @@ namespace LTTQ_Proj
         public Form1()
         {
             InitializeComponent();
+            //this.BackColor = System.Drawing.Color.LightPink;
         }
 
         private void Form1_Load(object sender, EventArgs e)
